@@ -24,6 +24,10 @@ public class NetTower extends Applet implements Runnable {
     int i;
     public int x;
     public int y;
+    public int ancho;
+    public int alto;
+    public int xspeed;
+    public int yspeed;
     // Imagen para el double-buffer
     private Image dbImage;
     private Graphics dbg;
@@ -37,6 +41,10 @@ public class NetTower extends Applet implements Runnable {
         i = 0;
         x = 100;
         y = 100;
+        ancho = 20;
+        alto = 20;
+        xspeed = +1;
+        yspeed = +1;
     }
 
     @Override
@@ -48,13 +56,33 @@ public class NetTower extends Applet implements Runnable {
     @Override
     public void run() {
         while (true) {
+            // Contador de iteraciones
             i++;
-            x++;
+            
+            // Movimiento horizontal
+            if (x >= (this.getSize().width - ancho)) {
+                x = this.getSize().width - ancho;
+                xspeed = -1;
+            } else if (x <= 0) {
+                x = 0;
+                xspeed = +1;
+            }
+            x += 10 * xspeed;
 
+            // Movimiento vertical
+            if (y >= (this.getSize().height - ancho)) {
+                y = this.getSize().height - ancho;
+                yspeed = -1;
+            } else if (y <= 0) {
+                y = 0;
+                yspeed = +1;
+            }
+            y += 10 * yspeed;
+            
             repaint();
 
             try {
-                Thread.sleep(1000 / 30);
+                Thread.sleep(1000 / 90);
             } catch (InterruptedException e) {;
             }
         }
