@@ -63,9 +63,11 @@ public class NetTower extends Applet implements Runnable {
             if (x >= (this.getSize().width - ancho)) {
                 x = this.getSize().width - ancho;
                 xspeed = -1;
+                Sound.bounce.play();
             } else if (x <= 0) {
                 x = 0;
                 xspeed = +1;
+                Sound.bounce.play();
             }
             x += 10 * xspeed;
 
@@ -73,9 +75,11 @@ public class NetTower extends Applet implements Runnable {
             if (y >= (this.getSize().height - ancho)) {
                 y = this.getSize().height - ancho;
                 yspeed = -1;
+                Sound.bounce.play();
             } else if (y <= 0) {
                 y = 0;
                 yspeed = +1;
+                Sound.bounce.play();
             }
             y += 10 * yspeed;
             
