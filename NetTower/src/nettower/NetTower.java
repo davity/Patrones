@@ -5,11 +5,7 @@
 package nettower;
 
 import java.applet.Applet;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import javax.swing.JFrame;
 
 /**
@@ -58,7 +54,7 @@ public class NetTower extends Applet implements Runnable {
         while (true) {
             // Contador de iteraciones
             i++;
-            
+
             // Movimiento horizontal
             if (x >= (this.getSize().width - ancho)) {
                 x = this.getSize().width - ancho;
@@ -82,7 +78,7 @@ public class NetTower extends Applet implements Runnable {
                 Sound.bounce.play();
             }
             y += 10 * yspeed;
-            
+
             repaint();
 
             try {
@@ -119,6 +115,13 @@ public class NetTower extends Applet implements Runnable {
 
         // Pintamos la imagen en pantalla
         g.drawImage(dbImage, 0, 0, this);
+    }
+
+    public boolean mouseDown(Event e, int x_mouse, int y_mouse) {
+        x = x_mouse;
+        y = y_mouse;
+
+        return true;
     }
 
     /**
