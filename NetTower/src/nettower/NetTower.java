@@ -51,38 +51,61 @@ public class NetTower extends Applet implements Runnable {
 
     @Override
     public void run() {
+        long lastTime = System.nanoTime();
+        long unprocessedTime = 0;
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        }
+
+
         while (true) {
-            // Contador de iteraciones
-            i++;
 
-            // Movimiento horizontal
-            if (x >= (this.getSize().width - ancho)) {
-                x = this.getSize().width - ancho;
-                xspeed = -1;
-                Sound.bounce.play();
-            } else if (x <= 0) {
-                x = 0;
-                xspeed = +1;
-                Sound.bounce.play();
+            long now = System.nanoTime();
+            unprocessedTime += now - lastTime;
+            lastTime = now;
+
+            int max = 10;
+            while (unprocessedTime > 0) {
+                unprocessedTime -= 1000000000 / 60;
+                // Contador de iteraciones
+                i++;
+
+                // Movimiento horizontal
+                if (x >= (this.getSize().width - ancho)) {
+                    x = this.getSize().width - ancho;
+                    xspeed = -1;
+                    Sound.bounce.play();
+                } else if (x <= 0) {
+                    x = 0;
+                    xspeed = +1;
+                    Sound.bounce.play();
+                }
+                x += 10 * xspeed;
+
+                // Movimiento vertical
+                if (y >= (this.getSize().height - ancho)) {
+                    y = this.getSize().height - ancho;
+                    yspeed = -1;
+                    Sound.bounce.play();
+                } else if (y <= 0) {
+                    y = 0;
+                    yspeed = +1;
+                    Sound.bounce.play();
+                }
+                y += 10 * yspeed;
+                
+                if (max-- == 0) {
+                    unprocessedTime = 0;
+                    break;
+                }
             }
-            x += 10 * xspeed;
-
-            // Movimiento vertical
-            if (y >= (this.getSize().height - ancho)) {
-                y = this.getSize().height - ancho;
-                yspeed = -1;
-                Sound.bounce.play();
-            } else if (y <= 0) {
-                y = 0;
-                yspeed = +1;
-                Sound.bounce.play();
-            }
-            y += 10 * yspeed;
-
+            
             repaint();
 
             try {
-                Thread.sleep(1000 / 90);
+                Thread.sleep(1);
             } catch (InterruptedException e) {;
             }
         }
