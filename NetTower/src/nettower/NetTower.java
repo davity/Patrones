@@ -7,7 +7,6 @@ package nettower;
 import java.applet.Applet;
 import java.awt.*;
 import javax.swing.JFrame;
-//prueba
 
 /**
  *
@@ -19,6 +18,7 @@ public class NetTower extends Applet implements Runnable {
     public static final int GAME_HEIGHT = 240;
     public static final int SCREEN_SCALE = 2;
     int i;
+    Invasion invasion;
     public int x;
     public int y;
     public int ancho;
@@ -35,6 +35,7 @@ public class NetTower extends Applet implements Runnable {
 
     @Override
     public void init() {
+        invasion = new Invasion();
         i = 0;
         x = 100;
         y = 100;
@@ -62,7 +63,6 @@ public class NetTower extends Applet implements Runnable {
 
 
         while (true) {
-
             long now = System.nanoTime();
             unprocessedTime += now - lastTime;
             lastTime = now;
@@ -97,6 +97,12 @@ public class NetTower extends Applet implements Runnable {
                 }
                 y += 10 * yspeed;
                 
+                //Avance de las gallinas
+                invasion.step();
+                if (i % 200 == 0) {
+                    invasion.addEnemy();
+                }
+                
                 if (max-- == 0) {
                     unprocessedTime = 0;
                     break;
@@ -118,6 +124,7 @@ public class NetTower extends Applet implements Runnable {
         g.drawString("i = " + i, 30, 30);
         g.setColor(Color.RED);
         g.fillRect(x, y, 20, 20);
+        invasion.draw(g);
     }
 
     @Override
@@ -152,12 +159,12 @@ public class NetTower extends Applet implements Runnable {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Metagun");
+        JFrame frame = new JFrame("NetTower");
         NetTower nettower = new NetTower();
         frame.setLayout(new BorderLayout());
         frame.add(nettower, BorderLayout.CENTER);
         frame.pack();
-        frame.setResizable(true);
+        frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
