@@ -8,6 +8,7 @@ import nettower.entity.Defense;
 import nettower.entity.Invasion;
 import java.applet.Applet;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 /**
@@ -124,10 +125,12 @@ public class NetTower extends Applet implements Runnable {
 
     @Override
     public void paint(Graphics g) {
+        BufferedImage chicken = Art.chicken;
         g.drawString("Hola mundo!", 100, 50);
         g.drawString("i = " + i, 30, 30);
-        g.setColor(Color.RED);
-        g.fillRect(x, y, 20, 20);
+        //g.setColor(Color.RED);
+        //g.fillRect(x, y, 20, 20);
+        g.drawImage(chicken,x,y,null);
         invasion.draw(g);
         defense.draw(g);
     }
