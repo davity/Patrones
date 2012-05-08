@@ -4,6 +4,7 @@
  */
 package nettower;
 
+import nettower.entityList.*;
 import java.applet.Applet;
 import java.awt.*;
 import javax.swing.JFrame;
@@ -19,6 +20,7 @@ public class NetTower extends Applet implements Runnable {
     public static final int SCREEN_SCALE = 2;
     int i;
     Invasion invasion;
+    Defense defense;
     public int x;
     public int y;
     public int ancho;
@@ -36,6 +38,7 @@ public class NetTower extends Applet implements Runnable {
     @Override
     public void init() {
         invasion = new Invasion();
+        defense = new Defense();
         i = 0;
         x = 100;
         y = 100;
@@ -125,6 +128,7 @@ public class NetTower extends Applet implements Runnable {
         g.setColor(Color.RED);
         g.fillRect(x, y, 20, 20);
         invasion.draw(g);
+        defense.draw(g);
     }
 
     @Override
@@ -151,6 +155,8 @@ public class NetTower extends Applet implements Runnable {
     public boolean mouseDown(Event e, int x_mouse, int y_mouse) {
         x = x_mouse;
         y = y_mouse;
+        
+        defense.addTower(x, y);
 
         return true;
     }
