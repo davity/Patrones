@@ -4,7 +4,6 @@
  */
 package nettower.entity;
 
-import nettower.entityList.Invasion;
 import java.awt.Color;
 import java.awt.Graphics;
 import nettower.*;

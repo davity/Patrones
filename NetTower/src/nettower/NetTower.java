@@ -4,7 +4,8 @@
  */
 package nettower;
 
-import nettower.entityList.*;
+import nettower.entity.Defense;
+import nettower.entity.Invasion;
 import java.applet.Applet;
 import java.awt.*;
 import javax.swing.JFrame;
