@@ -14,19 +14,42 @@ import nettower.entity.Tower;
  */
 public class Defense {
     private ArrayList towerlist;
+    private ArrayList shootlist;
+    private Invasion invasion;
     
-    public Defense() {
+    public Defense(Invasion iniInvasion) {
         towerlist = new ArrayList();
+        shootlist = new ArrayList();
+        invasion = iniInvasion;
     }
     
     public void addTower(int x, int y) {
-        towerlist.add(new Tower(3, 1, x, y));
+        towerlist.add(new Tower(3, 1, 20, x, y, this));
+    }
+    
+    public void addShoot(Shoot shoot) {
+        shootlist.add(shoot);
+    }
+    
+    public void delShoot(Shoot shoot) {
+        shootlist.remove(shoot);
+    }
+    
+    public void step() {
+        for (int n = 0; n < towerlist.size(); n++) {
+            ((Tower)towerlist.get(n)).shoot(invasion);
+        }
+        for (int n = 0; n < shootlist.size(); n++) {
+            ((Shoot)shootlist.get(n)).step();
+        }
     }
     
     public void draw(Graphics g) {
-        for (int n = 0; n < towerlist.size(); n++)
-        {
+        for (int n = 0; n < towerlist.size(); n++) {
             ((Tower)towerlist.get(n)).draw(g);
+        }
+        for (int n = 0; n < shootlist.size(); n++) {
+            ((Shoot)shootlist.get(n)).draw(g);
         }
     }
 }
