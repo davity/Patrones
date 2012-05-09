@@ -25,7 +25,7 @@ public class Defense {
     }
 
     public void addTower(int x, int y) {
-        towerlist.add(new Tower(1, 80, 20, x, y, this));
+        towerlist.add(new Tower(10, 80, 20, x, y, this));
     }
 
     public void addShoot(Shoot shoot) {

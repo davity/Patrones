@@ -32,9 +32,11 @@ public class Chicken extends Entity {
     }
 
     public void damage(int damage) {
-        life -= damage;
-        if (life <= 0) {
-            this.die();
+        if (life > 0) {
+            life -= damage;
+            if (life <= 0) {
+                this.die();
+            }
         }
     }
 

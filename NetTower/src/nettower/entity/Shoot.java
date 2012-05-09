@@ -27,31 +27,16 @@ public class Shoot extends Entity {
     }
 
     public void step() {
-        if (target.x > x) {
-            x += speed;
-            if (target.x <= x) {
-                x = target.x;
-            }
-        } else {
-            x -= speed;
-            if (target.x >= x) {
-                x = target.x;
-            }
-        }
-        if (target.y > y) {
-            y += speed;
-            if (target.y <= y) {
-                y = target.y;
-            }
-        } else {
-            y -= speed;
-            if (target.y >= y) {
-                y = target.y;
-            }
-        }
-        if (x == target.x && y == target.y) {
+        double tmpx, tmpy, tmph;
+        
+        tmpx = target.x - x;
+        tmpy = target.y - y;
+        tmph = Math.sqrt(Math.pow(tmpx, 2) + Math.pow(tmpy, 2));
+        if (tmph <= speed) {
             this.impact();
         }
+        x = x + speed * (tmpx / tmph);
+        y = y + speed * (tmpy / tmph);
     }
 
     public void impact() {
