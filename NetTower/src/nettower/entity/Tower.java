@@ -35,11 +35,19 @@ public class Tower extends Entity {
         if (recharge <= 0) {
             Chicken target = invasion.nearestChickenOnRange(range, (int) x, (int) y);
             if (target != null) {
-                defense.addShoot(new Shoot((int) x, (int) y, target, damage, 1, defense));
+                defense.addShoot(new Shoot((int) x, (int) y, target, damage, 6, defense));
                 Sound.bounce.play();
+                recharge = fireRate;
             }
         } else {
             recharge--;
         }
+    }
+    
+    public void upgrade() {
+        damage += 10;
+        fireRate -= 10;
+        range += 10;
+        recharge += fireRate;    
     }
 }
