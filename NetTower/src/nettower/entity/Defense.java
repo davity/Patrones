@@ -25,7 +25,7 @@ public class Defense {
     }
 
     public void addTower(int x, int y) {
-        towerlist.add(new Tower(3, 1, 20, x, y, this));
+        towerlist.add(new Tower(1, 80, 20, x, y, this));
     }
 
     public void addShoot(Shoot shoot) {
@@ -52,5 +52,16 @@ public class Defense {
         for (int n = 0; n < shootlist.size(); n++) {
             ((Shoot) shootlist.get(n)).draw(g);
         }
+    }
+    
+    public Tower getTowerAt(int x, int y) {
+        Tower tower;
+        for (int n = 0; n < towerlist.size(); n++) {
+            tower = (Tower)towerlist.get(n);
+            if (tower.x == x && tower.y == y) {
+                return tower;
+            }
+        }
+        return null;
     }
 }

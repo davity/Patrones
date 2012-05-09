@@ -172,8 +172,13 @@ public class NetTower extends Applet implements Runnable {
         y = y_mouse;
         Point p = new Point();
         p = grid.getBoxPaintOrigin(grid.getBoxPosition(x_mouse, y_mouse));
-
-        defense.addTower(p.x, p.y);
+        nettower.entity.Tower tower = defense.getTowerAt(p.x, p.y);
+        if (tower != null) {
+            tower.upgrade();
+        }
+        else {
+            defense.addTower(p.x, p.y);
+        }
 
         return true;
     }
