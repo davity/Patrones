@@ -101,20 +101,20 @@ public class NetTower extends Applet implements Runnable {
                     //Sound.bounce.play();
                 }
                 y += 10 * yspeed;
-                
+
                 //Avance de las gallinas
                 invasion.step();
                 if (i % 200 == 0) {
                     invasion.addEnemy();
                 }
                 defense.step();
-                
+
                 if (max-- == 0) {
                     unprocessedTime = 0;
                     break;
                 }
             }
-            
+
             repaint();
 
             try {
@@ -131,7 +131,7 @@ public class NetTower extends Applet implements Runnable {
         g.drawString("i = " + i, 30, 30);
         //g.setColor(Color.RED);
         //g.fillRect(x, y, 20, 20);
-        g.drawImage(chicken,x,y,null);
+        g.drawImage(chicken, x, y, null);
         invasion.draw(g);
         defense.draw(g);
     }
@@ -160,7 +160,7 @@ public class NetTower extends Applet implements Runnable {
     public boolean mouseDown(Event e, int x_mouse, int y_mouse) {
         x = x_mouse;
         y = y_mouse;
-        
+
         defense.addTower(x, y);
 
         return true;

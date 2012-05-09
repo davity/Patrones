@@ -14,7 +14,7 @@ import nettower.Sound;
  * @author David Moran Diaz
  */
 public class Tower extends Entity {
-    
+
     public int damage;
     public int fireRate;
     public int range;
@@ -30,16 +30,15 @@ public class Tower extends Entity {
         this.recharge = iniFireRate;
         this.defense = def;
     }
-    
+
     public void shoot(Invasion invasion) {
         if (recharge <= 0) {
-            Chicken target = invasion.nearestChickenOnRange(range, (int)x, (int)y);
+            Chicken target = invasion.nearestChickenOnRange(range, (int) x, (int) y);
             if (target != null) {
-                defense.addShoot(new Shoot((int)x, (int)y, target, damage, 1, defense));
+                defense.addShoot(new Shoot((int) x, (int) y, target, damage, 1, defense));
                 Sound.bounce.play();
             }
-        }
-        else {
+        } else {
             recharge--;
         }
     }

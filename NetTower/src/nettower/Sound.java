@@ -10,36 +10,42 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Sound {
+
     public static class Clips {
+
         public Clip[] clips;
         private int p;
         private int count;
-        
+
         public Clips(byte[] buffer, int count) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-            if (buffer==null) return;
-            
+            if (buffer == null) {
+                return;
+            }
+
             clips = new Clip[count];
             this.count = count;
-            for (int i=0; i<count; i++) {
+            for (int i = 0; i < count; i++) {
                 clips[i] = AudioSystem.getClip();
                 clips[i].open(AudioSystem.getAudioInputStream(new ByteArrayInputStream(buffer)));
             }
         }
-        
+
         public void play() {
-            if (clips==null) return;
+            if (clips == null) {
+                return;
+            }
 
             clips[p].stop();
             clips[p].setFramePosition(0);
             clips[p].start();
             p++;
-            if (p>=count) p = 0;
+            if (p >= count) {
+                p = 0;
+            }
         }
     }
-    
     // Sonidos a cargar cuando se inicia la aplicacion
     public static Clips bounce = load("/bounce.wav", 4);
-
 
     private static Clips load(String name, int count) {
         try {
@@ -51,7 +57,7 @@ public class Sound {
                 baos.write(buffer, 0, read);
             }
             dis.close();
-            
+
             byte[] data = baos.toByteArray();
             return new Clips(data, count);
         } catch (Exception e) {

@@ -13,7 +13,7 @@ import nettower.*;
  * @author David Moran Diaz
  */
 public class Chicken extends Entity {
-    
+
     public int life;
     public double speed;
     public Invasion invasion;
@@ -25,19 +25,19 @@ public class Chicken extends Entity {
         this.invasion = i;
         art = Art.chicken;
     }
-    
-        public void advance() {
+
+    public void advance() {
         x += speed;
         y += speed;
     }
-    
+
     public void damage(int damage) {
         life -= damage;
         if (life <= 0) {
             this.die();
         }
     }
-    
+
     public void die() {
         invasion.delete(this);
     }

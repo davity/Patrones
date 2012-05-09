@@ -17,7 +17,7 @@ public class Entity {
     public double x;
     public double y;
     BufferedImage art;
-    
+
     public Entity(int posx, int posy) {
         this.x = posx;
         this.y = posy;
@@ -28,9 +28,8 @@ public class Entity {
         this.x = posx;
         this.y = posy;
     }
-    
-    public void draw(Graphics g)
-    {
-        g.drawImage(art, (int)x, (int)y, null);
+
+    public void draw(Graphics g) {
+        g.drawImage(art, (int) x, (int) y, null);
     }
 }
