@@ -27,7 +27,12 @@ public class Invasion {
     }
 
     public void addEnemy() {
-        enemylist.add(new Chicken(1, 4, this, 0, 0));
+        ArrayList route = new ArrayList();
+        route.add(new Point(300,400));
+        route.add(new Point(100,400));
+        route.add(new Point(100,200));
+        route.add(new Point(400,200));
+        enemylist.add(new Chicken(1, 4, this, 300, 0, route));
     }
 
     public void delete(Chicken chicken) {

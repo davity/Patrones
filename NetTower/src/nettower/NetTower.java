@@ -143,7 +143,8 @@ public class NetTower extends Applet implements Runnable {
         
         invasion.draw(g);
         defense.draw(g);
-        g.drawImage(chicken, x, y, null);
+        //oculta temporalmente para facilitar la visivilidad
+        //g.drawImage(chicken, x, y, null);
     }
 
     @Override

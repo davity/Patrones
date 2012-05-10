@@ -7,6 +7,8 @@ package nettower.entity;
 import java.awt.Color;
 import java.awt.Graphics;
 import nettower.*;
+import java.util.ArrayList;
+import java.awt.Point;
 
 /**
  *
@@ -17,18 +19,15 @@ public class Chicken extends Entity {
     public int life;
     public double speed;
     public Invasion invasion;
+    ArrayList route;
 
-    public Chicken(int iniLife, double iniSpeed, Invasion i, int x, int y) {
+    public Chicken(int iniLife, double iniSpeed, Invasion i, int x, int y, ArrayList iniRoute) {
         super(x, y);
         this.life = iniLife;
         this.speed = iniSpeed;
         this.invasion = i;
-        art = Art.chicken;
-    }
-
-    public void advance() {
-        x += speed;
-        y += speed;
+        this.art = Art.chicken;
+        this.route = iniRoute;
     }
 
     public void damage(int damage) {
@@ -39,8 +38,29 @@ public class Chicken extends Entity {
             }
         }
     }
+    
+    //Muy similar a Shoot.step(), quizás deberiamos fusionarlas
+    public void advance() {
+        double tmpx, tmpy, tmph;
+        
+        tmpx = ((Point)route.get(0)).x - x;
+        tmpy = ((Point)route.get(0)).y - y;
+        tmph = Math.sqrt(Math.pow(tmpx, 2) + Math.pow(tmpy, 2));
+        if (tmph <= speed) {
+            route.remove(0);
+            if (route.size() <= 0) {
+                this.remove();
+            }
+        }
+        x = x + speed * (tmpx / tmph);
+        y = y + speed * (tmpy / tmph);
+    }
+    
+    public void remove() {
+        invasion.delete(this);
+    }
 
     public void die() {
-        invasion.delete(this);
+        remove();
     }
 }

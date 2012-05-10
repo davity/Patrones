@@ -35,8 +35,10 @@ public class Shoot extends Entity {
         if (tmph <= speed) {
             this.impact();
         }
-        x = x + speed * (tmpx / tmph);
-        y = y + speed * (tmpy / tmph);
+        else {
+            x = x + speed * (tmpx / tmph);
+            y = y + speed * (tmpy / tmph);
+        }
     }
 
     public void impact() {
