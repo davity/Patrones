@@ -6,11 +6,12 @@ package nettower;
 
 import nettower.entity.Defense;
 import nettower.entity.Invasion;
-import nettower.map.Grid;
+import nettower.screen.Grid;
 import java.applet.Applet;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
+import nettower.screen.Screen;
 
 /**
  *
@@ -34,9 +35,11 @@ public class NetTower extends Applet implements Runnable {
     // Imagen para el double-buffer
     private Image dbImage;
     private Graphics dbg;
+    private Screen screen;
+    private Input input = new Input();
 
     public NetTower() {
-        setPreferredSize(new Dimension(GAME_WIDTH , GAME_HEIGHT));
+        setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
     }
 
     @Override
@@ -44,7 +47,7 @@ public class NetTower extends Applet implements Runnable {
         invasion = new Invasion();
         defense = new Defense(invasion);
         grid = new Grid();
-        
+
         i = 0;
         x = 100;
         y = 100;
@@ -81,6 +84,8 @@ public class NetTower extends Applet implements Runnable {
                 unprocessedTime -= 1000000000 / 60;
                 // Contador de iteraciones
                 i++;
+
+
 
                 // Movimiento horizontal
                 if (x >= (GAME_HEIGHT - ancho)) {
@@ -133,14 +138,21 @@ public class NetTower extends Applet implements Runnable {
         BufferedImage chicken = Art.chicken;
         g.drawString("Hola mundo!", 100, 50);
         g.drawString("i = " + i, 30, 30);
-        
+
         // Zona del mapa
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, GAME_HEIGHT, GAME_HEIGHT);
         // Zona del menu
         g.setColor(Color.GREEN);
         g.fillRect(GAME_HEIGHT, 0, GAME_WIDTH - GAME_HEIGHT, GAME_HEIGHT);
-        
+
+        // Testeando colores pal mapa
+//        char[] boxes = map.parseMap(1);
+//        if (boxes[0] == 'R') {
+//            g.setColor(Color.GRAY);
+//            g.fillRect(0, 0, 32, 32);
+//        }
+
         invasion.draw(g);
         defense.draw(g);
         //oculta temporalmente para facilitar la visivilidad
@@ -168,6 +180,16 @@ public class NetTower extends Applet implements Runnable {
         g.drawImage(dbImage, 0, 0, this);
     }
 
+    public void setScreen(Screen newScreen) {
+        if (screen != null) {
+            screen.removed();
+        }
+        screen = newScreen;
+        if (screen != null) {
+            screen.init(this);
+        }
+    }
+
     public boolean mouseDown(Event e, int x_mouse, int y_mouse) {
         x = x_mouse;
         y = y_mouse;
@@ -176,8 +198,7 @@ public class NetTower extends Applet implements Runnable {
         nettower.entity.Tower tower = defense.getTowerAt(p.x, p.y);
         if (tower != null) {
             tower.upgrade();
-        }
-        else {
+        } else {
             defense.addTower(p.x, p.y);
         }
 

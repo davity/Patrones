@@ -20,6 +20,7 @@ public class Art {
     public static BufferedImage chicken = load("/chicken.png");
     public static BufferedImage tower = load("/tower2.png");
     public static BufferedImage blueShoot = load("/blueShoot.png");
+    public static BufferedImage map1 = load("/map_1.png");
 
     public static BufferedImage load(String name) {
         try {
