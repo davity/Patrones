@@ -18,6 +18,7 @@ public class Art {
 //    public static BufferedImage winScreen2 = load("/winscreen2.png");;
 
     public static BufferedImage chicken = load("/chicken.png");
+    public static BufferedImage chickenI = load("/chickenI.png");
     public static BufferedImage tower = load("/tower2.png");
     public static BufferedImage blueShoot = load("/blueShoot.png");
     public static BufferedImage map1 = load("/map_1.png");

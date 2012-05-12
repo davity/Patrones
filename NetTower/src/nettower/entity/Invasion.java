@@ -32,7 +32,7 @@ public class Invasion {
         route.add(new Point(100,400));
         route.add(new Point(100,200));
         route.add(new Point(400,200));
-        enemylist.add(new Chicken(1, 4, this, 300, 0, route));
+        enemylist.add(new Chicken(1, 1, this, 300, 0, route));
     }
 
     public void delete(Chicken chicken) {
