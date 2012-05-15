@@ -6,8 +6,8 @@ package nettower.entity;
 
 import java.awt.Point;
 import nettower.Art;
-import nettower.entity.singleton.SingletonGame;
 import nettower.iterator.Iterator;
+import nettower.singleton.SingletonGame;
 
 /**
  *

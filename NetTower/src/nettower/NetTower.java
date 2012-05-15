@@ -10,8 +10,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.JFrame;
-import nettower.entity.singleton.SingletonGame;
-import nettower.entity.singleton.SingletonGraphics;
+import nettower.singleton.SingletonGame;
+import nettower.singleton.SingletonGraphics;
 import nettower.screen.Screen;
 
 /**

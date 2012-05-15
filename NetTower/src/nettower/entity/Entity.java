@@ -6,7 +6,7 @@ package nettower.entity;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;
-import nettower.entity.singleton.SingletonGraphics;
+import nettower.singleton.SingletonGraphics;
 
 /**
  *
