@@ -4,50 +4,55 @@
  */
 package nettower.entity;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.Point;
 import nettower.Art;
-import nettower.Sound;
+import nettower.entity.singleton.SingletonGame;
 
 /**
  *
  * @author David Moran Diaz
  */
 public class Tower extends Entity {
-
-    public int damage;
-    public int fireRate;
-    public int range;
-    private int recharge;
-    private Defense defense;
-
-    public Tower(int iniDamage, int iniFireRate, int iniRange, double x, double y, Defense def) {
-        super((int) x, (int) y);
-        this.damage = iniDamage;
-        this.fireRate = iniFireRate;
-        this.range = iniRange;
-        this.art = Art.tower;
-        this.recharge = iniFireRate;
-        this.defense = def;
+    int damage;
+    int fireRate;
+    int bulletsSpeed;
+    int range;
+    int recharge;
+    
+    public Tower(Point.Double iniPosition, int iniDamage, int iniFireRate, int iniBulletsSpeed, int iniRange) {
+        super(iniPosition, 16, Art.tower);
+        damage = iniDamage;
+        fireRate = iniFireRate;
+        bulletsSpeed = iniBulletsSpeed;
+        range = iniRange;
+        
+        recharge = fireRate;
     }
 
-    public void shoot(Invasion invasion) {
-        if (recharge <= 0) {
-            Chicken target = invasion.nearestChickenOnRange(range, (int) x, (int) y);
+    @Override
+    public void step() {
+        if (recharge == 0) {
+            Chicken target = SingletonGame.getInstance().getNearestInRangeChicken(getPosition(), range);
             if (target != null) {
-                defense.addShoot(new Shoot((int) x, (int) y, target, damage, 6, defense));
-                Sound.bounce.play();
+                SingletonGame.getInstance().addBullet(getPosition(), target, damage, bulletsSpeed);
                 recharge = fireRate;
             }
-        } else {
+        }
+        else {
             recharge--;
         }
     }
     
     public void upgrade() {
-        damage += 10;
-        fireRate -= 10;
-        range += 10;
-        recharge += fireRate;    
+        damage *= 0.1;
+        fireRate *= 0.1;
+        bulletsSpeed *= 0.1;
+        range *= 0.1;
+        recharge = fireRate;
+    }
+
+    @Override
+    public void remove() {
+        SingletonGame.getInstance().removeTower(this);
     }
 }

@@ -1,12 +1,11 @@
 package nettower.level;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.List;
-
-import nettower.*;
+import java.util.Random;
 import nettower.Art;
-import nettower.entity.*;
+import nettower.entity.Entity;
 import nettower.screen.GameScreen;
 
 /*

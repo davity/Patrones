@@ -4,13 +4,14 @@
  */
 package nettower;
 
-import nettower.entity.Defense;
-import nettower.entity.Invasion;
 import nettower.screen.Grid;
 import java.applet.Applet;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import javax.swing.JFrame;
+import nettower.entity.singleton.SingletonGame;
+import nettower.entity.singleton.SingletonGraphics;
 import nettower.screen.Screen;
 
 /**
@@ -23,8 +24,6 @@ public class NetTower extends Applet implements Runnable {
     public static final int GAME_HEIGHT = 480;
     //public static final int SCREEN_SCALE = 2;
     int i;
-    Invasion invasion;
-    Defense defense;
     Grid grid;
     public int x;
     public int y;
@@ -44,8 +43,6 @@ public class NetTower extends Applet implements Runnable {
 
     @Override
     public void init() {
-        invasion = new Invasion();
-        defense = new Defense(invasion);
         grid = new Grid();
 
         i = 0;
@@ -55,6 +52,34 @@ public class NetTower extends Applet implements Runnable {
         alto = 32;
         xspeed = +1;
         yspeed = +1;
+        
+        ArrayList<Point.Double> route = new ArrayList();
+        route.add(new Point.Double(300,0));
+        route.add(new Point.Double(300,400));
+        route.add(new Point.Double(100,400));
+        route.add(new Point.Double(100,200));
+        route.add(new Point.Double(400,200));
+        SingletonGame.getInstance().addRoute(route);
+        
+        route = new ArrayList();
+        route.add(new Point.Double(0,300));
+        route.add(new Point.Double(400,300));
+        route.add(new Point.Double(400,100));
+        route.add(new Point.Double(200,100));
+        route.add(new Point.Double(200,400));
+        SingletonGame.getInstance().addRoute(route);
+        
+        route = new ArrayList();
+        route.add(new Point.Double(0, 100));
+        route.add(new Point.Double(500,100));
+        route.add(new Point.Double(500,200));
+        route.add(new Point.Double(0,200));
+        route.add(new Point.Double(0,300));
+        route.add(new Point.Double(400,300));
+        route.add(new Point.Double(400,400));
+        route.add(new Point.Double(0,400));
+        route.add(new Point.Double(0,500));
+        SingletonGame.getInstance().addRoute(route);
     }
 
     @Override
@@ -112,11 +137,10 @@ public class NetTower extends Applet implements Runnable {
                 y += 10 * yspeed;
 
                 //Avance de las gallinas
-                invasion.step();
                 if (i % 200 == 0) {
-                    invasion.addEnemy();
+                    SingletonGame.getInstance().addChicken();
                 }
-                defense.step();
+                SingletonGame.getInstance().step();
 
                 if (max-- == 0) {
                     unprocessedTime = 0;
@@ -152,9 +176,8 @@ public class NetTower extends Applet implements Runnable {
 //            g.setColor(Color.GRAY);
 //            g.fillRect(0, 0, 32, 32);
 //        }
-
-        invasion.draw(g);
-        defense.draw(g);
+        SingletonGraphics.getInstance().setGraphics(g);
+        SingletonGame.getInstance().draw();
         //oculta temporalmente para facilitar la visivilidad
         //g.drawImage(chicken, x, y, null);
     }
@@ -195,11 +218,13 @@ public class NetTower extends Applet implements Runnable {
         y = y_mouse;
         Point p = new Point();
         p = grid.getBoxPaintOrigin(grid.getBoxPosition(x_mouse, y_mouse));
-        nettower.entity.Tower tower = defense.getTowerAt(p.x, p.y);
+        Point.Double p2 = new Point.Double();
+        p2.setLocation(p);
+        nettower.entity.Tower tower = SingletonGame.getInstance().getTowerAt(p2);
         if (tower != null) {
             tower.upgrade();
         } else {
-            defense.addTower(p.x, p.y);
+            SingletonGame.getInstance().addTower(p2);
         }
 
         return true;
