@@ -21,14 +21,4 @@ public class ConcreteAggregate implements Aggregate {
     public Iterator newIterator() {
         return new ConcreteIterator(this);
     }
-
-    @Override
-    public void addElement(Object element) {
-        elements.add(element);
-    }
-    
-    @Override
-    public void removeElement(Object element) {
-        elements.remove(element);
-    }
 }

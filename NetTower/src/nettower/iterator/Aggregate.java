@@ -10,6 +10,4 @@ package nettower.iterator;
  */
 public interface Aggregate {
     Iterator newIterator();
-    void addElement(Object element);
-    void removeElement(Object element);
 }

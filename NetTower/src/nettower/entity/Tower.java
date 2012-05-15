@@ -17,14 +17,16 @@ public class Tower extends Entity {
     int fireRate;
     int bulletsSpeed;
     int range;
+    int upgradeCost;
     int recharge;
     
-    public Tower(Point.Double iniPosition, int iniDamage, int iniFireRate, int iniBulletsSpeed, int iniRange) {
+    public Tower(Point.Double iniPosition, int iniDamage, int iniFireRate, int iniBulletsSpeed, int iniRange, int iniUpgradeCost) {
         super(iniPosition, 16, Art.tower);
         damage = iniDamage;
         fireRate = iniFireRate;
         bulletsSpeed = iniBulletsSpeed;
         range = iniRange;
+        upgradeCost = iniUpgradeCost;
         
         recharge = fireRate;
     }
@@ -44,10 +46,12 @@ public class Tower extends Entity {
     }
     
     public void upgrade() {
-        damage *= 0.1;
-        fireRate *= 0.1;
-        bulletsSpeed *= 0.1;
-        range *= 0.1;
+        SingletonGame.getInstance().takeMoney(upgradeCost);
+        damage *= 1.1;
+        fireRate *= 0.9;
+        bulletsSpeed *= 1.1;
+        range *= 1.1;
+        upgradeCost *= 1.1;
         recharge = fireRate;
     }
 

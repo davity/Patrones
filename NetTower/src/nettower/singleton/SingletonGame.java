@@ -24,6 +24,9 @@ public class SingletonGame {
     private ArrayList<Chicken> chickensList = new ArrayList();
     private ArrayList<Tower> towersList = new ArrayList();
     private ArrayList<Bullet> bulletsList = new ArrayList();
+    private int points = 0;
+    private int money = 400;
+    private int lives = 10;
     private Random random = new Random();
     
     private SingletonGame() {}
@@ -37,7 +40,7 @@ public class SingletonGame {
     }
     
     public void addChicken() {
-        chickensList.add(new Chicken(20, 1));
+        chickensList.add(new Chicken(20, 1, 20, 20));
     }
     
     public void removeChicken(Chicken chicken) {
@@ -45,7 +48,7 @@ public class SingletonGame {
     }
     
     public void addTower(Point.Double position) {
-        towersList.add(new Tower(position, 1, 4, 4, 400));
+        towersList.add(new Tower(position, 1, 16, 4, 400, 10));
     }
     
     public void removeTower(Tower tower) {
@@ -109,5 +112,21 @@ public class SingletonGame {
             }
         }
         return null;
+    }
+    
+    public void givePoints(int amount) {
+        points += amount;
+    }
+    
+    public void giveMoney(int amount) {
+        money += amount;
+    }
+    
+    public void takeMoney(int amount) {
+        money -= amount;
+    }
+    
+    public void takeALife() {
+        lives--;
     }
 }

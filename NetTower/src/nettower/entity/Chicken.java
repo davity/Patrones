@@ -16,11 +16,15 @@ import nettower.singleton.SingletonGame;
 public class Chicken extends MobileEntity {
     private Iterator route;
     public int life;
+    public int points;
+    public int money;
     
-    public Chicken(int iniLife, int iniSpeed) {
+    public Chicken(int iniLife, int iniSpeed, int iniPoints, int iniMoney) {
         super(new Point.Double(0, 0), 16, Art.chicken, iniSpeed);
         route = SingletonGame.getInstance().getRandomRoute();
         life = iniLife;
+        points = iniPoints;
+        money = iniMoney;
         
         setPosition((Point.Double)route.first());
     }
@@ -46,6 +50,7 @@ public class Chicken extends MobileEntity {
             route.next();
         }
         else {
+            SingletonGame.getInstance().takeALife();
             remove();
         }
     }
@@ -55,6 +60,8 @@ public class Chicken extends MobileEntity {
     }
     
     public void slain() {
+        SingletonGame.getInstance().givePoints(points);
+        SingletonGame.getInstance().giveMoney(money);
         remove();
     }
 
