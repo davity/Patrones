@@ -23,6 +23,9 @@ public class Art {
     public static BufferedImage blueShoot = load("/blueShoot.png");
     public static BufferedImage bullet = load("/blueShoot.png");
     public static BufferedImage map1 = load("/map_1.png");
+    public static BufferedImage hierba = load("/hierba.png");
+    public static BufferedImage roca = load("/roca.png");
+    public static BufferedImage camino = load("/camino.png");
 
     public static BufferedImage load(String name) {
         try {

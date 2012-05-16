@@ -13,6 +13,7 @@ import nettower.entity.Tower;
 import nettower.iterator.Aggregate;
 import nettower.iterator.ConcreteAggregate;
 import nettower.iterator.Iterator;
+import nettower.level.Level;
 
 /**
  *
@@ -28,6 +29,7 @@ public class SingletonGame {
     private int money = 400;
     private int lives = 10;
     private Random random = new Random();
+    private Level level = new Level(15, 15);
     
     private SingletonGame() {}
     
@@ -76,6 +78,7 @@ public class SingletonGame {
     }
     
     public void draw() {
+        level.render();
         for (int n = 0; n < chickensList.size(); n++) {
             chickensList.get(n).draw();
         }

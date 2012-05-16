@@ -12,7 +12,7 @@ public class GameScreen extends Screen {
     private int xLevel = DEBUG_MODE?8:0;
     private int yLevel = DEBUG_MODE?4:0;
 
-    Level level = new Level(this, 32, 24, xLevel, yLevel, 0, 0);
+    Level level = new Level(15, 15);
 
     public boolean mayRespawn = false;
     private int gunLevel = DEBUG_MODE?2:0;
@@ -29,6 +29,6 @@ public class GameScreen extends Screen {
 
     public void render(Graphics g) {
 //        g.drawImage(Art.bg, -xLevel*160, -yLevel*120, null);
-        level.render(g);
+        //level.render(g);
     }
 }

@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import nettower.level.Level;
 import nettower.singleton.SingletonGame;
 import nettower.singleton.SingletonGraphics;
 import nettower.screen.Screen;
@@ -36,6 +37,7 @@ public class NetTower extends Applet implements Runnable {
     private Graphics dbg;
     private Screen screen;
     private Input input = new Input();
+    private Level level;
 
     public NetTower() {
         setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
@@ -80,6 +82,8 @@ public class NetTower extends Applet implements Runnable {
         route.add(new Point.Double(0,400));
         route.add(new Point.Double(0,500));
         SingletonGame.getInstance().addRoute(route);
+        
+        level = new Level(15, 15);
     }
 
     @Override
@@ -160,15 +164,15 @@ public class NetTower extends Applet implements Runnable {
     @Override
     public void paint(Graphics g) {
         BufferedImage chicken = Art.chicken;
-        g.drawString("Hola mundo!", 100, 50);
-        g.drawString("i = " + i, 30, 30);
+//        g.drawString("Hola mundo!", 100, 50);
+//        g.drawString("i = " + i, 30, 30);
 
-        // Zona del mapa
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, GAME_HEIGHT, GAME_HEIGHT);
-        // Zona del menu
-        g.setColor(Color.GREEN);
-        g.fillRect(GAME_HEIGHT, 0, GAME_WIDTH - GAME_HEIGHT, GAME_HEIGHT);
+//        // Zona del mapa
+//        g.setColor(Color.BLACK);
+//        g.fillRect(0, 0, GAME_HEIGHT, GAME_HEIGHT);
+//        // Zona del menu
+//        g.setColor(Color.GREEN);
+//        g.fillRect(GAME_HEIGHT, 0, GAME_WIDTH - GAME_HEIGHT, GAME_HEIGHT);
 
         // Testeando colores pal mapa
 //        char[] boxes = map.parseMap(1);

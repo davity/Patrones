@@ -27,6 +27,22 @@ public class Grid {
         return p;
     }
 
+    public Point getBoxMiddle(Point position) {
+        Point p = new Point();
+        p.x = position.x / 32 + 16;
+        p.y = position.y / 32 + 16;
+
+        return p;
+    }
+    
+    public static Point getBoxMiddleForPaint(Point position) {
+        Point p = new Point();
+        p.x = position.x * 32;
+        p.y = position.y * 32;
+
+        return p;
+    }
+    
     public Point getBoxPaintOrigin(Point position) {
         Point p = new Point();
         p.x = position.x * 32;

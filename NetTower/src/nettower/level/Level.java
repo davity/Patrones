@@ -1,12 +1,16 @@
 package nettower.level;
 
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import nettower.Art;
 import nettower.entity.Entity;
 import nettower.screen.GameScreen;
+import nettower.screen.Grid;
+import nettower.singleton.SingletonGraphics;
 
 /*
  *
@@ -20,40 +24,51 @@ import nettower.screen.GameScreen;
  *
  *
  */
-
 public class Level {
 
-    public List<Entity> entities = new ArrayList<Entity>();
+    public static final int HIERBA = 0;
+    public static final int CAMINO = 1;
+    public static final int ROCA = 2;
     public List<Entity>[] entityMap;
-    private int width, height;
-    private Random random = new Random(1000);
-    private GameScreen screen;
-    private int respawnTime = 0;
     private int tick;
-    public byte[] boxes;
+    public int[] map;
+    int w;
+    int h;
 
     @SuppressWarnings("unchecked")
-    public Level(GameScreen screen, int w, int h, int xo, int yo, int xSpawn, int ySpawn) {
-        this.screen = screen;
-        int[] pixels = new int[32 * 24];
+    public Level(int w, int h) {
+        this.w = w;
+        this.h = h;
+        int[] pixels = new int[w * h];
+        map = new int[w * h];
+        Art.map1.getRGB(0, 0, w, h, pixels, 0, 15);
+        int indice;
 
-        Art.map1.getRGB(xo * 31, yo * 23, 32, 24, pixels, 0, 32);
-
-        boxes = new byte[w * h];
-        entityMap = new ArrayList[w * h];
-        this.width = w;
-        this.height = h;
-
+        /*
+         * Parseamos el mapa y lo pasamos a una matriz de enteros
+         */
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
-                
+
+                indice = x + y * w;
+
+                if (pixels[indice] == 0xFF00FF00) {
+                    map[indice] = HIERBA;
+                    SingletonGraphics.getInstance().drawImage(Art.hierba, new Point(x,y));
+                } else if (pixels[indice] == 0xFFFFFF00) {
+                    map[indice] = CAMINO;
+                } else if (pixels[indice] == 0xFFA0A0A0) {
+                    map[indice] = ROCA;
+                }
             }
         }
+
+
     }
 
     /*
-     * Esta funcionalidad debe ir dentro del constructor de Level.
-     * De momento la dejo aquí para hacer pruebas.
+     * Esta funcionalidad debe ir dentro del constructor de Level. De momento la
+     * dejo aquí para hacer pruebas.
      */
     public char[] parseMap(int level) {
         int[] pixels = new int[15 * 15];
@@ -66,7 +81,7 @@ public class Level {
         }
         return boxes;
     }
-    
+
     public void add(Entity e) {
     }
 
@@ -82,6 +97,22 @@ public class Level {
         return hits;
     }
 
-    public void render(Graphics g) {
+    public void render() {
+        int indice;
+        
+        for (int y = 0; y < h; y++) {
+            for (int x = 0; x < w; x++) {
+
+                indice = x + y * w;
+
+                if (map[indice] == 0) {
+                    SingletonGraphics.getInstance().drawImage(Art.hierba, Grid.getBoxMiddleForPaint(new Point(x,y)));
+                } else if (map[indice] == 1) {
+                    SingletonGraphics.getInstance().drawImage(Art.camino, Grid.getBoxMiddleForPaint(new Point(x,y)));
+                } else if (map[indice] == 2) {
+                    SingletonGraphics.getInstance().drawImage(Art.roca, Grid.getBoxMiddleForPaint(new Point(x,y)));
+                }
+            }
+        }
     }
 }
