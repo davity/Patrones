@@ -13,7 +13,6 @@ import javax.swing.JFrame;
 import nettower.level.Level;
 import nettower.singleton.SingletonGame;
 import nettower.singleton.SingletonGraphics;
-import nettower.screen.Screen;
 
 /**
  *

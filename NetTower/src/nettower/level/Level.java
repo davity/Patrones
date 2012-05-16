@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Random;
 import nettower.Art;
 import nettower.entity.Entity;
-import nettower.screen.GameScreen;
 import nettower.screen.Grid;
 import nettower.singleton.SingletonGraphics;
 
