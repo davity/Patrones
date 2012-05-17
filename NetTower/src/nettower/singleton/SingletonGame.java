@@ -5,6 +5,7 @@
 package nettower.singleton;
 
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 import nettower.entity.Bullet;
@@ -13,7 +14,7 @@ import nettower.entity.Tower;
 import nettower.iterator.Aggregate;
 import nettower.iterator.ConcreteAggregate;
 import nettower.iterator.Iterator;
-import nettower.level.Level;
+import nettower.map.Map;
 
 /**
  *
@@ -25,11 +26,11 @@ public class SingletonGame {
     private ArrayList<Chicken> chickensList = new ArrayList();
     private ArrayList<Tower> towersList = new ArrayList();
     private ArrayList<Bullet> bulletsList = new ArrayList();
+    private Map mapa = null;
     private int points = 0;
     private int money = 400;
     private int lives = 10;
     private Random random = new Random();
-    private Level level = new Level(15, 15);
     
     private SingletonGame() {}
     
@@ -78,7 +79,7 @@ public class SingletonGame {
     }
     
     public void draw() {
-        level.render();
+        mapa.draw();
         for (int n = 0; n < chickensList.size(); n++) {
             chickensList.get(n).draw();
         }
@@ -131,5 +132,9 @@ public class SingletonGame {
     
     public void takeALife() {
         lives--;
+    }
+    
+    public void setMap(BufferedImage unmapa, int width, int height) {
+        this.mapa = new Map(unmapa, width, width);
     }
 }

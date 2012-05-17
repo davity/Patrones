@@ -4,13 +4,13 @@
  */
 package nettower;
 
-import nettower.screen.Grid;
+import nettower.Grid;
 import java.applet.Applet;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.JFrame;
-import nettower.level.Level;
+import nettower.map.Map;
 import nettower.singleton.SingletonGame;
 import nettower.singleton.SingletonGraphics;
 
@@ -34,9 +34,8 @@ public class NetTower extends Applet implements Runnable {
     // Imagen para el double-buffer
     private Image dbImage;
     private Graphics dbg;
-    private Screen screen;
     private Input input = new Input();
-    private Level level;
+    private Map level;
 
     public NetTower() {
         setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
@@ -53,6 +52,8 @@ public class NetTower extends Applet implements Runnable {
         alto = 32;
         xspeed = +1;
         yspeed = +1;
+        
+        SingletonGame.getInstance().setMap(Art.map1, 15, 15);
         
         ArrayList<Point.Double> route = new ArrayList();
         route.add(new Point.Double(300,0));
@@ -81,8 +82,6 @@ public class NetTower extends Applet implements Runnable {
         route.add(new Point.Double(0,400));
         route.add(new Point.Double(0,500));
         SingletonGame.getInstance().addRoute(route);
-        
-        level = new Level(15, 15);
     }
 
     @Override
@@ -206,21 +205,11 @@ public class NetTower extends Applet implements Runnable {
         g.drawImage(dbImage, 0, 0, this);
     }
 
-    public void setScreen(Screen newScreen) {
-        if (screen != null) {
-            screen.removed();
-        }
-        screen = newScreen;
-        if (screen != null) {
-            screen.init(this);
-        }
-    }
-
     public boolean mouseDown(Event e, int x_mouse, int y_mouse) {
         x = x_mouse;
         y = y_mouse;
         Point p = new Point();
-        p = grid.getBoxPaintOrigin(grid.getBoxPosition(x_mouse, y_mouse));
+        p = Grid.getBoxMiddle(x_mouse, y_mouse);
         Point.Double p2 = new Point.Double();
         p2.setLocation(p);
         nettower.entity.Tower tower = SingletonGame.getInstance().getTowerAt(p2);

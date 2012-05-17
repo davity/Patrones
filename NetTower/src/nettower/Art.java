@@ -26,6 +26,8 @@ public class Art {
     public static BufferedImage hierba = load("/hierba.png");
     public static BufferedImage roca = load("/roca.png");
     public static BufferedImage camino = load("/camino.png");
+    public static BufferedImage gallinero = load("/gallinero.png");
+    public static BufferedImage castillo = load("/castillo.png");
 
     public static BufferedImage load(String name) {
         try {
