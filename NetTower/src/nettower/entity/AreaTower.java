@@ -15,14 +15,14 @@ import nettower.singleton.SingletonGame;
  */
 public class AreaTower extends Tower {
     public AreaTower(Point.Double iniPosition) {
-        super(iniPosition, 16, Art.tower, 1, 200, 10, 200, 200);
+        super(Art.tower, 16, iniPosition, 1, 200, 10, 200, 200);
     }
     
     @Override
     public void shoot() {
-        ArrayList<Chicken> targets = SingletonGame.getInstance().getInRangeChickens(getPosition(), range);
+        ArrayList<Chicken> targets = SingletonGame.getInstance().getInRangeChickens(position, range);
         for (int n = 0; n < targets.size(); n++) {
-            SingletonGame.getInstance().addBullet(getPosition(), 4, Art.bullet, targets.get(n), damage, bulletsSpeed);
+            SingletonGame.getInstance().addBullet(Art.bullet, 4, position, targets.get(n), damage, bulletsSpeed);
         }
     }
 

@@ -63,8 +63,8 @@ public class SingletonGame {
         towersList.remove(tower);
     }
     
-    public void addBullet(Point.Double position, int radiusSize, BufferedImage image, Chicken target, int damage, int speed) {
-        bulletsList.add(new Bullet(position, radiusSize, image, target, damage, speed));
+    public void addBullet(BufferedImage image, int radiusSize, Point.Double position, Chicken target, int damage, int speed) {
+        bulletsList.add(new Bullet(image, radiusSize, position, target, damage, speed));
     }
     
     public void removeBullet(Bullet bullet) {
@@ -105,7 +105,7 @@ public class SingletonGame {
         double shortestDistance = range;
         double currentDistance;
         for (int n = 0; n < chickensList.size(); n++) {
-            currentDistance = point.distance(chickensList.get(n).getPosition());
+            currentDistance = point.distance(chickensList.get(n).position);
             if (currentDistance <= shortestDistance) {
                 chicken = chickensList.get(n);
                 shortestDistance = currentDistance;
@@ -117,7 +117,7 @@ public class SingletonGame {
     public ArrayList<Chicken> getInRangeChickens(Double point, int range) {
         ArrayList<Chicken> chickens = new ArrayList();
         for (int n = 0; n < chickensList.size(); n++) {
-            if (point.distance(chickensList.get(n).getPosition()) <= range) {
+            if (point.distance(chickensList.get(n).position) <= range) {
                 chickens.add(chickensList.get(n));
             }
         }
@@ -126,7 +126,7 @@ public class SingletonGame {
     
     public Tower getTowerAt(Point.Double point) {
         for (int n = 0; n < towersList.size(); n++) {
-            if (towersList.get(n).getPosition().distance(point) == 0) {
+            if (towersList.get(n).position.distance(point) == 0) {
                 return towersList.get(n);
             }
         }

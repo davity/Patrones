@@ -14,22 +14,22 @@ import java.awt.image.BufferedImage;
 public abstract class MobileEntity extends Entity {
     public int speed;
     
-    public MobileEntity(Point.Double iniPosition, int iniRadiusSize, BufferedImage iniImage, int iniSpeed) {
-        super(iniPosition, iniRadiusSize, iniImage);
+    public MobileEntity(BufferedImage iniImage, int iniRadiusSize, Point.Double iniPosition, int iniSpeed) {
+        super(iniImage, iniRadiusSize, iniPosition);
         speed = iniSpeed;
     }
     
     public abstract Point.Double getPointTarget();
     
     public void advance() {
-        double x = getPointTarget().x - getPosition().x;
-        double y = getPointTarget().y - getPosition().y;
+        double x = getPointTarget().x - position.x;
+        double y = getPointTarget().y - position.y;
         double distance = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
         if (distance > speed) {
-            setPosition(new Point.Double(getPosition().x + x * speed / distance, getPosition().y + y * speed / distance));
+            position = new Point.Double(position.x + x * speed / distance, position.y + y * speed / distance);
         }
         else {
-            setPosition(getPointTarget());
+            position = getPointTarget();
             onReach();
         }
     }

@@ -14,14 +14,14 @@ import nettower.singleton.SingletonGame;
  */
 public class HeavyTower extends Tower {
     public HeavyTower(Point.Double iniPosition) {
-        super(iniPosition, 16, Art.tower, 200, 400, 2, 200, 200);
+        super(Art.tower, 16, iniPosition, 200, 400, 2, 200, 200);
     }
     
     @Override
     public void shoot() {
-        Chicken target = SingletonGame.getInstance().getNearestInRangeChicken(getPosition(), range);
+        Chicken target = SingletonGame.getInstance().getNearestInRangeChicken(position, range);
         if (target != null) {
-            SingletonGame.getInstance().addBullet(getPosition(), 4, Art.bullet, target, damage, bulletsSpeed);
+            SingletonGame.getInstance().addBullet(Art.bullet, 4, position, target, damage, bulletsSpeed);
         }
         recharge = fireRate;
     }

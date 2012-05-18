@@ -20,8 +20,8 @@ public abstract class Tower extends Entity {
     int upgradeCost;
     int recharge;
     
-    public Tower(Point.Double iniPosition, int iniRadiusSize, BufferedImage iniImage, int iniDamage, int iniFireRate, int iniBulletsSpeed, int iniRange, int iniUpgradeCost) {
-        super(iniPosition, iniRadiusSize, iniImage);
+    public Tower(BufferedImage iniImage, int iniRadiusSize, Point.Double iniPosition, int iniDamage, int iniFireRate, int iniBulletsSpeed, int iniRange, int iniUpgradeCost) {
+        super(iniImage, iniRadiusSize, iniPosition);
         damage = iniDamage;
         fireRate = iniFireRate;
         bulletsSpeed = iniBulletsSpeed;

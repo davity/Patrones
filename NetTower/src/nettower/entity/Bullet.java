@@ -16,15 +16,15 @@ public class Bullet extends MobileEntity{
     public Chicken target;
     public int damage;
     
-    public Bullet(Point.Double iniPosition, int iniRadiusSize, BufferedImage iniImage, Chicken iniTarget, int iniDamage, int iniSpeed) {
-        super(iniPosition, iniRadiusSize, iniImage, iniSpeed);
+    public Bullet(BufferedImage iniImage, int iniRadiusSize, Point.Double iniPosition, Chicken iniTarget, int iniDamage, int iniSpeed) {
+        super(iniImage, iniRadiusSize, iniPosition, iniSpeed);
         target = iniTarget;
         damage = iniDamage;
     }
     
     @Override
     public Point.Double getPointTarget() {
-        return target.getPosition();
+        return target.position;
     }
     
     @Override

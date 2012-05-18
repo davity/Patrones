@@ -13,7 +13,7 @@ import nettower.singleton.SingletonGame;
  */
 public class QuickChicken extends Chicken{
     public QuickChicken() {
-        super(16, Art.chicken, SingletonGame.getInstance().getRandomRoute(), 10, 40, 20, 20);
+        super(Art.chicken, 16, SingletonGame.getInstance().getRandomRoute(), 10, 40, 20, 20);
     }
 
     @Override

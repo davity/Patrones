@@ -19,8 +19,8 @@ public abstract class Chicken extends MobileEntity {
     public int points;
     public int money;
     
-    public Chicken(int iniRadiusSize, BufferedImage iniImage, Iterator iniRoute, int iniLife, int iniSpeed, int iniPoints, int iniMoney) {
-        super((Point.Double)iniRoute.first(), iniRadiusSize, iniImage, iniSpeed);
+    public Chicken(BufferedImage iniImage, int iniRadiusSize, Iterator iniRoute, int iniLife, int iniSpeed, int iniPoints, int iniMoney) {
+        super(iniImage, iniRadiusSize, (Point.Double)iniRoute.first(), iniSpeed);
         route = iniRoute;
         life = iniLife;
         points = iniPoints;
