@@ -16,7 +16,7 @@ public class Map {
     public static final int START = 3;
     public static final int END = 4;
     public int[] map;
-    public ArrayList<ArrayList> paths;
+    public ArrayList<Point> path;
     int width;
     int height;
 
@@ -26,6 +26,7 @@ public class Map {
         this.height = h;
         
         this.map = parseMap(mapa);
+//        path= getPaths();
     }
 
     /*
@@ -55,9 +56,175 @@ public class Map {
         
         return m;
     }
-
-    public void add(Entity e) {
-    }
+//    
+//    public ArrayList<Point> getPaths() {
+//        ArrayList<Point> path = new ArrayList();
+//        ArrayList<Point> startPoints = getStartPositions();
+//        ArrayList<Point> adyacentes;
+//        int dirx;
+//        int diry;
+//        Point p;
+////        Point t;
+//        Point a;
+//        Point b;
+//        int i =-1;
+//
+//        p = startPoints.get(0);
+//
+//        while (map[p.x + p.y * width] != END) {
+//            path.add((Point) p.clone());
+//            adyacentes = getAdjacents(p);
+//            a = adyacentes.get(0);
+//            dirx = a.x - p.x;
+//            diry = a.y - p.y;
+//
+//            if (dirx != 0) {
+//                /* nos movemos en horizontal hasta encontrar una esquina */
+//                while (dirx != 0) {
+//                    p.x += dirx;
+//                    adyacentes = getAdjacents(p);
+//                    a = adyacentes.get(0);
+//                    dirx = a.x - p.x;
+//                }
+//                path.add((Point) p.clone());
+//
+//            } else if (diry != 0) {
+//                /* nos movemos en vertical hasta encontrar una esquina */
+//                while (diry != 0) {
+//                    b = (Point) p.clone();
+//                    p.y += diry;
+//                    adyacentes = getAdjacents(p);
+//                    do {
+//                        i++;
+//                        a = adyacentes.get(i);
+//                    } while (a.equals(b));
+//                    diry = a.y - p.y;
+//                }
+//                path.add((Point) p.clone());
+//            }
+//
+//        }
+//
+//    return null;
+//    }
+//    
+//    private ArrayList<Point> getStartPositions() {
+//        ArrayList<Point> startPoints = new ArrayList();
+//        int x;
+//        int y;
+//        int i;
+//        
+//        for (y = 0; y < height; y++) {
+//             for (x = 0; x < width; x++) {
+//                 i = x + y * width;
+//                 
+//                 if (map[i] == START) {
+//                     startPoints.add(new Point(x, y));
+//                 }
+//            }
+//
+//        }
+//        
+//        return startPoints;
+//    }
+//    
+//    private ArrayList<Point> getAdjacents (Point p) {
+//        ArrayList<Point> ady = new ArrayList();
+//        
+//        /* Up mid */
+//        if ((p.x >= 0) && ((p.y - 1 ) >= 0)){
+//            if (map[p.x + (p.y - 1) * width] == CAMINO)
+//                ady.add(new Point(p.x, p.y -1));
+//        }
+//        
+//        /* Mid left */
+//        if (((p.x - 1) >= 0) && (p.y >= 0)){
+//            if (map[(p.x - 1) + p.y  * width] == CAMINO)
+//                ady.add(new Point(p.x - 1, p.y));
+//        }
+//        
+//        /* Mid right */
+//        if (((p.x + 1) >= 0) && (p.y >= 0)){
+//            if (map[(p.x + 1) + p.y * width] == CAMINO)
+//                ady.add(new Point(p.x + 1, p.y));
+//        }
+//        
+//        /* Down mid */
+//        if ((p.x >= 0) && ((p.y + 1 ) >= 0)){
+//            if (map[p.x + (p.y + 1) * width] == CAMINO)
+//                ady.add(new Point(p.x, p.y + 1));
+//        }
+//        
+//        return ady;
+//    }
+    
+//    private int[] getAdjacents(Point p) {
+//        int[] ady = new int[] {0,0,0,0,0,0,0,0,0}; // [8]
+////        int y;
+////        int x;
+////        int i;
+////        int ex;
+////        int ey;
+//        
+//        /* Up left */
+//        if (((p.x - 1) >= 0) && ((p.y - 1 ) >= 0)){
+//            if (map[(p.x - 1) + (p.y - 1) * width] == CAMINO)
+//                ady[0] = 1;
+//        }
+//        
+//        /* Up mid */
+//        if ((p.x >= 0) && ((p.y - 1 ) >= 0)){
+//            if (map[p.x + (p.y - 1) * width] == CAMINO)
+//                ady[0] = 1;
+//        }
+//        
+//        /* Up rigth */
+//        if (((p.x + 1) >= 0) && ((p.y - 1 ) >= 0)){
+//            if (map[(p.x + 1) + (p.y - 1) * width] == CAMINO)
+//                ady[0] = 1;
+//        }
+//        
+//        /* Mid left */
+//        if (((p.x - 1) >= 0) && (p.y >= 0)){
+//            if (map[(p.x - 1) + p.y  * width] == CAMINO)
+//                ady[0] = 1;
+//        }
+//        
+//        /* Mid right */
+//        if (((p.x + 1) >= 0) && (p.y >= 0)){
+//            if (map[(p.x + 1) + p.y * width] == CAMINO)
+//                ady[0] = 1;
+//        }
+//        
+//        /* Down left */
+//        if (((p.x - 1) >= 0) && ((p.y + 1 ) >= 0)){
+//            if (map[(p.x - 1) + (p.y + 1) * width] == CAMINO)
+//                ady[0] = 1;
+//        }
+//        
+//        /* Down mid */
+//        if ((p.x >= 0) && ((p.y + 1 ) >= 0)){
+//            if (map[p.x + (p.y + 1) * width] == CAMINO)
+//                ady[0] = 1;
+//        }
+//        
+//        /* Down right */
+//        if (((p.x + 1) >= 0) && ((p.y + 1 ) >= 0)){
+//            if (map[(p.x + 1) + (p.y + 1) * width] == CAMINO)
+//                ady[0] = 1;
+//        }
+//        
+////        for (y = -1; y <= 1; y++) {
+////            for (x = -1; x <= 1; y++) {
+////                ex = p.x + x;
+////                ey = p.y + y;
+////                if ((ex >= 0) && (ex <= 14) && (ey >= 0) && (ey <= 14)) {
+////                    
+////                }
+////            }
+////        }
+//        return ady;
+//    }
 
     public void draw() {
         int indice;
