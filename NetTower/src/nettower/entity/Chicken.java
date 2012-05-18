@@ -5,7 +5,7 @@
 package nettower.entity;
 
 import java.awt.Point;
-import nettower.Art;
+import java.awt.image.BufferedImage;
 import nettower.iterator.Iterator;
 import nettower.singleton.SingletonGame;
 
@@ -13,20 +13,18 @@ import nettower.singleton.SingletonGame;
  *
  * @author David Moran Diaz
  */
-public class Chicken extends MobileEntity {
+public abstract class Chicken extends MobileEntity {
     private Iterator route;
     public int life;
     public int points;
     public int money;
     
-    public Chicken(int iniLife, int iniSpeed, int iniPoints, int iniMoney) {
-        super(new Point.Double(0, 0), 16, Art.chicken, iniSpeed);
-        route = SingletonGame.getInstance().getRandomRoute();
+    public Chicken(BufferedImage iniImage, int iniRadiusSize, Iterator iniRoute, int iniLife, int iniSpeed, int iniPoints, int iniMoney) {
+        super(iniImage, iniRadiusSize, (Point.Double)iniRoute.first(), iniSpeed);
+        route = iniRoute;
         life = iniLife;
         points = iniPoints;
         money = iniMoney;
-        
-        setPosition((Point.Double)route.first());
     }
     
     @Override
@@ -40,9 +38,12 @@ public class Chicken extends MobileEntity {
             slain();
         }
         else {
+            onStep();
             advance();
         }
     }
+    
+    public abstract void onStep();
     
     @Override
     public void onReach() {
