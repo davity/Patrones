@@ -5,14 +5,14 @@
 package nettower.entity;
 
 import java.awt.Point;
-import nettower.Art;
+import java.awt.image.BufferedImage;
 import nettower.singleton.SingletonGame;
 
 /**
  *
  * @author David Moran Diaz
  */
-public class Tower extends Entity {
+public abstract class Tower extends Entity {
     int damage;
     int fireRate;
     int bulletsSpeed;
@@ -20,8 +20,8 @@ public class Tower extends Entity {
     int upgradeCost;
     int recharge;
     
-    public Tower(Point.Double iniPosition, int iniDamage, int iniFireRate, int iniBulletsSpeed, int iniRange, int iniUpgradeCost) {
-        super(iniPosition, 16, Art.tower);
+    public Tower(Point.Double iniPosition, int iniRadiusSize, BufferedImage iniImage, int iniDamage, int iniFireRate, int iniBulletsSpeed, int iniRange, int iniUpgradeCost) {
+        super(iniPosition, iniRadiusSize, iniImage);
         damage = iniDamage;
         fireRate = iniFireRate;
         bulletsSpeed = iniBulletsSpeed;
@@ -34,26 +34,22 @@ public class Tower extends Entity {
     @Override
     public void step() {
         if (recharge == 0) {
-            Chicken target = SingletonGame.getInstance().getNearestInRangeChicken(getPosition(), range);
-            if (target != null) {
-                SingletonGame.getInstance().addBullet(getPosition(), target, damage, bulletsSpeed);
-                recharge = fireRate;
-            }
+            shoot();
         }
         else {
             recharge--;
         }
     }
     
+    public abstract void shoot();
+    
     public void upgrade() {
         SingletonGame.getInstance().takeMoney(upgradeCost);
-        damage *= 1.1;
-        fireRate *= 0.9;
-        bulletsSpeed *= 1.1;
-        range *= 1.1;
-        upgradeCost *= 1.1;
+        onUpgrade();
         recharge = fireRate;
     }
+    
+    public abstract void onUpgrade();
 
     @Override
     public void remove() {

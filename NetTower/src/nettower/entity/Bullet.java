@@ -5,7 +5,7 @@
 package nettower.entity;
 
 import java.awt.Point;
-import nettower.Art;
+import java.awt.image.BufferedImage;
 import nettower.singleton.SingletonGame;
 
 /**
@@ -16,8 +16,8 @@ public class Bullet extends MobileEntity{
     public Chicken target;
     public int damage;
     
-    public Bullet(Point.Double iniPosition, Chicken iniTarget, int iniDamage, int iniSpeed) {
-        super(iniPosition, 4, Art.bullet, iniSpeed);
+    public Bullet(Point.Double iniPosition, int iniRadiusSize, BufferedImage iniImage, Chicken iniTarget, int iniDamage, int iniSpeed) {
+        super(iniPosition, iniRadiusSize, iniImage, iniSpeed);
         target = iniTarget;
         damage = iniDamage;
     }

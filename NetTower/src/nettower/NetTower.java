@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import nettower.factory.ChickenFactory;
 import nettower.map.Map;
 import nettower.singleton.SingletonGame;
 import nettower.singleton.SingletonGraphics;
@@ -39,6 +40,7 @@ public class NetTower extends Applet implements Runnable {
 
     public NetTower() {
         setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+        SingletonGame.getInstance().setMap(Art.map1, 15, 15);
     }
 
     @Override
@@ -53,7 +55,10 @@ public class NetTower extends Applet implements Runnable {
         xspeed = +1;
         yspeed = +1;
         
-        SingletonGame.getInstance().setMap(Art.map1, 15, 15);
+        //CAMBIADO EL ESTABLECIMIENTO DEL MAPA AL CONSTRUCTOR
+        //PARA EVITAR NULL-POINTERS-EXCEPTIONS
+        //borra estas líneas cuando lo leas
+        //SingletonGame.getInstance().setMap(Art.map1, 15, 15);
         
         ArrayList<Point.Double> route = new ArrayList();
         route.add(new Point.Double(300,0));
@@ -216,7 +221,7 @@ public class NetTower extends Applet implements Runnable {
         if (tower != null) {
             tower.upgrade();
         } else {
-            SingletonGame.getInstance().addTower(p2);
+            SingletonGame.getInstance().addTower(p2, SingletonGame.getInstance().random.nextInt(4));
         }
 
         return true;

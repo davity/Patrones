@@ -5,12 +5,15 @@
 package nettower.singleton;
 
 import java.awt.Point;
+import java.awt.geom.Point2D.Double;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 import nettower.entity.Bullet;
 import nettower.entity.Chicken;
 import nettower.entity.Tower;
+import nettower.factory.ChickenFactory;
+import nettower.factory.TowerFactory;
 import nettower.iterator.Aggregate;
 import nettower.iterator.ConcreteAggregate;
 import nettower.iterator.Iterator;
@@ -22,6 +25,8 @@ import nettower.map.Map;
  */
 public class SingletonGame {
     private static SingletonGame instancia = new SingletonGame();
+    private TowerFactory towerFactory = new TowerFactory();
+    private ChickenFactory chickenFactory = new ChickenFactory();
     private ArrayList<Aggregate> routesList = new ArrayList();
     private ArrayList<Chicken> chickensList = new ArrayList();
     private ArrayList<Tower> towersList = new ArrayList();
@@ -30,7 +35,7 @@ public class SingletonGame {
     private int points = 0;
     private int money = 400;
     private int lives = 10;
-    private Random random = new Random();
+    public Random random = new Random();
     
     private SingletonGame() {}
     
@@ -43,23 +48,23 @@ public class SingletonGame {
     }
     
     public void addChicken() {
-        chickensList.add(new Chicken(20, 1, 20, 20));
+        chickensList.add(chickenFactory.getChicken());
     }
     
     public void removeChicken(Chicken chicken) {
         chickensList.remove(chicken);
     }
     
-    public void addTower(Point.Double position) {
-        towersList.add(new Tower(position, 1, 16, 4, 400, 10));
+    public void addTower(Point.Double position, int type) {
+        towersList.add(towerFactory.getTower(position, type));
     }
     
     public void removeTower(Tower tower) {
         towersList.remove(tower);
     }
     
-    public void addBullet(Point.Double position, Chicken target, int damage, int speed) {
-        bulletsList.add(new Bullet(position, target, damage, speed));
+    public void addBullet(Point.Double position, int radiusSize, BufferedImage image, Chicken target, int damage, int speed) {
+        bulletsList.add(new Bullet(position, radiusSize, image, target, damage, speed));
     }
     
     public void removeBullet(Bullet bullet) {
@@ -80,11 +85,11 @@ public class SingletonGame {
     
     public void draw() {
         mapa.draw();
-        for (int n = 0; n < chickensList.size(); n++) {
-            chickensList.get(n).draw();
-        }
         for (int n = 0; n < towersList.size(); n++) {
             towersList.get(n).draw();
+        }
+        for (int n = 0; n < chickensList.size(); n++) {
+            chickensList.get(n).draw();
         }
         for (int n = 0; n < bulletsList.size(); n++) {
             bulletsList.get(n).draw();
@@ -107,6 +112,16 @@ public class SingletonGame {
             }
         }
         return chicken;
+    }
+    
+    public ArrayList<Chicken> getInRangeChickens(Double point, int range) {
+        ArrayList<Chicken> chickens = new ArrayList();
+        for (int n = 0; n < chickensList.size(); n++) {
+            if (point.distance(chickensList.get(n).getPosition()) <= range) {
+                chickens.add(chickensList.get(n));
+            }
+        }
+        return chickens;
     }
     
     public Tower getTowerAt(Point.Double point) {
