@@ -18,6 +18,7 @@ public abstract class Chicken extends MobileEntity {
     public int life;
     public int points;
     public int money;
+    private boolean exist = true;
     
     public Chicken(BufferedImage iniImage, int iniRadiusSize, Iterator iniRoute, int iniLife, int iniSpeed, int iniPoints, int iniMoney) {
         super(iniImage, iniRadiusSize, (Point.Double)iniRoute.first(), iniSpeed);
@@ -69,5 +70,10 @@ public abstract class Chicken extends MobileEntity {
     @Override
     public void remove() {
         SingletonGame.getInstance().removeChicken(this);
+        exist = false;
+    }
+
+    boolean exist() {
+        return exist;
     }
 }

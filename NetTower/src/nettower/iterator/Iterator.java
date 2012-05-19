@@ -13,4 +13,5 @@ public interface Iterator {
     Object current();
     Object next();
     boolean hasNext();
+    Iterator clone();
 }

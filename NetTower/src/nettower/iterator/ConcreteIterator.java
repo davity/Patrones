@@ -53,4 +53,13 @@ public class ConcreteIterator implements Iterator {
         }
         return result;
     }
+
+    @Override
+    public Iterator clone() {
+        Iterator iterator = aggregate.newIterator();
+        for (int n = 0; n < index; n++) {
+            iterator.next();
+        }
+        return iterator;
+    }
 }
