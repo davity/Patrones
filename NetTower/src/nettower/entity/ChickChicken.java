@@ -27,8 +27,8 @@ public class ChickChicken extends Chicken {
     @Override
     public Point.Double getPointTarget() {
         Point.Double target = new Point.Double();
-        target.x += mom.position.x + 10;
-        target.y += mom.position.y + 10;
+        target.x += mom.position.x + SingletonGame.getInstance().random.nextInt(16) - SingletonGame.getInstance().random.nextInt(16);
+        target.y += mom.position.y + SingletonGame.getInstance().random.nextInt(16) - SingletonGame.getInstance().random.nextInt(16);
         return target;
     }
     
