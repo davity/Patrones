@@ -24,7 +24,7 @@ public class PathInterpreter {
     String EMAP = "\\s*(/MAP)$";
     String PATH = "\\s*(PATH)$";
     String EPATH = "\\s*(/PATH)";
-    String COOR = "\\s*[0-9],[0-9]$";
+    String COOR = "\\s*[0-9]+,[0-9]+$";
     // Estados
     int SMAP = 0;
     int SPATH = 1;
