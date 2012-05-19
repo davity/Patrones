@@ -6,6 +6,8 @@ package nettower.entity;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import nettower.flyweight.ImageFactory;
+import nettower.flyweight.ImageFlyweight;
 import nettower.iterator.Iterator;
 import nettower.singleton.SingletonGame;
 
@@ -14,14 +16,16 @@ import nettower.singleton.SingletonGame;
  * @author David Moran Diaz
  */
 public abstract class Chicken extends MobileEntity {
+    public ImageFlyweight invertedImage;
+    public boolean inverted;
     public Iterator route;
     public int life;
     public int points;
     public int money;
-    private boolean exist = true;
     
-    public Chicken(BufferedImage iniImage, int iniRadiusSize, Iterator iniRoute, int iniLife, int iniSpeed, int iniPoints, int iniMoney) {
+    public Chicken(BufferedImage iniImage, BufferedImage iniInvertedImage, int iniRadiusSize, Iterator iniRoute, int iniLife, int iniSpeed, int iniPoints, int iniMoney) {
         super(iniImage, iniRadiusSize, (Point.Double)iniRoute.first(), iniSpeed);
+        invertedImage = ImageFactory.getImage(iniInvertedImage, iniRadiusSize);
         route = iniRoute;
         life = iniLife;
         points = iniPoints;
@@ -40,6 +44,18 @@ public abstract class Chicken extends MobileEntity {
         }
         else {
             onStep();
+            if (inverted && getPointTarget().x - position.x > 0) {
+                ImageFlyweight aux = image;
+                image = invertedImage;
+                invertedImage = aux;
+                inverted = false;
+            }
+            if (!inverted && getPointTarget().x - position.x < 0) {
+                ImageFlyweight aux = image;
+                image = invertedImage;
+                invertedImage = aux;
+                inverted = true;
+            }
             advance();
         }
     }
@@ -70,10 +86,5 @@ public abstract class Chicken extends MobileEntity {
     @Override
     public void remove() {
         SingletonGame.getInstance().removeChicken(this);
-        exist = false;
-    }
-
-    boolean exist() {
-        return exist;
     }
 }

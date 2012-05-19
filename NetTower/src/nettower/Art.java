@@ -20,7 +20,7 @@ public class Art {
     public static BufferedImage chicken = load("/chicken.png");
     public static BufferedImage chickenI = load("/chickenI.png");
     public static BufferedImage tower = load("/tower2.png");
-    public static BufferedImage blueShoot = load("/blueShoot.png");
+    public static BufferedImage cursor = load("/tower.png");
     public static BufferedImage bullet = load("/blueShoot.png");
     public static BufferedImage map1 = load("/map_1.png");
     public static BufferedImage hierba = load("/hierba.png");

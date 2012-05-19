@@ -9,8 +9,10 @@ import java.awt.geom.Point2D.Double;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
+import nettower.Grid;
 import nettower.entity.Bullet;
 import nettower.entity.Chicken;
+import nettower.entity.Cursor;
 import nettower.entity.Tower;
 import nettower.factory.ChickenFactory;
 import nettower.factory.TowerFactory;
@@ -31,7 +33,8 @@ public class SingletonGame {
     private ArrayList<Chicken> chickensList = new ArrayList();
     private ArrayList<Tower> towersList = new ArrayList();
     private ArrayList<Bullet> bulletsList = new ArrayList();
-    private Map mapa = null;
+    private Map map = null;
+    public Cursor cursor = new Cursor();
     private int points = 0;
     private int money = 400;
     private int lives = 10;
@@ -59,8 +62,10 @@ public class SingletonGame {
         chickensList.remove(chicken);
     }
     
-    public void addTower(Point.Double position, int type) {
-        towersList.add(towerFactory.getTower(position, type));
+    public void addTower(int type) {
+        Point.Double point = new Point.Double();
+        point.setLocation(cursor.position);
+        towersList.add(towerFactory.getTower(point, type));
     }
     
     public void removeTower(Tower tower) {
@@ -88,7 +93,7 @@ public class SingletonGame {
     }
     
     public void draw() {
-        mapa.draw();
+        map.draw();
         for (int n = 0; n < towersList.size(); n++) {
             towersList.get(n).draw();
         }
@@ -98,6 +103,7 @@ public class SingletonGame {
         for (int n = 0; n < bulletsList.size(); n++) {
             bulletsList.get(n).draw();
         }
+        if (cursor != null) cursor.draw();
     }
     
     public Iterator getRandomRoute() {
@@ -128,13 +134,18 @@ public class SingletonGame {
         return chickens;
     }
     
-    public Tower getTowerAt(Point.Double point) {
+    public Tower getTowerAt() {
         for (int n = 0; n < towersList.size(); n++) {
-            if (towersList.get(n).position.distance(point) == 0) {
+            if (towersList.get(n).position.distance(cursor.position) == 0) {
                 return towersList.get(n);
             }
         }
         return null;
+    }
+    
+    public boolean isBuildable() {
+        Point tmp = Grid.getBoxLittlePosition((int)cursor.position.x, (int)cursor.position.y);
+        return map.isBuildable(tmp.x, tmp.y);
     }
     
     public void givePoints(int amount) {
@@ -154,6 +165,6 @@ public class SingletonGame {
     }
     
     public void setMap(BufferedImage unmapa, int width, int height) {
-        this.mapa = new Map(unmapa, width, width);
+        this.map = new Map(unmapa, width, width);
     }
 }

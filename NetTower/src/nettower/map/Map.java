@@ -4,12 +4,10 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import nettower.Art;
-import nettower.entity.Entity;
 import nettower.Grid;
 import nettower.singleton.SingletonGraphics;
 
-public class Map {
-
+public final class Map {
     public static final int HIERBA = 0;
     public static final int CAMINO = 1;
     public static final int ROCA = 2;
@@ -26,7 +24,7 @@ public class Map {
         this.height = h;
         
         this.map = parseMap(mapa);
-//        path= getPaths();
+        //path= getPaths();
     }
 
     /*
@@ -157,7 +155,6 @@ public class Map {
 //        
 //        return ady;
 //    }
-    
 //    private int[] getAdjacents(Point p) {
 //        int[] ady = new int[] {0,0,0,0,0,0,0,0,0}; // [8]
 ////        int y;
@@ -225,7 +222,6 @@ public class Map {
 ////        }
 //        return ady;
 //    }
-
     public void draw() {
         int indice;
         
@@ -249,5 +245,9 @@ public class Map {
                 }
             }
         }
+    }
+
+    public boolean isBuildable(int x, int y) {
+        return map[x + y * width] == HIERBA;
     }
 }

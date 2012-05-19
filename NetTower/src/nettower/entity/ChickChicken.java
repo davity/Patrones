@@ -5,6 +5,7 @@
 package nettower.entity;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import nettower.Art;
 import nettower.singleton.SingletonGame;
 
@@ -13,16 +14,37 @@ import nettower.singleton.SingletonGame;
  * @author David
  */
 public class ChickChicken extends Chicken {
-    Chicken mom;
+    ArrayList<ChickChicken> chicks = new ArrayList();
+    ChickChicken mom;
     
-    public ChickChicken(Chicken iniMom) {
-        super(Art.chicken, 16, iniMom.route, 10, 4, 4, 4);
+    public ChickChicken() {
+        super(Art.chicken, Art.chickenI, 16, SingletonGame.getInstance().getRandomRoute(), 10, 4, 4, 4);
+        while (SingletonGame.getInstance().random.nextDouble() <= 0.9) {
+            ChickChicken chick = new ChickChicken(this, 0.8);
+            SingletonGame.getInstance().insertSpecificChicken(chick);
+            chicks.add(chick);
+        }
+        while (SingletonGame.getInstance().random.nextDouble() <= 0.9) {
+            ChickChicken chick = new ChickChicken(this, 0.8);
+            SingletonGame.getInstance().insertSpecificChicken(chick);
+            chicks.add(chick);
+        }
+    }
+    
+    public ChickChicken(ChickChicken iniMom, double probability) {
+        super(Art.chicken, Art.chickenI, 16, iniMom.route, 10, 4, 4, 4);
         mom = iniMom;
-        if (SingletonGame.getInstance().random.nextBoolean()) {
-            SingletonGame.getInstance().insertSpecificChicken(new ChickChicken(this));
-            SingletonGame.getInstance().insertSpecificChicken(new ChickChicken(this));
+        double chickProbability = probability * 0.7;
+        while (SingletonGame.getInstance().random.nextDouble() <= probability) {
+            ChickChicken chick = new ChickChicken(this, chickProbability);
+            SingletonGame.getInstance().insertSpecificChicken(chick);
+            chicks.add(chick);
         }
         route = null;
+    }
+    
+    public void addChicks(ArrayList<ChickChicken> newChicks) {
+        chicks.addAll(newChicks);
     }
     
     @Override
@@ -43,9 +65,21 @@ public class ChickChicken extends Chicken {
     }
     
     @Override
-    public void onStep() {
-        if (route == null && !mom.exist()) {
-            route = mom.route.clone();
+    public void onStep() {}
+    
+    @Override
+    public void remove() {
+        super.remove();
+        if (route != null) {
+            for (int n = 0; n < chicks.size(); n++) {
+                chicks.get(n).route = route.clone();
+            }
+        }
+        else {
+            mom.addChicks(chicks);
+            for (int n = 0; n < chicks.size(); n++) {
+                chicks.get(n).mom = mom;
+            }
         }
     }
 }

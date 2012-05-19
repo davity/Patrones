@@ -4,13 +4,11 @@
  */
 package nettower;
 
-import nettower.Grid;
 import java.applet.Applet;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.JFrame;
-import nettower.factory.ChickenFactory;
 import nettower.map.Map;
 import nettower.singleton.SingletonGame;
 import nettower.singleton.SingletonGraphics;
@@ -86,6 +84,9 @@ public class NetTower extends Applet implements Runnable {
         route.add(new Point.Double(400,400));
         route.add(new Point.Double(0,400));
         route.add(new Point.Double(0,500));
+        
+        /*PathInterpreter path = new PathInterpreter();
+        path.parseMap();*/
         SingletonGame.getInstance().addRoute(route);
     }
 
@@ -213,15 +214,20 @@ public class NetTower extends Applet implements Runnable {
     public boolean mouseDown(Event e, int x_mouse, int y_mouse) {
         x = x_mouse;
         y = y_mouse;
-        Point p = new Point();
-        p = Grid.getBoxMiddle(x_mouse, y_mouse);
-        Point.Double p2 = new Point.Double();
-        p2.setLocation(p);
-        nettower.entity.Tower tower = SingletonGame.getInstance().getTowerAt(p2);
-        if (tower != null) {
-            tower.upgrade();
-        } else {
-            SingletonGame.getInstance().addTower(p2, SingletonGame.getInstance().random.nextInt(4));
+        Point.Double p = new Point.Double();
+        p.setLocation(Grid.getBoxMiddle(x_mouse, y_mouse));
+        if (SingletonGame.getInstance().cursor.position.distance(p) == 0) {
+            if (SingletonGame.getInstance().isBuildable()) {
+                nettower.entity.Tower tower = SingletonGame.getInstance().getTowerAt();
+                if (tower != null) {
+                    tower.upgrade();
+                } else {
+                    SingletonGame.getInstance().addTower(SingletonGame.getInstance().random.nextInt(4));
+                }
+            }
+        }
+        else {
+            SingletonGame.getInstance().cursor.position = p;
         }
 
         return true;

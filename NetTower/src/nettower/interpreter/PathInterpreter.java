@@ -15,7 +15,6 @@ import java.util.ArrayList;
  * @author David Moran Diaz
  */
 public class PathInterpreter {
-
     File archivo;
     FileReader fr;
     BufferedReader br;
@@ -35,16 +34,15 @@ public class PathInterpreter {
     int OK = 1;
     int FAIL = 2;
 
-    public PathInterpreter() {
-    }
+    public PathInterpreter() {}
 
     public static void main(String[] args) {
         PathInterpreter p = new PathInterpreter();
 
-        p.pasrseMap("entrada.txt");
+        p.parseMap("entrada.txt");
     }
 
-    public ArrayList<ArrayList> pasrseMap(String fileName) {
+    public ArrayList<ArrayList> parseMap(String fileName) {
 
         ArrayList<ArrayList> pathsList = null;
         ArrayList<Point> path = null;
@@ -67,18 +65,18 @@ public class PathInterpreter {
                 path = new ArrayList();
             } else if (lin.matches(COOR)) {
                 status = SCOOR;
-
+                
                 lin = lin.replaceAll("\\s*", "");
                 puntos = lin.split(",");
                 p = new Point();
                 p.x = Integer.parseInt(puntos[0]);
                 p.y = Integer.parseInt(puntos[1]);
-
+                
                 // Ponemos el punto al final de la lista
                 path.add(path.size(), p);
             } else if (lin.matches(EPATH)) {
                 status = SEPATH;
-
+                
                 // Ponemos el camino al final de la lista
                 pathsList.add(pathsList.size(), path);
             } else if (lin.matches(EMAP)) {
