@@ -14,7 +14,7 @@ import nettower.singleton.SingletonGame;
  * @author David Moran Diaz
  */
 public abstract class Chicken extends MobileEntity {
-    private Iterator route;
+    public Iterator route;
     public int life;
     public int points;
     public int money;

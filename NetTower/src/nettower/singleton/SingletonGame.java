@@ -51,6 +51,10 @@ public class SingletonGame {
         chickensList.add(chickenFactory.getChicken());
     }
     
+    public void insertSpecificChicken(Chicken chicken) {
+        chickensList.add(chicken);
+    }
+    
     public void removeChicken(Chicken chicken) {
         chickensList.remove(chicken);
     }
