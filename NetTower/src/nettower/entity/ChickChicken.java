@@ -22,25 +22,30 @@ public class ChickChicken extends Chicken {
             SingletonGame.getInstance().insertSpecificChicken(new ChickChicken(this));
             SingletonGame.getInstance().insertSpecificChicken(new ChickChicken(this));
         }
+        route = null;
     }
     
     @Override
     public Point.Double getPointTarget() {
-        Point.Double target = new Point.Double();
-        target.x += mom.position.x + 10;
-        target.y += mom.position.y + 10;
-        return target;
+        if (route != null) {
+            return super.getPointTarget();
+        }
+        else {
+            return new Point.Double(mom.position.x + SingletonGame.getInstance().random.nextInt(16) - SingletonGame.getInstance().random.nextInt(16), mom.position.y + SingletonGame.getInstance().random.nextInt(16) - SingletonGame.getInstance().random.nextInt(16));
+        }
     }
     
     @Override
-    public void onStep() {}
+    public void onReach() {
+        if (route != null) {
+            super.onReach();
+        }
+    }
     
     @Override
-    public void onReach() {
-        if (!route.hasNext())
-        {
-            SingletonGame.getInstance().takeALife();
-            remove();
+    public void onStep() {
+        if (route == null && !mom.exist()) {
+            route = mom.route.clone();
         }
     }
 }
