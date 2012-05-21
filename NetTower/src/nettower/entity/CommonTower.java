@@ -21,7 +21,7 @@ public class CommonTower extends Tower {
     public void shoot() {
         Chicken target = SingletonGame.getInstance().getNearestInRangeChicken(position, range);
         if (target != null) {
-            SingletonGame.getInstance().addBullet(Art.bullet, 4, position, target, damage, bulletsSpeed);
+            SingletonGame.getInstance().addBullet(Art.redBullet, 4, position, target, damage, bulletsSpeed);
         }
         recharge = fireRate;
     }

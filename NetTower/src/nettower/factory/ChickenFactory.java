@@ -13,12 +13,12 @@ import nettower.singleton.SingletonGame;
  */
 public class ChickenFactory extends Factory{
     public Chicken getChicken() {
-        return new ChickChicken();
-        /*switch (SingletonGame.getInstance().random.nextInt(4)) {
+//        return new ChickChicken();
+        switch (SingletonGame.getInstance().random.nextInt(4)) {
             case 1: return new HeavyChicken();
             case 2: return new QuickChicken();
             case 3: return new ChickChicken();
             default: return new CommonChicken();
-        }*/
+        }
     }
 }

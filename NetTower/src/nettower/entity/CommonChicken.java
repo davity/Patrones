@@ -13,7 +13,7 @@ import nettower.singleton.SingletonGame;
  */
 public class CommonChicken extends Chicken{
     public CommonChicken() {
-        super(Art.chicken, Art.chickenI, 16, SingletonGame.getInstance().getRandomRoute(), 20, 4, 20, 20);
+        super(Art.commonChicken, Art.commonChickenI, 16, SingletonGame.getInstance().getRandomRoute(), 20, 4, 20, 20);
     }
 
     @Override

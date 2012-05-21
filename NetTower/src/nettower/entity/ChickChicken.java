@@ -18,7 +18,7 @@ public class ChickChicken extends Chicken {
     ChickChicken mom;
     
     public ChickChicken() {
-        super(Art.chicken, Art.chickenI, 16, SingletonGame.getInstance().getRandomRoute(), 10, 4, 4, 4);
+        super(Art.chickChicken, Art.chickChickenI, 16, SingletonGame.getInstance().getRandomRoute(), 10, 4, 4, 4);
         while (SingletonGame.getInstance().random.nextDouble() <= 0.9) {
             ChickChicken chick = new ChickChicken(this, 0.8);
             SingletonGame.getInstance().insertSpecificChicken(chick);
@@ -32,7 +32,7 @@ public class ChickChicken extends Chicken {
     }
     
     public ChickChicken(ChickChicken iniMom, double probability) {
-        super(Art.chicken, Art.chickenI, 16, iniMom.route, 10, 4, 4, 4);
+        super(Art.chickChicken, Art.chickChickenI, 16, iniMom.route, 10, 4, 4, 4);
         mom = iniMom;
         double chickProbability = probability * 0.7;
         while (SingletonGame.getInstance().random.nextDouble() <= probability) {

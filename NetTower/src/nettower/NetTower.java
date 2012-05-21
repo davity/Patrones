@@ -167,7 +167,7 @@ public class NetTower extends Applet implements Runnable {
 
     @Override
     public void paint(Graphics g) {
-        BufferedImage chicken = Art.chicken;
+//        BufferedImage chicken = Art.commonChicken;
 //        g.drawString("Hola mundo!", 100, 50);
 //        g.drawString("i = " + i, 30, 30);
 
