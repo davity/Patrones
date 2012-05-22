@@ -4,6 +4,8 @@
  */
 package nettower.singleton;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.geom.Point2D.Double;
 import java.awt.image.BufferedImage;
@@ -82,30 +84,43 @@ public class SingletonGame {
     }
     
     public void step() {
+        
         for (int n = 0; n < chickensList.size(); n++) {
             chickensList.get(n).step();
         }
-        for (int n = 0; n < towersList.size(); n++) {
-            towersList.get(n).step();
-        }
-        for (int n = 0; n < bulletsList.size(); n++) {
-            bulletsList.get(n).step();
+        if (lives > 0) {
+            for (int n = 0; n < towersList.size(); n++) {
+                towersList.get(n).step();
+            }
+            for (int n = 0; n < bulletsList.size(); n++) {
+                bulletsList.get(n).step();
+            }
         }
     }
     
     public void draw() {
         map.draw();
         SingletonGraphics.getInstance().drawImage(Art.menu, new Point(480,0));
-        for (int n = 0; n < towersList.size(); n++) {
-            towersList.get(n).draw();
+        if (lives > 0) {
+            for (int n = 0; n < towersList.size(); n++) {
+                towersList.get(n).draw();
+            }
         }
         for (int n = 0; n < chickensList.size(); n++) {
             chickensList.get(n).draw();
         }
-        for (int n = 0; n < bulletsList.size(); n++) {
-            bulletsList.get(n).draw();
+        if (lives > 0)
+        {
+            for (int n = 0; n < bulletsList.size(); n++) {
+                bulletsList.get(n).draw();
+            }
+            if (cursor != null) cursor.draw();
         }
-        if (cursor != null) cursor.draw();
+        else {
+            SingletonGraphics.getInstance().graphics.setColor(Color.RED);
+            SingletonGraphics.getInstance().graphics.setFont(new Font("Arial", Font.BOLD, 22));
+            SingletonGraphics.getInstance().graphics.drawString("YOU LOSE", 200, 200);
+        }
     }
     
     public Iterator getRandomRoute() {
