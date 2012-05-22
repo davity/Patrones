@@ -5,9 +5,11 @@
 package nettower;
 
 import java.applet.Applet;
-import java.awt.*;
+import java.awt.Event;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Point;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 import nettower.map.Map;
 import nettower.singleton.SingletonGame;
 import nettower.singleton.SingletonGraphics;
