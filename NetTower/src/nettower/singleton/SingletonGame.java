@@ -169,4 +169,13 @@ public class SingletonGame {
     public void setMap(BufferedImage unmapa, int width, int height) {
         this.map = new Map(unmapa, width, width);
     }
+
+    public void clear() {
+        chickensList.clear();
+        towersList.clear();
+        bulletsList.clear();
+        points = 0;
+        money = 400;
+        lives = 10;
+    }
 }

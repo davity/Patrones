@@ -9,6 +9,7 @@ import java.awt.Event;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import nettower.map.Map;
 import nettower.singleton.SingletonGame;
@@ -35,9 +36,10 @@ public class Game extends Applet implements Runnable {
     private Graphics dbg;
     private Input input = new Input();
     private Map level;
+    private static Thread t;
     
     public Game() {
-        
+                    
         SingletonGame.getInstance().setMap(Art.map1, 15, 15);
     }
     
@@ -92,8 +94,13 @@ public class Game extends Applet implements Runnable {
 
     @Override
     public void start() {
-        Thread t = new Thread(this);
-        t.start();
+        i = 0;
+        if (t == null) {
+            t = new Thread(this);
+            t.start();
+        }
+        SingletonGame.getInstance().clear();
+        
     }
 
     @Override
@@ -276,8 +283,12 @@ public class Game extends Applet implements Runnable {
     
     @Override
     public boolean keyDown(Event e, int k) {
-        this.stop();
-        Main.getInstance().showMenu();
+        if (k == KeyEvent.VK_ESCAPE)
+            Main.getInstance().showMenu();
+        if (k == KeyEvent.VK_0)
+           t.suspend();
+        if (k == KeyEvent.VK_1)
+           t.resume();
         return true;
     }
 
@@ -298,4 +309,8 @@ public class Game extends Applet implements Runnable {
         nettower.init();
         nettower.start();
     }*/
+    
+    @Override
+    public void stop() {
+    }
 }

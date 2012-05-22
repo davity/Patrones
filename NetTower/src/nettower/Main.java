@@ -16,6 +16,7 @@ public class Main {
     private static Main instance = new Main();
     private static JFrame frame = new JFrame("Chickens Defense");
     private static Menu menu;
+    private Game game;
     private static final int GAME_WIDTH = 640;
     private static final int GAME_HEIGHT = 480;
     
@@ -40,7 +41,7 @@ public class Main {
     
     public void startGame() {
         menu.setVisible(false);
-        Game game = new Game();
+        game = new Game();
         game.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
         frame.add(game, BorderLayout.CENTER);
         frame.pack();
@@ -50,5 +51,6 @@ public class Main {
     
     public void showMenu() {
         menu.setVisible(true);
+        game.stop();
     }
 }
