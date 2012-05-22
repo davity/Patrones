@@ -37,6 +37,7 @@ public class Game extends Applet implements Runnable {
     private Input input = new Input();
     private Map level;
     private static Thread t;
+    private boolean pause;
     
     public Game() {
                     
@@ -120,48 +121,50 @@ public class Game extends Applet implements Runnable {
             lastTime = now;
 
             int max = 10;
-            while (unprocessedTime > 0) {
-                unprocessedTime -= 1000000000 / 60;
-                // Contador de iteraciones
-                i++;
+            if (!pause) {
+                while (unprocessedTime > 0) {
+                    unprocessedTime -= 1000000000 / 60;
+                    // Contador de iteraciones
+                    i++;
 
 
 
-                // Movimiento horizontal
-                if (x >= (GAME_HEIGHT - ancho)) {
-                    x = GAME_HEIGHT - ancho;
-                    xspeed = -1;
-                    //Sound.bounce.play();
-                } else if (x <= 0) {
-                    x = 0;
-                    xspeed = +1;
-                    //Sound.bounce.play();
+                    // Movimiento horizontal
+                    if (x >= (GAME_HEIGHT - ancho)) {
+                        x = GAME_HEIGHT - ancho;
+                        xspeed = -1;
+                        //Sound.bounce.play();
+                    } else if (x <= 0) {
+                        x = 0;
+                        xspeed = +1;
+                        //Sound.bounce.play();
+                    }
+                    x += 10 * xspeed;
+
+                    // Movimiento vertical
+                    if (y >= (GAME_HEIGHT - ancho)) {
+                        y = GAME_HEIGHT - ancho;
+                        yspeed = -1;
+                        //Sound.bounce.play();
+                    } else if (y <= 0) {
+                        y = 0;
+                        yspeed = +1;
+                        //Sound.bounce.play();
+                    }
+                    y += 10 * yspeed;
+
+                    //Avance de las gallinas
+                    if (i % 200 == 0) {
+                        SingletonGame.getInstance().addChicken();
+                    }
+                    SingletonGame.getInstance().step();
+
+                    if (max-- == 0) {
+                        unprocessedTime = 0;
+                        break;
+                    }
                 }
-                x += 10 * xspeed;
-
-                // Movimiento vertical
-                if (y >= (GAME_HEIGHT - ancho)) {
-                    y = GAME_HEIGHT - ancho;
-                    yspeed = -1;
-                    //Sound.bounce.play();
-                } else if (y <= 0) {
-                    y = 0;
-                    yspeed = +1;
-                    //Sound.bounce.play();
-                }
-                y += 10 * yspeed;
-
-                //Avance de las gallinas
-                if (i % 200 == 0) {
-                    SingletonGame.getInstance().addChicken();
-                }
-                SingletonGame.getInstance().step();
-
-                if (max-- == 0) {
-                    unprocessedTime = 0;
-                    break;
-                }
-            }
+        }
 
             repaint();
 
@@ -284,11 +287,9 @@ public class Game extends Applet implements Runnable {
     @Override
     public boolean keyDown(Event e, int k) {
         if (k == KeyEvent.VK_ESCAPE)
-            Main.getInstance().showMenu();
+            Main.getInstance().endGame();
         if (k == KeyEvent.VK_0)
-           t.suspend();
-        if (k == KeyEvent.VK_1)
-           t.resume();
+            Main.getInstance().pause();
         return true;
     }
 
@@ -312,5 +313,13 @@ public class Game extends Applet implements Runnable {
     
     @Override
     public void stop() {
+    }
+
+    void pause() {
+        pause = true;
+    }
+
+    void resume() {
+        pause = false;
     }
 }

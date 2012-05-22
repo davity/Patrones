@@ -15,8 +15,9 @@ import javax.swing.JFrame;
 public class Main {
     private static Main instance = new Main();
     private static JFrame frame = new JFrame("Chickens Defense");
-    private static Menu menu;
+    private static Menu menu = new Menu();
     private Game game;
+    private Pause pause;
     private static final int GAME_WIDTH = 640;
     private static final int GAME_HEIGHT = 480;
     
@@ -28,7 +29,6 @@ public class Main {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        menu = new Menu();
         menu.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
         frame.add(menu, BorderLayout.CENTER);
         frame.pack();
@@ -41,16 +41,36 @@ public class Main {
     
     public void startGame() {
         menu.setVisible(false);
-        game = new Game();
-        game.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+        if (game == null) {
+            game = new Game();
+            game.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+        }
         frame.add(game, BorderLayout.CENTER);
         frame.pack();
         game.init();
         game.start();
     }
     
-    public void showMenu() {
-        menu.setVisible(true);
+    public void endGame() {
         game.stop();
+        frame.remove(game);
+        menu.setVisible(true);
+    }
+    
+    public void pause() {
+        game.pause();
+        game.setVisible(false);
+        if (pause == null ) {
+            pause = new Pause();
+            pause.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+        }
+        frame.add(pause, BorderLayout.CENTER);
+        frame.pack();
+    }
+    
+    public void resume() {
+        frame.remove(pause);
+        game.setVisible(true);
+        game.resume();
     }
 }
