@@ -23,7 +23,7 @@ public class Pause extends Applet {
     @Override
     public boolean mouseUp(Event e, int x, int y) {
         Main.getInstance().resume();
-        if (x > y) Main.getInstance().endGame();
+        Main.getInstance().endGame();
         return true;
     }
 }

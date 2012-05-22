@@ -6,6 +6,9 @@ package nettower;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -18,6 +21,7 @@ public class Main {
     private static Menu menu = new Menu();
     private Game game;
     private Pause pause;
+    private Records records;
     private static final int GAME_WIDTH = 640;
     private static final int GAME_HEIGHT = 480;
     
@@ -49,6 +53,11 @@ public class Main {
         frame.pack();
         game.init();
         game.start();
+        records = new Records();
+        load();
+        System.out.println(records.record[1]);
+        records.record[1]++;
+        save();
     }
     
     public void endGame() {
@@ -72,5 +81,33 @@ public class Main {
         frame.remove(pause);
         game.setVisible(true);
         game.resume();
+    }
+    
+    public void save() {
+        try {
+            File file = new File("records.dat");
+            if(!file.exists()) {
+                file.createNewFile();
+            }
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                writer.write(records.save());
+                writer.newLine();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void load() {
+        try {
+            File file = new File("records.dat");
+            if(file.exists()) {
+                try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                    records.load(reader.readLine());
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
