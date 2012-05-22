@@ -182,16 +182,24 @@ public class Grid {
         
         if (position.x >= 489 && position.x <= 730) p.x = 489;
         /* Torreta normal */
-        if (position.y >= 172 && position.y <= 208) p.y = 172;
+        if (position.y >= 150 && position.y <= 186) p.y = 172;
         else
             /* Torreta de area */ 
-            if (position.y >= 212 && position.y <= 248) p.y = 212;
+            if (position.y >= 190 && position.y <= 226) p.y = 212;
         else 
             /* Torreta heavy */
-            if (position.y >= 252 && position.y <= 288) p.y = 252;
+            if (position.y >= 230 && position.y <= 266) p.y = 190;
+        else 
+            /* Upgrade */
+            if (position.y >= 270 && position.y <= 306) p.y = 270;
+        else 
+            /* Pausa */
+            if (position.y >= 333 && position.y <= 386) p.y = 333;
         else 
             /* Menu principal */
             if (position.y >= 416 && position.y <= 454) p.y = 416;
+        else
+            p = null;
 
         return p;
     }
@@ -201,13 +209,19 @@ public class Grid {
         
         if (ox >= 489 && ox <= 730) p.x = 489;
         /* Torreta normal */
-        if (oy >= 172 && oy <= 208) p.y = 172;
+        if (oy >= 150 && oy <= 186) p.y = 172;
         else
             /* Torreta de area */ 
-            if (oy >= 212 && oy <= 248) p.y = 212;
+            if (oy >= 190 && oy <= 226) p.y = 212;
         else 
             /* Torreta heavy */
-            if (oy >= 252 && oy <= 288) p.y = 252;
+            if (oy >= 230 && oy <= 266) p.y = 190;
+        else 
+            /* Upgrade */
+            if (oy >= 270 && oy <= 306) p.y = 270;
+        else 
+            /* Pausa */
+            if (oy >= 333 && oy <= 386) p.y = 333;
         else 
             /* Menu principal */
             if (oy >= 416 && oy <= 454) p.y = 416;
@@ -220,15 +234,21 @@ public class Grid {
     public static String getMenuElementType(int ox, int oy) {
         String element="nothing";
         
-        if (ox >= 489 && ox <= 630);
+        if (ox >= 489 && ox <= 730);
         /* Torreta normal */
-        if (oy >= 172 && oy <= 208) element = "common";
+        if (oy >= 150 && oy <= 186) element = "common";
         else
             /* Torreta de area */ 
-            if (oy >= 212 && oy <= 248) element = "area";
+            if (oy >= 190 && oy <= 226) element = "area";
         else 
             /* Torreta heavy */
-            if (oy >= 252 && oy <= 288) element = "heavy";
+            if (oy >= 230 && oy <= 266) element = "heavy";
+        else 
+            /* Upgrade */
+            if (oy >= 270 && oy <= 306) element = "upgrade";
+        else 
+            /* Pausa */
+            if (oy >= 333 && oy <= 386) element = "pause";
         else 
             /* Menu principal */
             if (oy >= 416 && oy <= 454) element = "menu";
