@@ -282,10 +282,13 @@ public class Game extends Applet implements Runnable {
                                 tower.upgrade();
                             break;
                         case "pause":
-                            // TODO with pause
+                            Main.getInstance().pause();
                             break;
                         case "menu":
-                            // instrucciones here
+                            /* 
+                             * ESTE ENDGAME SOLO REINICIA LA PANTALLA!!
+                             */
+                            Main.getInstance().endGame();
                             break;
                     }
                 }
