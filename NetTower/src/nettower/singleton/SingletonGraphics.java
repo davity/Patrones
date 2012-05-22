@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
  */
 public class SingletonGraphics {
     private static SingletonGraphics instancia = new SingletonGraphics();
-    private Graphics graphics;
+    public Graphics graphics;
     
     private SingletonGraphics() {}
     
