@@ -9,6 +9,7 @@ import java.awt.Event;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import nettower.map.Map;
 import nettower.singleton.SingletonGame;
@@ -242,7 +243,12 @@ public class Game extends Applet implements Runnable {
     
     @Override
     public boolean keyDown(Event e, int k) {
-        Main.getInstance().showMenu();
+        if (k == KeyEvent.VK_ESCAPE)
+            Main.getInstance().showMenu();
+        if (k == KeyEvent.VK_0)
+           t.suspend();
+        if (k == KeyEvent.VK_1)
+           t.resume();
         return true;
     }
 
