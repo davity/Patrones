@@ -45,11 +45,11 @@ public class PathInterpreter {
     public ArrayList<ArrayList> parseMap(String fileName) {
 
         ArrayList<ArrayList> pathsList = null;
-        ArrayList<Point> path = null;
+        ArrayList<Point.Double> path = null;
         int status;
         String lin;
         String[] puntos;
-        Point p;
+        Point.Double p;
 
         if (openFile(fileName) == FAIL) {
             return null;
@@ -68,9 +68,12 @@ public class PathInterpreter {
                 
                 lin = lin.replaceAll("\\s*", "");
                 puntos = lin.split(",");
-                p = new Point();
+                p = new Point.Double();
                 p.x = Integer.parseInt(puntos[0]);
                 p.y = Integer.parseInt(puntos[1]);
+                
+                p.x = p.x * 32 + 16;
+                p.y = p.y * 32 + 16;
                 
                 // Ponemos el punto al final de la lista
                 path.add(path.size(), p);

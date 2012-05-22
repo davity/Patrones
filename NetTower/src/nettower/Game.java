@@ -11,6 +11,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import nettower.interpreter.PathInterpreter;
 import nettower.map.Map;
 import nettower.singleton.SingletonGame;
 import nettower.singleton.SingletonGraphics;
@@ -62,35 +63,38 @@ public class Game extends Applet implements Runnable {
         //SingletonGame.getInstance().setMap(Art.map1, 15, 15);
         
         ArrayList<Point.Double> route = new ArrayList();
-        route.add(new Point.Double(300,0));
-        route.add(new Point.Double(300,400));
-        route.add(new Point.Double(100,400));
-        route.add(new Point.Double(100,200));
-        route.add(new Point.Double(400,200));
-        SingletonGame.getInstance().addRoute(route);
+//        route.add(new Point.Double(300,0));
+//        route.add(new Point.Double(300,400));
+//        route.add(new Point.Double(100,400));
+//        route.add(new Point.Double(100,200));
+//        route.add(new Point.Double(400,200));
+//        SingletonGame.getInstance().addRoute(route);
+//        
+//        route = new ArrayList();
+//        route.add(new Point.Double(0,300));
+//        route.add(new Point.Double(400,300));
+//        route.add(new Point.Double(400,100));
+//        route.add(new Point.Double(200,100));
+//        route.add(new Point.Double(200,400));
+//        SingletonGame.getInstance().addRoute(route);
+//        
+//        route = new ArrayList();
+//        route.add(new Point.Double(0, 100));
+//        route.add(new Point.Double(500,100));
+//        route.add(new Point.Double(500,200));
+//        route.add(new Point.Double(0,200));
+//        route.add(new Point.Double(0,300));
+//        route.add(new Point.Double(400,300));
+//        route.add(new Point.Double(400,400));
+//        route.add(new Point.Double(0,400));
+//        route.add(new Point.Double(0,500));
         
-        route = new ArrayList();
-        route.add(new Point.Double(0,300));
-        route.add(new Point.Double(400,300));
-        route.add(new Point.Double(400,100));
-        route.add(new Point.Double(200,100));
-        route.add(new Point.Double(200,400));
-        SingletonGame.getInstance().addRoute(route);
-        
-        route = new ArrayList();
-        route.add(new Point.Double(0, 100));
-        route.add(new Point.Double(500,100));
-        route.add(new Point.Double(500,200));
-        route.add(new Point.Double(0,200));
-        route.add(new Point.Double(0,300));
-        route.add(new Point.Double(400,300));
-        route.add(new Point.Double(400,400));
-        route.add(new Point.Double(0,400));
-        route.add(new Point.Double(0,500));
-        
-        /*PathInterpreter path = new PathInterpreter();
-        path.parseMap();*/
-        SingletonGame.getInstance().addRoute(route);
+        PathInterpreter path = new PathInterpreter();
+        ArrayList caminos = path.parseMap("entrada.txt");
+        for (i = 0; i < caminos.size(); i++) {
+            route = (ArrayList<Point.Double>) caminos.get(i);
+            SingletonGame.getInstance().addRoute(route);
+        }
     }
 
     @Override
