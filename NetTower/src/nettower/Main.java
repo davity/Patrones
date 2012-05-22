@@ -60,7 +60,7 @@ public class Main {
     public void pause() {
         game.pause();
         game.setVisible(false);
-        if (pause == null ) {
+        if (pause == null) {
             pause = new Pause();
             pause.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
         }

@@ -5,16 +5,24 @@
 package nettower;
 
 import java.applet.Applet;
-import java.awt.BorderLayout;
+import java.awt.Event;
+import java.awt.Graphics;
 
 /**
  *
  * @author David
  */
 public class Menu extends Applet {
-    public Menu() {
-        add(new Button(), BorderLayout.CENTER);
-        add(new Button(), BorderLayout.CENTER);
-        add(new Button(), BorderLayout.CENTER);
+    public Menu() {}
+    
+    @Override
+    public void paint(Graphics g) {
+        //g.drawImage(, , , this);
+    }
+    
+    @Override
+    public boolean mouseUp(Event e, int x, int y) {
+        Main.getInstance().startGame();
+        return true;
     }
 }
