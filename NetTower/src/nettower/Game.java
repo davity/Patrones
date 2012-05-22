@@ -35,9 +35,10 @@ public class Game extends Applet implements Runnable {
     private Graphics dbg;
     private Input input = new Input();
     private Map level;
+    private static Thread t;
     
     public Game() {
-        
+                    
         SingletonGame.getInstance().setMap(Art.map1, 15, 15);
     }
     
@@ -92,8 +93,13 @@ public class Game extends Applet implements Runnable {
 
     @Override
     public void start() {
-        Thread t = new Thread(this);
-        t.start();
+        i = 0;
+        if (t == null) {
+            t = new Thread(this);
+            t.start();
+        }
+        SingletonGame.getInstance().clear();
+        
     }
 
     @Override
@@ -236,7 +242,6 @@ public class Game extends Applet implements Runnable {
     
     @Override
     public boolean keyDown(Event e, int k) {
-        this.stop();
         Main.getInstance().showMenu();
         return true;
     }
@@ -258,4 +263,8 @@ public class Game extends Applet implements Runnable {
         nettower.init();
         nettower.start();
     }*/
+    
+    @Override
+    public void stop() {
+    }
 }
