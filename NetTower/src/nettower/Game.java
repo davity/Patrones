@@ -246,6 +246,8 @@ public class Game extends Applet implements Runnable {
         x = x_mouse;
         y = y_mouse;
         Point.Double p = new Point.Double();
+        boolean canBuild = false;
+        nettower.entity.Tower tower = null;
         
         if (Grid.isAMapPosition(x_mouse, y_mouse)) {
             p.setLocation(Grid.getBoxMiddle(x_mouse, y_mouse));
@@ -263,8 +265,9 @@ public class Game extends Applet implements Runnable {
         } else {
             if (Grid.isAMenuPosition(x_mouse, y_mouse)) {
                 if (SingletonGame.getInstance().isBuildable()) {
-                    nettower.entity.Tower tower = SingletonGame.getInstance().getTowerAt();
-                    switch (Grid.getMenuElementType(x_mouse, y_mouse)) {
+                    tower = SingletonGame.getInstance().getTowerAt();
+                }
+                switch (Grid.getMenuElementType(x_mouse, y_mouse)) {
                         case "common":
                             if (tower == null)
                                 SingletonGame.getInstance().addTower(0);
@@ -288,10 +291,11 @@ public class Game extends Applet implements Runnable {
                             /* 
                              * ESTE ENDGAME SOLO REINICIA LA PANTALLA!!
                              */
+                            Main.getInstance().pause();
                             Main.getInstance().endGame();
                             break;
                     }
-                }
+                
             }
         }
         
