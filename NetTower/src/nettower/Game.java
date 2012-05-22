@@ -6,7 +6,6 @@ package nettower;
 
 import java.applet.Applet;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import nettower.map.Map;
@@ -17,10 +16,9 @@ import nettower.singleton.SingletonGraphics;
  *
  * @author David Moran Diaz
  */
-public class NetTower extends Applet implements Runnable {
-
-    public static final int GAME_WIDTH = 640;
-    public static final int GAME_HEIGHT = 480;
+public class Game extends Applet implements Runnable {
+    private static final int GAME_WIDTH = 640;
+    private static final int GAME_HEIGHT = 480;
     //public static final int SCREEN_SCALE = 2;
     int i;
     Grid grid;
@@ -35,16 +33,16 @@ public class NetTower extends Applet implements Runnable {
     private Graphics dbg;
     private Input input = new Input();
     private Map level;
-
-    public NetTower() {
-        setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+    
+    public Game() {
+        
         SingletonGame.getInstance().setMap(Art.map1, 15, 15);
     }
-
+    
     @Override
     public void init() {
         grid = new Grid();
-
+        
         i = 0;
         x = 100;
         y = 100;
@@ -211,6 +209,7 @@ public class NetTower extends Applet implements Runnable {
         g.drawImage(dbImage, 0, 0, this);
     }
 
+    @Override
     public boolean mouseDown(Event e, int x_mouse, int y_mouse) {
         x = x_mouse;
         y = y_mouse;
@@ -232,13 +231,20 @@ public class NetTower extends Applet implements Runnable {
 
         return true;
     }
+    
+    @Override
+    public boolean keyDown(Event e, int k) {
+        this.stop();
+        Main.getInstance().showMenu();
+        return true;
+    }
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         JFrame frame = new JFrame("NetTower");
-        NetTower nettower = new NetTower();
+        Game nettower = new Game();
         frame.setLayout(new BorderLayout());
         frame.add(nettower, BorderLayout.CENTER);
         frame.pack();
@@ -249,5 +255,5 @@ public class NetTower extends Applet implements Runnable {
 
         nettower.init();
         nettower.start();
-    }
+    }*/
 }

@@ -26,7 +26,7 @@ import nettower.map.Map;
  * @author David
  */
 public class SingletonGame {
-    private static SingletonGame instancia = new SingletonGame();
+    private static SingletonGame instance = new SingletonGame();
     private TowerFactory towerFactory = new TowerFactory();
     private ChickenFactory chickenFactory = new ChickenFactory();
     private ArrayList<Aggregate> routesList = new ArrayList();
@@ -43,7 +43,7 @@ public class SingletonGame {
     private SingletonGame() {}
     
     public static SingletonGame getInstance() {
-        return instancia;
+        return instance;
     }
     
     public void addRoute(ArrayList<Point.Double> route) {
