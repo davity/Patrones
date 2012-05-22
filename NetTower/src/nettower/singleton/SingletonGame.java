@@ -9,6 +9,7 @@ import java.awt.geom.Point2D.Double;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
+import nettower.Art;
 import nettower.Grid;
 import nettower.entity.Bullet;
 import nettower.entity.Chicken;
@@ -94,6 +95,7 @@ public class SingletonGame {
     
     public void draw() {
         map.draw();
+        SingletonGraphics.getInstance().drawImage(Art.menu, new Point(480,0));
         for (int n = 0; n < towersList.size(); n++) {
             towersList.get(n).draw();
         }
