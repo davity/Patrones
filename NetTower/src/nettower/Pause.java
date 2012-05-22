@@ -6,6 +6,7 @@ package nettower;
 
 import java.applet.Applet;
 import java.awt.Event;
+import java.awt.Graphics;
 
 /**
  *
@@ -15,8 +16,14 @@ public class Pause extends Applet {
     public Pause() {}
     
     @Override
-    public boolean keyDown(Event e, int key) {
+    public void paint(Graphics g) {
+        //g.drawImage(, , , this);
+    }
+    
+    @Override
+    public boolean mouseUp(Event e, int x, int y) {
         Main.getInstance().resume();
+        if (x > y) Main.getInstance().endGame();
         return true;
     }
 }
