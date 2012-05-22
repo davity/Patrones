@@ -210,27 +210,67 @@ public class Game extends Applet implements Runnable {
         // Pintamos la imagen en pantalla
         g.drawImage(dbImage, 0, 0, this);
     }
-
+    
+    @Override
+    public boolean mouseDrag(Event e, int x_mouse, int y_mouse) {
+        Point.Double p = new Point.Double();
+        
+        if (Grid.isAMapPosition(x_mouse, y_mouse)) {
+            p.setLocation(Grid.getBoxMiddle(x_mouse, y_mouse));
+            /* Comprobamos si el puntero esta en la casilla pintada */
+            if (SingletonGame.getInstance().cursor.position.distance(p) != 0) {
+                /* Si el puntero no esta en la casilla, lo movemos */
+                SingletonGame.getInstance().cursor.position = p;
+            }
+        }
+        
+        return true;
+    }
+    
     @Override
     public boolean mouseDown(Event e, int x_mouse, int y_mouse) {
         x = x_mouse;
         y = y_mouse;
         Point.Double p = new Point.Double();
-        p.setLocation(Grid.getBoxMiddle(x_mouse, y_mouse));
-        if (SingletonGame.getInstance().cursor.position.distance(p) == 0) {
-            if (SingletonGame.getInstance().isBuildable()) {
+        
+        if (Grid.isAMapPosition(x_mouse, y_mouse)) {
+            p.setLocation(Grid.getBoxMiddle(x_mouse, y_mouse));
+            /* Comprobamos si el puntero esta en la casilla pintada */
+            if (SingletonGame.getInstance().cursor.position.distance(p) == 0) {
+                /* Actualizar torreta si hay una torreta en la casilla */
                 nettower.entity.Tower tower = SingletonGame.getInstance().getTowerAt();
                 if (tower != null) {
                     tower.upgrade();
-                } else {
-                    SingletonGame.getInstance().addTower(SingletonGame.getInstance().random.nextInt(4));
+                }
+            } else {
+                /* Si el puntero no esta en la casilla, lo movemos */
+                SingletonGame.getInstance().cursor.position = p;
+            }
+        } else {
+            if (Grid.isAMenuPosition(x_mouse, y_mouse)) {
+                if (SingletonGame.getInstance().isBuildable()) {
+                    nettower.entity.Tower tower = SingletonGame.getInstance().getTowerAt();
+                    switch (Grid.getMenuElementType(x_mouse, y_mouse)) {
+                        case "common":
+                            if (tower == null)
+                                SingletonGame.getInstance().addTower(0);
+                            break;
+                        case "area":
+                            if (tower == null)
+                                SingletonGame.getInstance().addTower(2);
+                            break;
+                        case "heavy":
+                            if (tower == null)
+                                SingletonGame.getInstance().addTower(1);
+                            break;
+                        case "menu":
+                            // instrucciones here
+                            break;
+                    }
                 }
             }
         }
-        else {
-            SingletonGame.getInstance().cursor.position = p;
-        }
-
+        
         return true;
     }
     
