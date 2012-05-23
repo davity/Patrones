@@ -30,6 +30,7 @@ public class Art {
     public static BufferedImage castillo = load("/castillo.png");
     public static BufferedImage menu = load("/menu.png");
     public static BufferedImage mainMenu = load("/mainMenu.png");
+    public static BufferedImage instructions = load("/instrucciones.png");
 
     public static BufferedImage load(String name) {
         try {
