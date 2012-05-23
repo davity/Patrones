@@ -191,38 +191,53 @@ public class SingletonGame {
         }
         SingletonGraphics.getInstance().graphics.setColor(Color.BLUE);
         SingletonGraphics.getInstance().graphics.setFont(new Font("Arial", Font.BOLD, 12));
-        SingletonGraphics.getInstance().graphics.drawString("Puntos:", 496, 42);
-        SingletonGraphics.getInstance().graphics.drawString(String.format("%016d", points), 514, 54);
+        SingletonGraphics.getInstance().graphics.drawString("Puntos:", 496, 46);
+        SingletonGraphics.getInstance().graphics.drawString(String.format("% 16d", points), 514, 58);
         SingletonGraphics.getInstance().graphics.setFont(new Font("Arial", Font.PLAIN, 12));
-        SingletonGraphics.getInstance().graphics.drawString("Mejor:", 496, 66);
-        SingletonGraphics.getInstance().graphics.drawString(record, 514, 78);
+        SingletonGraphics.getInstance().graphics.drawString("Mejor:", 496, 72);
+        SingletonGraphics.getInstance().graphics.drawString(record, 514, 76);
         SingletonGraphics.getInstance().graphics.setColor(Color.RED);
-        SingletonGraphics.getInstance().graphics.setFont(new Font("Arial", Font.BOLD, 20));
-        SingletonGraphics.getInstance().graphics.drawString(String.valueOf(lives), 514, 124);
+        SingletonGraphics.getInstance().graphics.setFont(new Font("Serif", Font.BOLD, 22));
+        SingletonGraphics.getInstance().graphics.drawString(String.valueOf(lives), 520, 124);
         SingletonGraphics.getInstance().graphics.setColor(Color.YELLOW);
+        if (money < 1000000) {
+            SingletonGraphics.getInstance().graphics.setFont(new Font("Arial", Font.BOLD, 15));
+            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(money), 576, 123);
+        }
+        else {
+            SingletonGraphics.getInstance().graphics.setFont(new Font("Arial", Font.BOLD, 13));
+            SingletonGraphics.getInstance().graphics.drawString(money / 1000000 + "M", 576, 123);
+        }
         SingletonGraphics.getInstance().graphics.setFont(new Font("Arial", Font.BOLD, 18));
-        SingletonGraphics.getInstance().graphics.drawString(String.valueOf(money), 574, 123);
         if (canPay(COST_TOWER[0]))
-            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(COST_TOWER[0]), 574, 175);
+            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(COST_TOWER[0]), 560, 175);
         if (canPay(COST_TOWER[1]))
-            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(COST_TOWER[1]), 574, 215);
+            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(COST_TOWER[1]), 560, 215);
         if (canPay(COST_TOWER[2]))
-            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(COST_TOWER[2]), 574, 255);
-        SingletonGraphics.getInstance().graphics.setColor(Color.BLACK);
+            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(COST_TOWER[2]), 560, 255);
+        SingletonGraphics.getInstance().graphics.setColor(new Color(128, 128, 0));
         if (!canPay(COST_TOWER[0]))
-            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(COST_TOWER[0]), 574, 175);
+            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(COST_TOWER[0]), 560, 175);
         if (!canPay(COST_TOWER[1]))
-            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(COST_TOWER[1]), 574, 215);
+            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(COST_TOWER[1]), 560, 215);
         if (!canPay(COST_TOWER[2]))
-            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(COST_TOWER[2]), 574, 255);
+            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(COST_TOWER[2]), 560, 255);
         if (getTowerAt() != null) {
             if (canPay(getTowerAt().upgradeCost)) {
                 SingletonGraphics.getInstance().graphics.setColor(Color.YELLOW);
             }
-            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(getTowerAt().upgradeCost), 574, 295);
+            if (getTowerAt().upgradeCost < 1000000) {
+                SingletonGraphics.getInstance().graphics.setFont(new Font("Arial", Font.BOLD, 15));
+                SingletonGraphics.getInstance().graphics.drawString(String.format("% 6d", getTowerAt().upgradeCost), 551, 295);
+            }
+            else {
+                SingletonGraphics.getInstance().graphics.setFont(new Font("Arial", Font.BOLD, 13));
+                SingletonGraphics.getInstance().graphics.drawString(String.format("% 6dM", getTowerAt().upgradeCost / 1000000), 551, 295);
+            }
         }
         else {
-            SingletonGraphics.getInstance().graphics.drawString("----", 576, 295);
+            SingletonGraphics.getInstance().graphics.setFont(new Font("Arial", Font.PLAIN, 28));
+            SingletonGraphics.getInstance().graphics.drawString("---", 561, 296);
         }
         
     }

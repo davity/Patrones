@@ -30,7 +30,7 @@ public class Records {
      */
     public String getRecord(int map) {
         if (map >= 0 && map < 3) {
-            return String.format("%016d", records[map]);
+            return String.format("% 16d", records[map]);
         }
         return null;
     }
