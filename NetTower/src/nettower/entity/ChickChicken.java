@@ -21,11 +21,6 @@ public abstract class ChickChicken extends Chicken {
         super(Art.chickChicken, Art.chickChickenI, 16, route, (int)(10 * level), 2 + (int)(level / 100), (int)(4 * level), (int)(4 * level));
     }
     
-    public ChickChicken(ChickChicken iniMom, double level) {
-        super(Art.chickChicken, Art.chickChickenI, 16, iniMom.route, (int)(10 * level), 2 + (int)(level / 100), (int)(4 * level), (int)(4 * level));
-        mom = iniMom;
-    }
-    
     /**
      * Añade una lista de gallinas a la lista de gallinas de la horda
      * 

@@ -19,7 +19,8 @@ public class LeafChickChicken extends ChickChicken {
      * @param level 
      */
     public LeafChickChicken(ChickChicken iniMom, double level) {
-        super(iniMom, level);
+        super(iniMom.route, level);
+        mom = iniMom;
         route = null;
     }
     

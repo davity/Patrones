@@ -44,7 +44,8 @@ public class CompoundChickChicken extends ChickChicken {
      * @param level 
      */
     public CompoundChickChicken(ChickChicken iniMom, double probability, double level) {
-        super(iniMom, level);
+        super(iniMom.route, level);
+        mom = iniMom;
         double chickProbability = probability * 0.7;
         while (SingletonGame.getInstance().random.nextDouble() <= probability) {
             CompoundChickChicken chick = new CompoundChickChicken(this, chickProbability, level);
