@@ -110,11 +110,6 @@ public class Main {
         }
     }
     
-    // LO HE IMPLEMENTADO EN LA CLASE MENU - davity
-//    public void showHelp() {
-//        //System.out.println("Not yet implemented");
-//    }
-    
     /**
      * Cierra el juego
      */
