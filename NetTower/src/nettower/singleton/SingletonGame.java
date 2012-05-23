@@ -405,11 +405,13 @@ public class SingletonGame {
      * las balas, y ademas reinicia la puntuacion, el dinero y las vidas
      */
     public void clear() {
+        routesList.clear();
         chickensList.clear();
         towersList.clear();
         bulletsList.clear();
         points = 0;
-        money = 400;
+        money = 0;
         lives = 10;
+        record = "0";
     }
 }
