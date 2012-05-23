@@ -44,7 +44,7 @@ public abstract class MobileEntity extends Entity {
     }
     
     /**
-     * 
+     * Funcion a ejecutar cuando la entidad alcanza su objetivo
      */
     public abstract void onReach();
 }

@@ -281,7 +281,8 @@ public class Game extends Applet implements Runnable {
     }
     
     /**
-     * ########################################################################################
+     * Funcion a ejecutar cuando finaliza la partida.
+     * Devuelve la puntuacion obtenida
      * 
      * @return int
      */

@@ -39,7 +39,7 @@ public class ImageFlyweight {
     }
     
     /**
-     * Dibuja la imagen
+     * Dibuja la imagen en un punto dado
      * 
      * @param point 
      */
