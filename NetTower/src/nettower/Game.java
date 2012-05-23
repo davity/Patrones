@@ -224,13 +224,6 @@ public class Game extends Applet implements Runnable {
                         case "pause":
                             Main.getInstance().pause();
                             break;
-                        case "menu":
-                            /* 
-                             * ESTE ENDGAME SOLO REINICIA LA PANTALLA!!
-                             */
-                            Main.getInstance().pause();
-                            Main.getInstance().endGame();
-                            break;
                     }
                 
             }
@@ -241,8 +234,7 @@ public class Game extends Applet implements Runnable {
     
     public boolean mouseUp(Event e, int x_mouse, int y_mouse) {
         if (Grid.isAMenuPosition(x_mouse, y_mouse)) {
-            if (getMenuElementType(x_mouse, y_mouse) == "menu") {
-
+            if (getMenuElementType(x_mouse, y_mouse).equals("menu")) {
                     Main.getInstance().pause();
                     Main.getInstance().endGame();
             }

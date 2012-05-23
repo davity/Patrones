@@ -127,6 +127,7 @@ public class Main {
      */
     public void exit() {
         frame.dispose();
+        System.exit(0);
     }
     
     /**
