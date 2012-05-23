@@ -24,7 +24,7 @@ public class ChickenFactory extends Factory{
         switch (SingletonGame.getInstance().random.nextInt(4)) {
             case 1: return new HeavyChicken(level);
             case 2: return new QuickChicken(level);
-            case 3: return new ChickChicken(level);
+            case 3: return new CompoundChickChicken(level);
             default: return new CommonChicken(level);
         }
     }

@@ -180,8 +180,8 @@ public class SingletonGame {
         }
         if (lives <= 0) {
             SingletonGraphics.getInstance().graphics.setColor(Color.RED);
-            SingletonGraphics.getInstance().graphics.setFont(new Font("Arial", Font.BOLD, 22));
-            SingletonGraphics.getInstance().graphics.drawString("YOU LOSE", 200, 200);
+            SingletonGraphics.getInstance().graphics.setFont(new Font("ARIAL", Font.BOLD, 40));
+            SingletonGraphics.getInstance().graphics.drawString("YOU LOSE", 160, 240);
         }
         else {
             for (int n = 0; n < bulletsList.size(); n++) {

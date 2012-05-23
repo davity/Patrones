@@ -193,10 +193,7 @@ public class Game extends Applet implements Runnable {
      */
     @Override
     public boolean mouseUp(Event e, int x_mouse, int y_mouse) {
-        int x = x_mouse;
-        int y = y_mouse;
         Point.Double p = new Point.Double();
-        boolean canBuild = false;
         nettower.entity.Tower tower = null;
         
         if (Grid.isAMapPosition(x_mouse, y_mouse)) {
@@ -225,7 +222,6 @@ public class Game extends Applet implements Runnable {
                                 tower.upgrade();
                             break;
                         case "menu":
-                            Main.getInstance().pause();
                             Main.getInstance().endGame();
                             break;
                         case "pause":
