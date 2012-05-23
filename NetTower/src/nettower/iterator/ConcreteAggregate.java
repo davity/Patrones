@@ -1,15 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nettower.iterator;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author David
- */
 public class ConcreteAggregate implements Aggregate {
     public ArrayList elements;
     

@@ -1,17 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nettower;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
-/**
- *
- * @author David
- */
 public class Main {
     private static Main instance = new Main();
     private static JFrame frame = new JFrame("Chickens Defense");

@@ -1,3 +1,4 @@
+
 package nettower.map;
 
 import java.awt.Point;

@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nettower.singleton;
 
 import java.awt.Color;
@@ -24,10 +21,6 @@ import nettower.iterator.ConcreteAggregate;
 import nettower.iterator.Iterator;
 import nettower.map.Map;
 
-/**
- *
- * @author David
- */
 public class SingletonGame {
     private static SingletonGame instance = new SingletonGame();
     private TowerFactory towerFactory = new TowerFactory();

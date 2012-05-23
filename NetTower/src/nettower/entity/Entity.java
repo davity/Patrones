@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nettower.entity;
 
 import java.awt.Point;
@@ -9,10 +6,6 @@ import java.awt.image.BufferedImage;
 import nettower.flyweight.ImageFactory;
 import nettower.flyweight.ImageFlyweight;
 
-/**
- *
- * @author David Moran Diaz
- */
 public abstract class Entity {
     public ImageFlyweight image;
     public Point.Double position;

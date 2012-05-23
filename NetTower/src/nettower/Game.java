@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nettower;
 
 import java.applet.Applet;
@@ -15,10 +12,6 @@ import nettower.interpreter.PathInterpreter;
 import nettower.singleton.SingletonGame;
 import nettower.singleton.SingletonGraphics;
 
-/**
- *
- * @author David Moran Diaz
- */
 public class Game extends Applet implements Runnable {
     private int i;
     private Thread thread;

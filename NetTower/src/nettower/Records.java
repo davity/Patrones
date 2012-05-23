@@ -1,17 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nettower;
 
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author David
- */
 public class Records {
     private int[] records = new int[3];
     private static final String RECORDS_FILE = "records.dat";

@@ -1,16 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nettower.entity;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
-/**
- *
- * @author David
- */
 public abstract class MobileEntity extends Entity {
     public int speed;
     

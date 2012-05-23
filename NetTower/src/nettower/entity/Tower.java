@@ -1,17 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nettower.entity;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import nettower.singleton.SingletonGame;
 
-/**
- *
- * @author David Moran Diaz
- */
 public abstract class Tower extends Entity {
     int damage;
     int fireRate;

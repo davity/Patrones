@@ -1,17 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nettower.singleton;
 
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
-/**
- *
- * @author David
- */
 public class SingletonGraphics {
     private static SingletonGraphics instancia = new SingletonGraphics();
     public Graphics graphics;

@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nettower.entity;
 
 import java.awt.Point;
@@ -9,10 +6,6 @@ import java.util.ArrayList;
 import nettower.Art;
 import nettower.singleton.SingletonGame;
 
-/**
- *
- * @author David
- */
 public class AreaTower extends Tower {
     
     /**

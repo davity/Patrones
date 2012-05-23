@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nettower.factory;
 
 import java.awt.Point;
@@ -10,10 +7,6 @@ import nettower.entity.CommonTower;
 import nettower.entity.HeavyTower;
 import nettower.entity.Tower;
 
-/**
- *
- * @author David
- */
 public class TowerFactory extends Factory {
     
     /**

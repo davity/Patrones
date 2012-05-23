@@ -1,13 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nettower.iterator;
 
-/**
- *
- * @author David
- */
 public class ConcreteIterator implements Iterator {
     private ConcreteAggregate aggregate;
     private int index = 0;

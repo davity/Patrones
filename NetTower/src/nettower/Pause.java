@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nettower;
 
 import java.applet.Applet;
@@ -11,10 +8,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
-/**
- *
- * @author David
- */
 public class Pause extends Applet {
     
     /**

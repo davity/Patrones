@@ -1,17 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nettower.flyweight;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import nettower.singleton.SingletonGraphics;
 
-/**
- *
- * @author David
- */
 public class ImageFlyweight {
     private BufferedImage image;
     private int radiusSize;

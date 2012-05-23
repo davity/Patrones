@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nettower.interpreter;
 
 import java.awt.Point;
@@ -10,10 +7,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 
-/**
- *
- * @author David Moran Diaz
- */
 public class PathInterpreter {
     File archivo;
     FileReader fr;

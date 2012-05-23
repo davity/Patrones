@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nettower.entity;
 
 import java.awt.Point;
@@ -10,10 +7,6 @@ import nettower.Art;
 import nettower.iterator.Iterator;
 import nettower.singleton.SingletonGame;
 
-/**
- *
- * @author David
- */
 public abstract class ChickChicken extends Chicken {
     ChickChicken mom;
     

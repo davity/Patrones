@@ -1,17 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package nettower.flyweight;
 
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import nettower.factory.Factory;
 
-/**
- *
- * @author David
- */
 public class ImageFactory extends Factory {
 
     private static final HashMap images = new HashMap();
