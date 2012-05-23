@@ -41,7 +41,9 @@ public class SingletonGame {
     private int points = 0;
     private int money = 400;
     private int lives = 10;
+    public String record;
     public Random random = new Random();
+    private static final int COST_TOWER[] = {100, 200, 300};
     
     private SingletonGame() {}
     
@@ -53,8 +55,8 @@ public class SingletonGame {
         routesList.add(new ConcreteAggregate(route));
     }
     
-    public void addChicken() {
-        chickensList.add(chickenFactory.getChicken());
+    public void addChicken(double level) {
+        chickensList.add(chickenFactory.getChicken(level));
     }
     
     public void insertSpecificChicken(Chicken chicken) {
@@ -66,9 +68,12 @@ public class SingletonGame {
     }
     
     public void addTower(int type) {
-        Point.Double point = new Point.Double();
-        point.setLocation(cursor.position);
-        towersList.add(towerFactory.getTower(point, type));
+        if (canPay(COST_TOWER[type])) {
+            takeMoney(COST_TOWER[type]);
+            Point.Double point = new Point.Double();
+            point.setLocation(cursor.position);
+            towersList.add(towerFactory.getTower(point, type));
+        }
     }
     
     public void removeTower(Tower tower) {
@@ -101,26 +106,59 @@ public class SingletonGame {
     public void draw() {
         map.draw();
         SingletonGraphics.getInstance().drawImage(Art.menu, new Point(480,0));
-        if (lives > 0) {
-            for (int n = 0; n < towersList.size(); n++) {
-                towersList.get(n).draw();
-            }
+        for (int n = 0; n < towersList.size(); n++) {
+            towersList.get(n).draw();
         }
         for (int n = 0; n < chickensList.size(); n++) {
             chickensList.get(n).draw();
         }
-        if (lives > 0)
-        {
-            for (int n = 0; n < bulletsList.size(); n++) {
-                bulletsList.get(n).draw();
-            }
-            if (cursor != null) cursor.draw();
+        for (int n = 0; n < bulletsList.size(); n++) {
+            bulletsList.get(n).draw();
         }
-        else {
+        if (lives <= 0) {
             SingletonGraphics.getInstance().graphics.setColor(Color.RED);
             SingletonGraphics.getInstance().graphics.setFont(new Font("Arial", Font.BOLD, 22));
             SingletonGraphics.getInstance().graphics.drawString("YOU LOSE", 200, 200);
         }
+        else {
+            if (cursor != null) cursor.draw();
+        }
+        SingletonGraphics.getInstance().graphics.setColor(Color.BLUE);
+        SingletonGraphics.getInstance().graphics.setFont(new Font("Arial", Font.BOLD, 12));
+        SingletonGraphics.getInstance().graphics.drawString("Puntos:", 496, 42);
+        SingletonGraphics.getInstance().graphics.drawString(String.format("%016d", points), 514, 54);
+        SingletonGraphics.getInstance().graphics.setFont(new Font("Arial", Font.PLAIN, 12));
+        SingletonGraphics.getInstance().graphics.drawString("Mejor:", 496, 66);
+        SingletonGraphics.getInstance().graphics.drawString(record, 514, 78);
+        SingletonGraphics.getInstance().graphics.setColor(Color.RED);
+        SingletonGraphics.getInstance().graphics.setFont(new Font("Arial", Font.BOLD, 20));
+        SingletonGraphics.getInstance().graphics.drawString(String.valueOf(lives), 514, 124);
+        SingletonGraphics.getInstance().graphics.setColor(Color.YELLOW);
+        SingletonGraphics.getInstance().graphics.setFont(new Font("Arial", Font.BOLD, 18));
+        SingletonGraphics.getInstance().graphics.drawString(String.valueOf(money), 574, 123);
+        if (canPay(COST_TOWER[0]))
+            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(COST_TOWER[0]), 574, 175);
+        if (canPay(COST_TOWER[1]))
+            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(COST_TOWER[1]), 574, 215);
+        if (canPay(COST_TOWER[2]))
+            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(COST_TOWER[2]), 574, 255);
+        SingletonGraphics.getInstance().graphics.setColor(Color.BLACK);
+        if (!canPay(COST_TOWER[0]))
+            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(COST_TOWER[0]), 574, 175);
+        if (!canPay(COST_TOWER[1]))
+            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(COST_TOWER[1]), 574, 215);
+        if (!canPay(COST_TOWER[2]))
+            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(COST_TOWER[2]), 574, 255);
+        if (getTowerAt() != null) {
+            if (canPay(getTowerAt().upgradeCost)) {
+                SingletonGraphics.getInstance().graphics.setColor(Color.YELLOW);
+            }
+            SingletonGraphics.getInstance().graphics.drawString(String.valueOf(getTowerAt().upgradeCost), 574, 295);
+        }
+        else {
+            SingletonGraphics.getInstance().graphics.drawString("----", 576, 295);
+        }
+        
     }
     
     public Iterator getRandomRoute() {
@@ -165,8 +203,16 @@ public class SingletonGame {
         return map.isBuildable(tmp.x, tmp.y);
     }
     
+    public int getPoints() {
+        return points;
+    }
+    
     public void givePoints(int amount) {
         points += amount;
+    }
+    
+    public int getMoney() {
+        return money;
     }
     
     public void giveMoney(int amount) {
@@ -177,14 +223,24 @@ public class SingletonGame {
         money -= amount;
     }
     
+    public boolean canPay(int amount) {
+        return amount <= money;
+    }
+    
+    public int getLife() {
+        return lives;
+    }
+    
     public void takeALife() {
-        lives--;
+        if (lives > 0) {
+            lives--;
+        }
     }
     
     public void setMap(BufferedImage unmapa, int width, int height) {
         this.map = new Map(unmapa, width, width);
     }
-
+    
     public void clear() {
         chickensList.clear();
         towersList.clear();
@@ -192,9 +248,5 @@ public class SingletonGame {
         points = 0;
         money = 400;
         lives = 10;
-    }
-
-    public int getPoints() {
-        return points;
     }
 }

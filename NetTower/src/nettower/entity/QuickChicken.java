@@ -12,8 +12,8 @@ import nettower.singleton.SingletonGame;
  * @author David
  */
 public class QuickChicken extends Chicken{
-    public QuickChicken() {
-        super(Art.quickChicken, Art.quickChickenI, 16, SingletonGame.getInstance().getRandomRoute(), 10, 40, 20, 20);
+    public QuickChicken(double level) {
+        super(Art.quickChicken, Art.quickChickenI, 16, SingletonGame.getInstance().getRandomRoute(), (int)(10 * level), 3 + (int)(level), (int)(20 * level), (int)(20 * level));
     }
 
     @Override

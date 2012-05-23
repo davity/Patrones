@@ -17,26 +17,27 @@ public class ChickChicken extends Chicken {
     ArrayList<ChickChicken> chicks = new ArrayList();
     ChickChicken mom;
     
-    public ChickChicken() {
-        super(Art.chickChicken, Art.chickChickenI, 16, SingletonGame.getInstance().getRandomRoute(), 10, 4, 4, 4);
+    public ChickChicken(double level) {
+        super(Art.chickChicken, Art.chickChickenI, 16, SingletonGame.getInstance().getRandomRoute(), (int)(10 * level), 2 + (int)(level / 100), (int)(4 * level), (int)(4 * level));
+        double probability = level;
         while (SingletonGame.getInstance().random.nextDouble() <= 0.9) {
-            ChickChicken chick = new ChickChicken(this, 0.8);
+            ChickChicken chick = new ChickChicken(this, 0.8, level);
             SingletonGame.getInstance().insertSpecificChicken(chick);
             chicks.add(chick);
         }
         while (SingletonGame.getInstance().random.nextDouble() <= 0.9) {
-            ChickChicken chick = new ChickChicken(this, 0.8);
+            ChickChicken chick = new ChickChicken(this, 0.8, level);
             SingletonGame.getInstance().insertSpecificChicken(chick);
             chicks.add(chick);
         }
     }
     
-    public ChickChicken(ChickChicken iniMom, double probability) {
-        super(Art.chickChicken, Art.chickChickenI, 16, iniMom.route, 10, 4, 4, 4);
+    public ChickChicken(ChickChicken iniMom, double probability, double level) {
+        super(Art.chickChicken, Art.chickChickenI, 16, iniMom.route, (int)(10 * level), 2 + (int)(level / 100), (int)(4 * level), (int)(4 * level));
         mom = iniMom;
         double chickProbability = probability * 0.7;
         while (SingletonGame.getInstance().random.nextDouble() <= probability) {
-            ChickChicken chick = new ChickChicken(this, chickProbability);
+            ChickChicken chick = new ChickChicken(this, chickProbability, level);
             SingletonGame.getInstance().insertSpecificChicken(chick);
             chicks.add(chick);
         }

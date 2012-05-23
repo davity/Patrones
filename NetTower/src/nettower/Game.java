@@ -55,6 +55,7 @@ public class Game extends Applet implements Runnable {
             SingletonGame.getInstance().addRoute(routes.get(n));
         }
         SingletonGame.getInstance().clear();
+        SingletonGame.getInstance().record = Main.getInstance().getRecord(map);
     }
     
     @Override
@@ -88,8 +89,8 @@ public class Game extends Applet implements Runnable {
                     // Contador de iteraciones
                     i++;
 
-                    if (i % 200 == 0) {
-                        SingletonGame.getInstance().addChicken();
+                    if (i % 100 == 0) {
+                        SingletonGame.getInstance().addChicken(i/1000);
                     }
                     SingletonGame.getInstance().step();
 
@@ -174,11 +175,11 @@ public class Game extends Applet implements Runnable {
                             break;
                         case "area":
                             if (tower == null)
-                                SingletonGame.getInstance().addTower(2);
+                                SingletonGame.getInstance().addTower(1);
                             break;
                         case "heavy":
                             if (tower == null)
-                                SingletonGame.getInstance().addTower(1);
+                                SingletonGame.getInstance().addTower(2);
                             break;
                         case "upgrade":
                             if (tower != null)

@@ -17,8 +17,8 @@ import nettower.entity.Tower;
 public class TowerFactory extends Factory {
     public Tower getTower(Point.Double position, int type) {
         switch (type) {
-            case 1: return new HeavyTower(position);
-            case 2: return new AreaTower(position);
+            case 1: return new AreaTower(position);
+            case 2: return new HeavyTower(position);
             default: return new CommonTower(position);
         }
     }

@@ -17,7 +17,7 @@ public abstract class Tower extends Entity {
     int fireRate;
     int bulletsSpeed;
     int range;
-    int upgradeCost;
+    public int upgradeCost;
     int recharge;
     
     public Tower(BufferedImage iniImage, int iniRadiusSize, Point.Double iniPosition, int iniDamage, int iniFireRate, int iniBulletsSpeed, int iniRange, int iniUpgradeCost) {
@@ -44,9 +44,11 @@ public abstract class Tower extends Entity {
     public abstract void shoot();
     
     public void upgrade() {
-        SingletonGame.getInstance().takeMoney(upgradeCost);
-        onUpgrade();
-        recharge = fireRate;
+        if (SingletonGame.getInstance().canPay(upgradeCost)) {
+            SingletonGame.getInstance().takeMoney(upgradeCost);
+            onUpgrade();
+            recharge = fireRate;
+        }
     }
     
     public abstract void onUpgrade();

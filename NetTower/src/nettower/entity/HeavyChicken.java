@@ -12,8 +12,8 @@ import nettower.singleton.SingletonGame;
  * @author David
  */
 public class HeavyChicken extends Chicken{
-    public HeavyChicken() {
-        super(Art.heavyChicken, Art.heavyChickenI, 16, SingletonGame.getInstance().getRandomRoute(), 200, 1, 20, 20);
+    public HeavyChicken(double level) {
+        super(Art.heavyChicken, Art.heavyChickenI, 16, SingletonGame.getInstance().getRandomRoute(), (int)(200 * level), 1 + (int)(level / 100), (int)(20 * level), (int)(20 * level));
     }
 
     @Override
