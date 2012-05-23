@@ -38,10 +38,21 @@ public class Main {
         frame.setLocationRelativeTo(null);
     }
     
+    /**
+     * Devuelve la instancia del objeto
+     * 
+     * @return 
+     */
     public static Main getInstance() {
         return instance;
     }
     
+    /**
+     * Inicia el juego. Oculta la pantalla de menu, muestra la pantalla del 
+     * juego, la inicializa y la arranca
+     * 
+     * @param map 
+     */
     public void startGame(int map) {
         if (!state[0]) {
             menu.setVisible(false);
@@ -59,6 +70,10 @@ public class Main {
         }
     }
     
+    /**
+     * Finaliza la partida. Elimina la pantalla de juego guardando previamente
+     * el record de puntos y muestra el menu principal.
+     */
     public void endGame() {
         if (state[0]) {
             if (state[1]) {
@@ -73,6 +88,9 @@ public class Main {
         }
     }
     
+    /**
+     * Pausa la ejecución del juego
+     */
     public void pause() {
         if (state[0] && !state[1]) {
             game.pause();
@@ -87,6 +105,9 @@ public class Main {
         }
     }
     
+    /**
+     * Reanuda la ejecución del juego
+     */
     public void resume() {
         if (state[0] && state[1]) {
             frame.remove(pause);
@@ -96,14 +117,24 @@ public class Main {
         }
     }
     
-    public void showHelp() {
-        //System.out.println("Not yet implemented");
-    }
-        
+    // LO HE IMPLEMENTADO EN LA CLASE MENU - davity
+//    public void showHelp() {
+//        //System.out.println("Not yet implemented");
+//    }
+    
+    /**
+     * Cierra el juego
+     */
     public void exit() {
         frame.dispose();
     }
     
+    /**
+     * Dado un mapa devuelve su puntuacion
+     * 
+     * @param map
+     * @return 
+     */
     public String getRecord(int map) {
         return records.getRecord(map);
     }

@@ -34,14 +34,17 @@ public class PathInterpreter {
     int OK = 1;
     int FAIL = 2;
 
+    /**
+     * Constructor del interprete
+     */
     public PathInterpreter() {}
 
-    public static void main(String[] args) {
-        PathInterpreter p = new PathInterpreter();
-
-        p.parseMap("entrada.txt");
-    }
-
+    /**
+     * Analiza un fichero y obtiene las coordenadas de las rutas.
+     * 
+     * @param fileName
+     * @return 
+     */
     public ArrayList<ArrayList> parseMap(String fileName) {
 
         ArrayList<ArrayList> pathsList = null;
@@ -92,6 +95,13 @@ public class PathInterpreter {
         return pathsList;
     }
 
+    /**
+     * Abre un fichero dado su nombre y devuelve un descriptro de
+     * BufferedReader
+     * 
+     * @param fileName
+     * @return 
+     */
     private int openFile(String fileName) {
         int ret = FAIL;
         try {
@@ -109,6 +119,11 @@ public class PathInterpreter {
         return ret;
     }
 
+    /**
+     * Devuelve una linea del fichero
+     * 
+     * @return 
+     */
     private String readLine() {
         String linea = null;
         try {
@@ -121,6 +136,9 @@ public class PathInterpreter {
         return linea;
     }
 
+    /**
+     * Cierra el fichero
+     */
     private void closeFile() {
         try {
             fr.close();

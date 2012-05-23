@@ -19,10 +19,19 @@ public class Menu extends Applet {
     
     private boolean showInstructions;
     
+    /**
+     * Constructor de Menu. Establece la variable de mostrar ayuda a falso
+     */
     public Menu() {
         showInstructions = false;
     }
     
+    /**
+     * Metodo que pinta la pantalla del menu. Muestra toda la interfaz
+     * o la ayuda en funcion de la variable showInstructions
+     * 
+     * @param g 
+     */
     @Override
     public void paint(Graphics g) {
         if (!showInstructions) {
@@ -41,6 +50,15 @@ public class Menu extends Applet {
             
     }
     
+    /**
+     * Controla los eventos de click para comenzar una partida en un mapa,
+     * mostrar las instrucciones o salir del juego
+     * 
+     * @param e
+     * @param x
+     * @param y
+     * @return 
+     */
     @Override
     public boolean mouseUp(Event e, int x, int y) {
         
@@ -76,6 +94,13 @@ public class Menu extends Applet {
         }
     }
     
+    /**
+     * Comprueba que boton del menu se ha pulsado
+     * 
+     * @param x
+     * @param y
+     * @return 
+     */
     private int getItemPressed(int x, int y) {
         if (x >= 46 && x <= 198 && y >= 135 && y < 342) return 1;
         if (x >= 246 && x <= 398 && y >= 135 && y < 342) return 2;
@@ -85,15 +110,26 @@ public class Menu extends Applet {
         return 0;
     }
     
+    /**
+     * Comprueba si se estan mostrando las instrucciones y se ha pulsado
+     * la tecla escape. En caso afirmativo, vuelve al menu principal.
+     * 
+     * @param e
+     * @param key
+     * @return 
+     */
     @Override
     public boolean keyUp(Event e, int key) {
-        switch (key) {
-            case KeyEvent.VK_ESCAPE:
-                showInstructions = false;
-                repaint();
-                return true;
-            default:
-                return false;
+        if (showInstructions) {
+            switch (key) {
+                case KeyEvent.VK_ESCAPE:
+                    showInstructions = false;
+                    repaint();
+                    return true;
+                default:
+                    return false;
+            }
         }
+        return true;
     }
 }

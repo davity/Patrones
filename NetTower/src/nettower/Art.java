@@ -32,6 +32,12 @@ public class Art {
     public static BufferedImage mainMenu = load("/mainMenu.png");
     public static BufferedImage instructions = load("/instrucciones.png");
 
+    /**
+     * Abre un archivo de imagen en modo RGB dado su nombre de archivo
+     * 
+     * @param name
+     * @return 
+     */
     public static BufferedImage load(String name) {
         try {
             BufferedImage org = ImageIO.read(Art.class.getResource(name));

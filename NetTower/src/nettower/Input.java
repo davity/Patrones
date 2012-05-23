@@ -18,6 +18,12 @@ public class Input {
     public boolean[] buttons = new boolean[8];
     public boolean[] oldButtons = new boolean[8];
 
+    /**
+     * Guarda en el array las teclas que se han pulsado
+     * 
+     * @param key
+     * @param down 
+     */
     public void set(int key, boolean down) {
         int button = -1;
 
@@ -29,10 +35,17 @@ public class Input {
         }
     }
     
+    /**
+     * Ejecuta un paso de tiempo. Copia las teclas pulsadas al array
+     * de teclas antiguas pulsadas.
+     */
     public void tick() {
         System.arraycopy(buttons, 0, oldButtons, 0, buttons.length);
     }
 
+    /**
+     * Limpia el array de teclas pulsadas poniendo todas a false (no pulsadas)
+     */
     public void releaseAllKeys() {
         for (int i = 0; i < buttons.length; i++) {
             buttons[i] = false;

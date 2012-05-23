@@ -16,8 +16,17 @@ import java.awt.event.KeyEvent;
  * @author David
  */
 public class Pause extends Applet {
+    
+    /**
+     * Constructor de Pause
+     */
     public Pause() {}
     
+    /**
+     * Dado un Graphics dibuja el menu de pausa
+     * 
+     * @param g 
+     */
     @Override
     public void paint(Graphics g) {
         /* Boton 1 */
@@ -42,6 +51,15 @@ public class Pause extends Applet {
         g.drawString("MENU", 440, 215);
     }
     
+    /**
+     * Majena los eventos de click. Comprueba si se ha pulsado
+     * algun boton dentro del menu de pausa y actua en consecuencia
+     * 
+     * @param e
+     * @param x
+     * @param y
+     * @return 
+     */
     @Override
     public boolean mouseUp(Event e, int x, int y) {
         if (x >= 120 && x <= 285 && y >= 170 && y <= 245)
@@ -51,7 +69,14 @@ public class Pause extends Applet {
         return true;
     }
     
-        @Override
+    /**
+     * Manejo de eventos de teclado. Si se pulsa ESCAPE el juego se reanuda
+     * 
+     * @param e
+     * @param key
+     * @return 
+     */
+    @Override
     public boolean keyUp(Event e, int key) {
         switch (key) {
             case KeyEvent.VK_ESCAPE:

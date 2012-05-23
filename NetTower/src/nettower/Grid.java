@@ -204,6 +204,14 @@ public class Grid {
         return p;
     }
     
+    /**
+     * Dada una posicion dentro del menu, si pertenece a alguno de los
+     * botones, devuelve la esquina sup. izq. del boton correspondiente
+     * 
+     * @param ox
+     * @param oy
+     * @return 
+     */
     public static Point getMenuElementCorner(int ox, int oy) {
         Point p = new Point();
         
@@ -229,31 +237,6 @@ public class Grid {
             p = null;
 
         return p;
-    }
-    
-    public static String getMenuElementType(int ox, int oy) {
-        String element="nothing";
-        
-        if (ox >= 489 && ox <= 730);
-        /* Torreta normal */
-        if (oy >= 150 && oy <= 186) element = "common";
-        else
-            /* Torreta de area */ 
-            if (oy >= 190 && oy <= 226) element = "area";
-        else 
-            /* Torreta heavy */
-            if (oy >= 230 && oy <= 266) element = "heavy";
-        else 
-            /* Upgrade */
-            if (oy >= 270 && oy <= 306) element = "upgrade";
-        else 
-            /* Pausa */
-            if (oy >= 333 && oy <= 386) element = "pause";
-        else 
-            /* Menu principal */
-            if (oy >= 416 && oy <= 454) element = "menu";
-
-        return element;
     }
     
     /**

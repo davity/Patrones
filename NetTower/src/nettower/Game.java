@@ -32,6 +32,10 @@ public class Game extends Applet implements Runnable {
     
     public Game() {}
     
+    /**
+     * Método de inicialización de la clase. Carga las rutas de los mapas
+     * y los records de los mismos
+     */
     @Override
     public void init() {
         i = 0;
@@ -58,6 +62,9 @@ public class Game extends Applet implements Runnable {
         SingletonGame.getInstance().record = Main.getInstance().getRecord(map);
     }
     
+    /**
+     * Crea un hilo y lo arranca
+     */
     @Override
     public void start() {
         if (thread == null) {
@@ -66,6 +73,11 @@ public class Game extends Applet implements Runnable {
         }
     }
     
+    /**
+     * Metodo principal de ejecución. Lleva la cuenta del tiempo, controla
+     * que se ejecuten las acciones 60 veces por segundo exactas y ejecuta
+     * los métodos para pintar la pantalla
+     */
     @Override
     public void run() {
         long lastTime = System.nanoTime();
@@ -110,12 +122,22 @@ public class Game extends Applet implements Runnable {
         }
     }
     
+    /**
+     * Pasa el Graphics con el que se va a dibujar al singleton de graficos
+     * y llama al metodo de dibujo del singleton de juego.
+     * 
+     * @param g 
+     */
     @Override
     public void paint(Graphics g) {
         SingletonGraphics.getInstance().setGraphics(g);
         SingletonGame.getInstance().draw();
     }
     
+    /**
+     * Metodo donde se implementa el doble buffer para evitar el flickering
+     * en la pantalla al dibujar
+     */
     @Override
     public void update(Graphics g) {
         if (doubleBufferedImage == null) {
@@ -126,6 +148,16 @@ public class Game extends Applet implements Runnable {
         g.drawImage(doubleBufferedImage, 0, 0, this);
     }
     
+    /**
+     * Controla el evento del raton al arrastrarlo. Va reposicionando
+     * el cursor de juego por el mapa colocandolo en la casilla donde
+     * se encuentra el puntero del raton
+     * 
+     * @param e
+     * @param x_mouse
+     * @param y_mouse
+     * @return 
+     */
     @Override
     public boolean mouseDrag(Event e, int x_mouse, int y_mouse) {
         Point.Double p = new Point.Double();
@@ -142,6 +174,15 @@ public class Game extends Applet implements Runnable {
         return true;
     }
     
+    /**
+     * Controla el evento de click del raton. Comprueba si se debe mover el
+     * cursor o si se ha pinchado en un botón de la pantalla de juego.
+     * 
+     * @param e
+     * @param x_mouse
+     * @param y_mouse
+     * @return 
+     */
     @Override
     public boolean mouseDown(Event e, int x_mouse, int y_mouse) {
         int x = x_mouse;
@@ -168,7 +209,7 @@ public class Game extends Applet implements Runnable {
                 if (SingletonGame.getInstance().isBuildable()) {
                     tower = SingletonGame.getInstance().getTowerAt();
                 }
-                switch (Grid.getMenuElementType(x_mouse, y_mouse)) {
+                switch (getMenuElementType(x_mouse, y_mouse)) {
                         case "common":
                             if (tower == null)
                                 SingletonGame.getInstance().addTower(0);
@@ -203,6 +244,14 @@ public class Game extends Applet implements Runnable {
         return true;
     }
     
+    /**
+     * Controla los eventos de las teclas. Comprueba si se ha pulsado
+     * la tecla ESCAPE y pausa el juego en caso afirmativo
+     * 
+     * @param e
+     * @param key
+     * @return 
+     */
     @Override
     public boolean keyUp(Event e, int key) {
         switch (key) {
@@ -214,15 +263,59 @@ public class Game extends Applet implements Runnable {
         }
     }
     
+    /**
+     * Dada una posición de la pantalla de juego, comprueba si es un botón
+     * del menu y devuelve un string que indica el boton que es.
+     * 
+     * @param ox
+     * @param oy
+     * @return 
+     */
+    private String getMenuElementType(int ox, int oy) {
+        String element="nothing";
+        
+        if (ox >= 489 && ox <= 730);
+        /* Torreta normal */
+        if (oy >= 150 && oy <= 186) element = "common";
+        else
+            /* Torreta de area */ 
+            if (oy >= 190 && oy <= 226) element = "area";
+        else 
+            /* Torreta heavy */
+            if (oy >= 230 && oy <= 266) element = "heavy";
+        else 
+            /* Upgrade */
+            if (oy >= 270 && oy <= 306) element = "upgrade";
+        else 
+            /* Pausa */
+            if (oy >= 333 && oy <= 386) element = "pause";
+        else 
+            /* Menu principal */
+            if (oy >= 416 && oy <= 454) element = "menu";
+
+        return element;
+    }
+    
+    /**
+     * ########################################################################################
+     * 
+     * @return 
+     */
     public int end() {
         pause = true;
         return SingletonGame.getInstance().getPoints();
     }
     
+    /**
+     * Cambia el estado de juego a pausado
+     */
     public void pause() {
         pause = true;
     }
     
+    /**
+     * Cambia el estado de juego a funcionando
+     */
     public void resume() {
         pause = false;
     }

@@ -14,13 +14,29 @@ import java.awt.image.BufferedImage;
 public abstract class MobileEntity extends Entity {
     public int speed;
     
+    /**
+     * Constructor. Recibe una imagen, el radio de la misma, una posicion inicial,
+     * y una velocidad inicial
+     * 
+     * @param iniImage
+     * @param iniRadiusSize
+     * @param iniPosition
+     * @param iniSpeed 
+     */
     public MobileEntity(BufferedImage iniImage, int iniRadiusSize, Point.Double iniPosition, int iniSpeed) {
         super(iniImage, iniRadiusSize, iniPosition);
         speed = iniSpeed;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public abstract Point.Double getPointTarget();
     
+    /**
+     * Ejecuta un paso de avance. Actualiza la posicion del objeto a cada paso.
+     */
     public void advance() {
         double x = getPointTarget().x - position.x;
         double y = getPointTarget().y - position.y;
@@ -34,5 +50,8 @@ public abstract class MobileEntity extends Entity {
         }
     }
     
+    /**
+     * 
+     */
     public abstract void onReach();
 }

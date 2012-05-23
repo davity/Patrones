@@ -17,6 +17,9 @@ public class Records {
     private static final String RECORDS_FILE = "records.dat";
     private static final String SPLITTER = ":";
     
+    /**
+     * Constructor de Records
+     */
     public Records() {}
     
     public String getRecord(int map) {
