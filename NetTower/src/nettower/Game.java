@@ -198,17 +198,7 @@ public class Game extends Applet implements Runnable {
         
         if (Grid.isAMapPosition(x_mouse, y_mouse)) {
             p.setLocation(Grid.getBoxMiddle(x_mouse, y_mouse));
-            /* Comprobamos si el puntero esta en la casilla pintada */
-//            if (SingletonGame.getInstance().cursor.position.distance(p) == 0) {
-//                /* Actualizar torreta si hay una torreta en la casilla */
-//                nettower.entity.Tower tower = SingletonGame.getInstance().getTowerAt();
-//                if (tower != null) {
-//                    tower.upgrade();
-//                }
-//            } else {
-                /* Si el puntero no esta en la casilla, lo movemos */
                 SingletonGame.getInstance().cursor.position = p;
-//            }
         } else {
             if (Grid.isAMenuPosition(x_mouse, y_mouse)) {
                 if (SingletonGame.getInstance().isBuildable()) {
@@ -246,6 +236,18 @@ public class Game extends Applet implements Runnable {
             }
         }
         
+        return true;
+    }
+    
+    public boolean mouseUp(Event e, int x_mouse, int y_mouse) {
+        if (Grid.isAMenuPosition(x_mouse, y_mouse)) {
+            if (getMenuElementType(x_mouse, y_mouse) == "menu") {
+
+                    Main.getInstance().pause();
+                    Main.getInstance().endGame();
+            }
+
+        }
         return true;
     }
     
