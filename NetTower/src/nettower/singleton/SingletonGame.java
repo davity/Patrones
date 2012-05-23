@@ -193,4 +193,8 @@ public class SingletonGame {
         money = 400;
         lives = 10;
     }
+
+    public int getPoints() {
+        return points;
+    }
 }

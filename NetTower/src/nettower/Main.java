@@ -6,9 +6,6 @@ package nettower;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -21,7 +18,8 @@ public class Main {
     private static Menu menu = new Menu();
     private Game game;
     private Pause pause;
-    private Records records;
+    private static Records records = new Records();
+    private boolean[] state = new boolean[2];
     private static final int GAME_WIDTH = 640;
     private static final int GAME_HEIGHT = 480;
     
@@ -33,6 +31,7 @@ public class Main {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        records.loadRecords();
         menu.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
         frame.add(menu, BorderLayout.CENTER);
         frame.pack();
@@ -43,71 +42,69 @@ public class Main {
         return instance;
     }
     
-    public void startGame() {
-        menu.setVisible(false);
-        if (game == null) {
-            game = new Game();
-            game.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+    public void startGame(int map) {
+        if (!state[0]) {
+            menu.setVisible(false);
+            if (game == null) {
+                game = new Game();
+                game.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+            }
+            game.map = map;
+            frame.add(game, BorderLayout.CENTER);
+            state[0] = true;
+            game.setVisible(true);
+            frame.pack();
+            game.init();
+            game.start();
         }
-        frame.add(game, BorderLayout.CENTER);
-        frame.pack();
-        game.init();
-        game.start();
-        records = new Records();
-        load();
-        System.out.println(records.record[1]);
-        records.record[1]++;
-        save();
     }
     
     public void endGame() {
-        game.stop();
-        frame.remove(game);
-        menu.setVisible(true);
+        if (state[0]) {
+            if (state[1]) {
+                frame.remove(pause);
+                state[1] = false;
+            }
+            records.newRecord(game.map, game.end());
+            frame.remove(game);
+            records.saveRecords();
+            state[0] = false;
+            menu.setVisible(true);
+        }
     }
     
     public void pause() {
-        game.pause();
-        game.setVisible(false);
-        if (pause == null) {
-            pause = new Pause();
-            pause.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+        if (state[0] && !state[1]) {
+            game.pause();
+            game.setVisible(false);
+            if (pause == null) {
+                pause = new Pause();
+                pause.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+            }
+            frame.add(pause, BorderLayout.CENTER);
+            state[1] = true;
+            frame.pack();
         }
-        frame.add(pause, BorderLayout.CENTER);
-        frame.pack();
     }
     
     public void resume() {
-        frame.remove(pause);
-        game.setVisible(true);
-        game.resume();
-    }
-    
-    public void save() {
-        try {
-            File file = new File("records.dat");
-            if(!file.exists()) {
-                file.createNewFile();
-            }
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                writer.write(records.save());
-                writer.newLine();
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        if (state[0] && state[1]) {
+            frame.remove(pause);
+            state[1] = false;
+            game.setVisible(true);
+            game.resume();
         }
     }
     
-    public void load() {
-        try {
-            File file = new File("records.dat");
-            if(file.exists()) {
-                try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                    records.load(reader.readLine());
-                }
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void showHelp() {
+        //System.out.println("Not yet implemented");
+    }
+        
+    public void exit() {
+        frame.dispose();
+    }
+    
+    public String getRecord(int map) {
+        return records.getRecord(map);
     }
 }

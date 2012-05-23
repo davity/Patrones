@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Event;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -48,5 +49,16 @@ public class Pause extends Applet {
         if (x >= 420 && x <= 520 && y >= 170 && y <= 245)
             Main.getInstance().endGame();
         return true;
+    }
+    
+        @Override
+    public boolean keyUp(Event e, int key) {
+        switch (key) {
+            case KeyEvent.VK_ESCAPE:
+                Main.getInstance().resume();
+                return true;
+            default:
+                return false;
+        }
     }
 }

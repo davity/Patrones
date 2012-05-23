@@ -22,11 +22,9 @@ public class SingletonGraphics {
         return instancia;
     }
     
-    /* NOT USED
     public Graphics getGraphics() {
         return graphics;
     }
-    */
     
     public void setGraphics(Graphics iniGraphics) {
         graphics = iniGraphics;
