@@ -16,8 +16,8 @@ import java.awt.event.KeyEvent;
  * @author David
  */
 public class Menu extends Applet {
-    
     private boolean showInstructions;
+    private static final String MESSAGE_RECORD = "Mejor puntuación:";
     
     /**
      * Constructor de Menu. Establece la variable de mostrar ayuda a falso
@@ -37,13 +37,14 @@ public class Menu extends Applet {
         if (!showInstructions) {
             g.drawImage(Art.mainMenu, 0, 0, this);
             g.setColor(Color.BLUE);
-            g.setFont(new Font("Arial", Font.BOLD, 15));
-            g.drawString("Mejor puntuación:", 54, 262);
-            g.drawString("Mejor puntuación:", 254, 262);
-            g.drawString("Mejor puntuación:", 454, 262);
-            g.drawString(Main.getInstance().getRecord(0), 54, 292);
-            g.drawString(Main.getInstance().getRecord(1), 254, 292);
-            g.drawString(Main.getInstance().getRecord(2), 454, 292);
+            g.setFont(new Font("Serif", Font.PLAIN, 15));
+            g.drawString(MESSAGE_RECORD, 54, 312);
+            g.drawString(MESSAGE_RECORD, 254, 312);
+            g.drawString(MESSAGE_RECORD, 454, 312);
+            g.setFont(new Font("Serif", Font.BOLD, 15));
+            g.drawString(Main.getInstance().getRecord(0), 60, 330);
+            g.drawString(Main.getInstance().getRecord(1), 260, 330);
+            g.drawString(Main.getInstance().getRecord(2), 460, 330);
         } else {
             g.drawImage(Art.instructions, 0, 0, this);
         }
@@ -61,10 +62,8 @@ public class Menu extends Applet {
      */
     @Override
     public boolean mouseUp(Event e, int x, int y) {
-        
         if (!showInstructions) {
             int itemPressed;
-
             itemPressed = getItemPressed(x, y);
             switch (itemPressed) {
                 case 1:
@@ -77,7 +76,6 @@ public class Menu extends Applet {
                     Main.getInstance().startGame(2);
                     return true;
                 case 4:
-//                    Main.getInstance().showHelp();
                     showInstructions = true;
                     repaint();
                     return true;
@@ -105,8 +103,8 @@ public class Menu extends Applet {
         if (x >= 46 && x <= 198 && y >= 135 && y < 342) return 1;
         if (x >= 246 && x <= 398 && y >= 135 && y < 342) return 2;
         if (x >= 446 && x <= 598 && y >= 135 && y < 342) return 3;
-        if (x >= 32 && x <= 178 && y >= 369 && y < 415) return 4;
-        if (x >= 457 && x <= 566 && y >= 369 && y < 414) return 5;
+        if (x >= 46 && x <= 192 && y >= 394 && y < 440) return 4;
+        if (x >= 470 && x <= 580 && y >= 394 && y < 440) return 5;
         return 0;
     }
     
