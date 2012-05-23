@@ -156,7 +156,7 @@ public class Game extends Applet implements Runnable {
      * @param e
      * @param x_mouse
      * @param y_mouse
-     * @return 
+     * @return boolean
      */
     @Override
     public boolean mouseDrag(Event e, int x_mouse, int y_mouse) {
@@ -181,7 +181,7 @@ public class Game extends Applet implements Runnable {
      * @param e
      * @param x_mouse
      * @param y_mouse
-     * @return 
+     * @return boolean
      */
     @Override
     public boolean mouseDown(Event e, int x_mouse, int y_mouse) {
@@ -250,7 +250,7 @@ public class Game extends Applet implements Runnable {
      * 
      * @param e
      * @param key
-     * @return 
+     * @return boolean
      */
     @Override
     public boolean keyUp(Event e, int key) {
@@ -269,7 +269,7 @@ public class Game extends Applet implements Runnable {
      * 
      * @param ox
      * @param oy
-     * @return 
+     * @return String
      */
     private String getMenuElementType(int ox, int oy) {
         String element="nothing";
@@ -299,7 +299,7 @@ public class Game extends Applet implements Runnable {
     /**
      * ########################################################################################
      * 
-     * @return 
+     * @return int
      */
     public int end() {
         pause = true;

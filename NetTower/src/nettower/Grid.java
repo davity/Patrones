@@ -40,7 +40,7 @@ public class Grid {
      * correspondiente en el mapa pequeño (15x15)
      *
      * @param op
-     * @return
+     * @return Point
      */
     public static Point getBoxLittlePosition(Point op) {
         Point p = new Point();
@@ -62,7 +62,7 @@ public class Grid {
      * casilla correspondiente en el mapa grande (480x480)
      *
      * @param op
-     * @return
+     * @return Point
      */
     public static Point getBoxBigPosition(Point op) {
         Point p = new Point();
@@ -85,7 +85,7 @@ public class Grid {
      *
      * @param ox
      * @param oy
-     * @return
+     * @return Point
      */
     public static Point getBoxBigPosition(int ox, int oy) {
         Point p = new Point();
@@ -106,7 +106,7 @@ public class Grid {
      * Devuelve las coordenadas del centro de una casilla en el mapa (480x480)
      *
      * @param position
-     * @return
+     * @return Point
      */
     public static Point getBoxMiddle(Point position) {
         Point p = new Point();
@@ -129,7 +129,7 @@ public class Grid {
      *
      * @param ox
      * @param oy
-     * @return
+     * @return Point
      */
     public static Point getBoxMiddle(int ox, int oy) {
         Point p = new Point();
@@ -152,7 +152,7 @@ public class Grid {
      * (480x480)
      *
      * @param position
-     * @return
+     * @return Point
      */
     public static Point getBoxCorner(Point position) {
         Point p = new Point();
@@ -175,7 +175,7 @@ public class Grid {
      * botones, devuelve la esquina sup. izq. del boton correspondiente
      * 
      * @param position
-     * @return 
+     * @return Point
      */
     public static Point getMenuElementCorner(Point position) {
         Point p = new Point();
@@ -210,7 +210,7 @@ public class Grid {
      * 
      * @param ox
      * @param oy
-     * @return 
+     * @return Point
      */
     public static Point getMenuElementCorner(int ox, int oy) {
         Point p = new Point();
@@ -243,7 +243,7 @@ public class Grid {
      * Comprueba si un punto dado pertenece al mapa de juego
      * 
      * @param position
-     * @return 
+     * @return boolean
      */
     public static boolean isAMapPosition (int ox, int oy) {
         if (ox >= 0 && ox < 480 && 
@@ -257,7 +257,7 @@ public class Grid {
      * Comprueba si un punto dado pertenece al menu de juego
      * 
      * @param position
-     * @return 
+     * @return boolean
      */
     public static boolean isAMenuPosition (int ox, int oy) {
         if (ox >= 480 && ox < 640 && oy >= 0 && oy < 480) {
@@ -271,7 +271,7 @@ public class Grid {
     
     /**
      * Devuelve la esquina sup. izq. donde hay que pintar la puntuación
-     * @return 
+     * @return Point
      */
     public static Point getScorePosition() {
         return new Point(497,38);
@@ -279,7 +279,7 @@ public class Grid {
     
     /**
      * Devuelve la esquina sup. izq. donde hay que pintar el dinero
-     * @return 
+     * @return Point
      */
     public static Point getMoneyPosition() {
         return new Point(497,128);

@@ -36,7 +36,7 @@ public class Art {
      * Abre un archivo de imagen en modo RGB dado su nombre de archivo
      * 
      * @param name
-     * @return 
+     * @return BufferedImage
      */
     public static BufferedImage load(String name) {
         try {

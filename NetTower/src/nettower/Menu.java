@@ -57,7 +57,7 @@ public class Menu extends Applet {
      * @param e
      * @param x
      * @param y
-     * @return 
+     * @return boolean
      */
     @Override
     public boolean mouseUp(Event e, int x, int y) {
@@ -99,7 +99,7 @@ public class Menu extends Applet {
      * 
      * @param x
      * @param y
-     * @return 
+     * @return int
      */
     private int getItemPressed(int x, int y) {
         if (x >= 46 && x <= 198 && y >= 135 && y < 342) return 1;
@@ -116,7 +116,7 @@ public class Menu extends Applet {
      * 
      * @param e
      * @param key
-     * @return 
+     * @return boolean
      */
     @Override
     public boolean keyUp(Event e, int key) {

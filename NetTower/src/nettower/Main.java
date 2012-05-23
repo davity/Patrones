@@ -41,7 +41,7 @@ public class Main {
     /**
      * Devuelve la instancia del objeto
      * 
-     * @return 
+     * @return Main
      */
     public static Main getInstance() {
         return instance;
@@ -133,7 +133,7 @@ public class Main {
      * Dado un mapa devuelve su puntuacion
      * 
      * @param map
-     * @return 
+     * @return String
      */
     public String getRecord(int map) {
         return records.getRecord(map);

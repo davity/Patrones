@@ -22,6 +22,12 @@ public class Records {
      */
     public Records() {}
     
+    /**
+     * Devuelve la puntuacion de un mapa en un formato concreto
+     * 
+     * @param map
+     * @return String
+     */
     public String getRecord(int map) {
         if (map >= 0 && map < 3) {
             return String.format("%016d", records[map]);
@@ -29,12 +35,22 @@ public class Records {
         return null;
     }
     
+    /**
+     * Dado un mapa y un record, si el record dado es mayor que el record
+     * actual para ese mapa, sustituye el viejo record por el dado
+     * 
+     * @param map
+     * @param record 
+     */
     public void newRecord(int map, int record) {
         if (map >= 0 && map < 3 && record > records[map]) {
             records[map] = record;
         }
     }
     
+    /**
+     * Guarda los records de los mapas en un archivo
+     */
     public void saveRecords() {
         try {
             File file = new File(RECORDS_FILE);
@@ -50,6 +66,9 @@ public class Records {
         }
     }
     
+    /**
+     * Carga los records de los mapas de un archivo
+     */
     public void loadRecords() {
         try {
             File file = new File(RECORDS_FILE);
@@ -63,10 +82,22 @@ public class Records {
         }
     }
     
+    /**
+     * Devuelve los records de los mapas en una cadena de texto separando
+     * cada record con un separador
+     * 
+     * @return String
+     */
     public String getIntoString() {
         return records[0] + SPLITTER + records[1] + SPLITTER + records[2];
     }
 
+    /**
+     * Dada una cadena, carga los records de los distintos mapas a partir
+     * de la misma, separando cada record de la cadena dada por un separador
+     * 
+     * @param string 
+     */
     void setFromString(String string) {
         String[] splitted = string.split(SPLITTER);
         records[0] = Integer.parseInt(splitted[0]);

@@ -58,7 +58,7 @@ public class Pause extends Applet {
      * @param e
      * @param x
      * @param y
-     * @return 
+     * @return boolean
      */
     @Override
     public boolean mouseUp(Event e, int x, int y) {
@@ -74,7 +74,7 @@ public class Pause extends Applet {
      * 
      * @param e
      * @param key
-     * @return 
+     * @return boolean
      */
     @Override
     public boolean keyUp(Event e, int key) {
