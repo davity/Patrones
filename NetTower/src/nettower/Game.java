@@ -26,9 +26,9 @@ public class Game extends Applet implements Runnable {
     private Image doubleBufferedImage;
     public int map;
     private boolean pause;
-    private static final String PATHS_MAP_1 = "entrada.txt";
-    private static final String PATHS_MAP_2 = "entrada.txt";
-    private static final String PATHS_MAP_3 = "entrada.txt";
+    private static final String PATHS_MAP_0 = "map_0.dat";
+    private static final String PATHS_MAP_1 = "map_1.dat";
+    private static final String PATHS_MAP_2 = "map_2.dat";
     
     public Game() {}
     
@@ -44,16 +44,16 @@ public class Game extends Applet implements Runnable {
         ArrayList<ArrayList> routes;
         switch (map) {
             case 1:
-                SingletonGame.getInstance().setMap(Art.map1, 15, 15);
-                routes = pathInterpreter.parseMap(PATHS_MAP_2);
+                SingletonGame.getInstance().setMap(Art.map_1, 15, 15);
+                routes = pathInterpreter.parseMap(PATHS_MAP_1);
                 break;
             case 2:
-                SingletonGame.getInstance().setMap(Art.map1, 15, 15);
-                routes = pathInterpreter.parseMap(PATHS_MAP_3);
+                SingletonGame.getInstance().setMap(Art.map_2, 15, 15);
+                routes = pathInterpreter.parseMap(PATHS_MAP_2);
                 break;
             default:
-                SingletonGame.getInstance().setMap(Art.map1, 15, 15);
-                routes = pathInterpreter.parseMap(PATHS_MAP_1);
+                SingletonGame.getInstance().setMap(Art.map_0, 15, 15);
+                routes = pathInterpreter.parseMap(PATHS_MAP_0);
         }
         for (int n = 0; n < routes.size(); n++) {
             SingletonGame.getInstance().addRoute(routes.get(n));
