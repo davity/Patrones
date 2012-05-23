@@ -189,7 +189,7 @@ public class Game extends Applet implements Runnable {
      * @return boolean
      */
     @Override
-    public boolean mouseDown(Event e, int x_mouse, int y_mouse) {
+    public boolean mouseUp(Event e, int x_mouse, int y_mouse) {
         int x = x_mouse;
         int y = y_mouse;
         Point.Double p = new Point.Double();
@@ -221,6 +221,10 @@ public class Game extends Applet implements Runnable {
                             if (tower != null)
                                 tower.upgrade();
                             break;
+                        case "menu":
+                            Main.getInstance().pause();
+                            Main.getInstance().endGame();
+                            break;
                         case "pause":
                             Main.getInstance().pause();
                             break;
@@ -229,17 +233,6 @@ public class Game extends Applet implements Runnable {
             }
         }
         
-        return true;
-    }
-    
-    public boolean mouseUp(Event e, int x_mouse, int y_mouse) {
-        if (Grid.isAMenuPosition(x_mouse, y_mouse)) {
-            if (getMenuElementType(x_mouse, y_mouse).equals("menu")) {
-                    Main.getInstance().pause();
-                    Main.getInstance().endGame();
-            }
-
-        }
         return true;
     }
     
