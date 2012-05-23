@@ -178,15 +178,15 @@ public class SingletonGame {
         for (int n = 0; n < chickensList.size(); n++) {
             chickensList.get(n).draw();
         }
-        for (int n = 0; n < bulletsList.size(); n++) {
-            bulletsList.get(n).draw();
-        }
         if (lives <= 0) {
             SingletonGraphics.getInstance().graphics.setColor(Color.RED);
             SingletonGraphics.getInstance().graphics.setFont(new Font("Arial", Font.BOLD, 22));
             SingletonGraphics.getInstance().graphics.drawString("YOU LOSE", 200, 200);
         }
         else {
+            for (int n = 0; n < bulletsList.size(); n++) {
+                bulletsList.get(n).draw();
+            }
             if (cursor != null) cursor.draw();
         }
         SingletonGraphics.getInstance().graphics.setColor(Color.BLUE);

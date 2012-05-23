@@ -22,7 +22,7 @@ public class AreaTower extends Tower {
      * @param iniPosition 
      */
     public AreaTower(Point.Double iniPosition) {
-        super(Art.areaTower, 16, iniPosition, 1, 200, 10, 200, 200);
+        super(Art.areaTower, 16, iniPosition, 1, 200, 10, 40, 200);
     }
     
     /**
@@ -43,9 +43,7 @@ public class AreaTower extends Tower {
      */
     @Override
     public void onUpgrade() {
-        damage *= 1.1;
-        bulletsSpeed *= 1.1;
-        range *= 1.1;
+        range *= 1.4;
         upgradeCost *= 1.1;
     }
 }

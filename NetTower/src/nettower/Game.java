@@ -101,8 +101,13 @@ public class Game extends Applet implements Runnable {
                     // Contador de iteraciones
                     i++;
 
-                    if (i % 100 == 0) {
-                        SingletonGame.getInstance().addChicken(i/1000);
+                    if (i >= 400 && i % 80 == 0) {
+                        if (i >= 1000) {
+                            SingletonGame.getInstance().addChicken(i / 1000);
+                        }
+                        else {
+                            SingletonGame.getInstance().addChicken(1);
+                        }
                     }
                     SingletonGame.getInstance().step();
 
