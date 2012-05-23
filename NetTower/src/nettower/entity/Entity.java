@@ -18,8 +18,8 @@ public abstract class Entity {
     public Point.Double position;
     
     /**
-     * Constructor de Entidad. Reciba una imagen, el tamaño del radio y una 
-     * posicion inicial
+     * Constructor de Entidad.
+     * Reciba una imagen, el tamaño del radio y una posicion inicial
      * 
      * @param iniImage
      * @param iniRadiusSize

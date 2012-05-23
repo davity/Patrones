@@ -17,6 +17,13 @@ public class ChickChicken extends Chicken {
     ArrayList<ChickChicken> chicks = new ArrayList();
     ChickChicken mom;
     
+    /**
+     * Constructor de la horda de gallinas. Recibe el nivel en el que se tiene
+     * que crear la misma. Va a crear una gallina madre (lider) a la que van a
+     * seguir el ressto de la horda.
+     * 
+     * @param level 
+     */
     public ChickChicken(double level) {
         super(Art.chickChicken, Art.chickChickenI, 16, SingletonGame.getInstance().getRandomRoute(), (int)(10 * level), 2 + (int)(level / 100), (int)(4 * level), (int)(4 * level));
         double probability = level;
@@ -32,6 +39,14 @@ public class ChickChicken extends Chicken {
         }
     }
     
+    /**
+     * Constructor de las gallinas seguidoras de la madre.
+     * Recibe la madre, una probabilidad ¿¿¿DE QUE ES ESTA PROBABILIDAD??? y el nivel donde se crea. ###############
+     * 
+     * @param iniMom
+     * @param probability
+     * @param level 
+     */
     public ChickChicken(ChickChicken iniMom, double probability, double level) {
         super(Art.chickChicken, Art.chickChickenI, 16, iniMom.route, (int)(10 * level), 2 + (int)(level / 100), (int)(4 * level), (int)(4 * level));
         mom = iniMom;
@@ -44,10 +59,18 @@ public class ChickChicken extends Chicken {
         route = null;
     }
     
+    /**
+     * Añade una lista de gallinas a la lista de gallinas de la horda
+     * 
+     * @param newChicks 
+     */
     public void addChicks(ArrayList<ChickChicken> newChicks) {
         chicks.addAll(newChicks);
     }
     
+    /**
+     * Devuelve el punto al que deben dirigirse las gallinas de la horda (lider)
+     */
     @Override
     public Point.Double getPointTarget() {
         if (route != null) {
@@ -58,6 +81,9 @@ public class ChickChicken extends Chicken {
         }
     }
     
+    /**
+     * Funciona a ejecutar cuando llegan al castillo (fin del camino)
+     */
     @Override
     public void onReach() {
         if (route != null) {
@@ -65,9 +91,16 @@ public class ChickChicken extends Chicken {
         }
     }
     
+    /**
+     * Funcion de transición
+     */
     @Override
     public void onStep() {}
     
+    /**
+     * Elimina la horda de gallinas y actualiza el objetivo al que deben
+     * dirigirse si el lider ha muerto (se crea un nuevo lider)
+     */
     @Override
     public void remove() {
         super.remove();

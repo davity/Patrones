@@ -15,6 +15,15 @@ import nettower.entity.Tower;
  * @author David
  */
 public class TowerFactory extends Factory {
+    
+    /**
+     * Dada una posición y un tipo, devuelve una torreta de ese tipo
+     * con coordenadas iniciales en la posicion pedida
+     * 
+     * @param position
+     * @param type
+     * @return 
+     */
     public Tower getTower(Point.Double position, int type) {
         switch (type) {
             case 1: return new AreaTower(position);

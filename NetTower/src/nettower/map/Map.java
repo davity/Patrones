@@ -18,7 +18,14 @@ public final class Map {
     int width;
     int height;
 
-    
+    /**
+     * Constructor de mapa.
+     * Recibe una imagen y un tamaño (ancho y alto)
+     * 
+     * @param mapa
+     * @param w
+     * @param h 
+     */
     public Map(BufferedImage mapa, int w, int h) {
         this.width = w;
         this.height = h;
@@ -29,6 +36,8 @@ public final class Map {
 
     /*
      * Devuelve un array con todos los tipos de casillas disponibles en el mapa
+     * en sus posiciones correspondientes (array unidimensional de tamaño
+     * ANCHOxALTO)
      */
     public int[] parseMap(BufferedImage mapa) {
         int[] pixels = new int[width * height];
@@ -55,6 +64,11 @@ public final class Map {
         return m;
     }
 
+    /**
+     * Duncion que dibuja el mapa.
+     * Dibuja cada casilla con una imagen distinta en funcion del tipo de 
+     * casilla que sea (hierba, roca, camino, casilla de inicio o fin)
+     */
     public void draw() {
         int indice;
         
@@ -80,6 +94,14 @@ public final class Map {
         }
     }
 
+    /**
+     * Dada una posicion dentro del mapa (tamaño 15x15) devuelve true si la 
+     * casilla es una casilla de hierba
+     * 
+     * @param x
+     * @param y
+     * @return 
+     */
     public boolean isBuildable(int x, int y) {
         return map[x + y * width] == HIERBA;
     }

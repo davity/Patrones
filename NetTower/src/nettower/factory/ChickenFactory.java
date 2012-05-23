@@ -12,6 +12,14 @@ import nettower.singleton.SingletonGame;
  * @author David
  */
 public class ChickenFactory extends Factory{
+    
+    /**
+     * Fabrica de gallinas.
+     * Dado un nivel, devuelve una gallina de un tipo aleatorio
+     * 
+     * @param level
+     * @return 
+     */
     public Chicken getChicken(double level) {
         switch (SingletonGame.getInstance().random.nextInt(4)) {
             case 1: return new HeavyChicken(level);

@@ -14,10 +14,21 @@ import nettower.singleton.SingletonGame;
  * @author David
  */
 public class AreaTower extends Tower {
+    
+    /**
+     * Constructor. Recibe la posición inicial de la torreta.
+     * El resto de parámetros son fijos y por defecto.
+     * 
+     * @param iniPosition 
+     */
     public AreaTower(Point.Double iniPosition) {
         super(Art.areaTower, 16, iniPosition, 1, 200, 10, 200, 200);
     }
     
+    /**
+     * Accion de disparar. Busca a todas las gallinas dentro de su rango y 
+     * crea una bala que se dirigira hacia cada una de ellas.
+     */
     @Override
     public void shoot() {
         ArrayList<Chicken> targets = SingletonGame.getInstance().getInRangeChickens(position, range);
@@ -26,6 +37,10 @@ public class AreaTower extends Tower {
         }
     }
 
+    /**
+     * Funcion que se ejecuta al mejorar una torreta. Aumenta el daño, el rango,
+     * la velocidad de las balas y el coste de mejora.
+     */
     @Override
     public void onUpgrade() {
         damage *= 1.1;
