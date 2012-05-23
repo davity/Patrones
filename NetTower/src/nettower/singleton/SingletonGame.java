@@ -45,28 +45,61 @@ public class SingletonGame {
     public Random random = new Random();
     private static final int COST_TOWER[] = {100, 200, 300};
     
+    /**
+     * Constructor
+     */
     private SingletonGame() {}
     
+    /**
+     * Devuelve la instancia del singleton
+     * 
+     * @return SingletonGame
+     */
     public static SingletonGame getInstance() {
         return instance;
     }
     
+    /**
+     * Añade una ruta al mapa actual
+     * 
+     * @param route 
+     */
     public void addRoute(ArrayList<Point.Double> route) {
         routesList.add(new ConcreteAggregate(route));
     }
     
+    /**
+     * Añade una gallina al mapa actual
+     * 
+     * @param level 
+     */
     public void addChicken(double level) {
         chickensList.add(chickenFactory.getChicken(level));
     }
     
+    /**
+     * Añade un objeto Gallina concreto al mapa actual
+     * 
+     * @param chicken 
+     */
     public void insertSpecificChicken(Chicken chicken) {
         chickensList.add(chicken);
     }
     
+    /**
+     * Elimina un objeto gallina concreto del mapa actual
+     * 
+     * @param chicken 
+     */
     public void removeChicken(Chicken chicken) {
         chickensList.remove(chicken);
     }
     
+    /**
+     * Añade una torreta al mapa actual del tipo dado
+     * 
+     * @param type 
+     */
     public void addTower(int type) {
         if (canPay(COST_TOWER[type])) {
             takeMoney(COST_TOWER[type]);
@@ -76,18 +109,45 @@ public class SingletonGame {
         }
     }
     
+    /**
+     * Elimina un objeto Torre concreto del mapa actual
+     * 
+     * @param tower 
+     */
     public void removeTower(Tower tower) {
         towersList.remove(tower);
     }
     
+    /**
+     * Añade una bala al mapa actual.
+     * Recibe como parametros la imagen de la bala, el radio de la imagen,
+     * la posicion inicial, el objeto Gallina objetivo, el daño y la velocidad
+     * inicial de la bala.
+     * 
+     * @param image
+     * @param radiusSize
+     * @param position
+     * @param target
+     * @param damage
+     * @param speed 
+     */
     public void addBullet(BufferedImage image, int radiusSize, Point.Double position, Chicken target, int damage, int speed) {
         bulletsList.add(new Bullet(image, radiusSize, position, target, damage, speed));
     }
     
+    /**
+     * Elimina un objeto Bala concreto del juego
+     * 
+     * @param bullet 
+     */
     public void removeBullet(Bullet bullet) {
         bulletsList.remove(bullet);
     }
     
+    /**
+     * Funcion de transición.
+     * Hace transitar un paso a todas las gallinas, torres y balas
+     */
     public void step() {
         
         for (int n = 0; n < chickensList.size(); n++) {
@@ -103,6 +163,12 @@ public class SingletonGame {
         }
     }
     
+    /**
+     * Dibuja el juego actual.
+     * Hace que las torres, las gallinas y las balas se dibujen, dibuja el menu,
+     * la puntuacion, las vidas restantes, el dinero disponible y el coste
+     * de actualizacion de una torreta si el cursor esta sobre ella.
+     */
     public void draw() {
         map.draw();
         SingletonGraphics.getInstance().drawImage(Art.menu, new Point(480,0));
@@ -161,10 +227,22 @@ public class SingletonGame {
         
     }
     
+    /**
+     * Devuelve un aruta al azar de todas las rutas posibles para el mapa actual
+     * 
+     * @return Iterator
+     */
     public Iterator getRandomRoute() {
         return routesList.get(random.nextInt(routesList.size())).newIterator();
     }
     
+    /**
+     * Dado un punto del mapa, devuelve la gallina mas cercana a dicho punto
+     * 
+     * @param point
+     * @param range
+     * @return Chicken
+     */
     public Chicken getNearestInRangeChicken(Point.Double point, int range) {
         Chicken chicken = null;
         double shortestDistance = range;
@@ -179,6 +257,14 @@ public class SingletonGame {
         return chicken;
     }
     
+    /**
+     * Dado un punto y un rango, devuelve una lista con las gallinas que se
+     * encuentran dentro del rango a partir de dicho punto
+     * 
+     * @param point
+     * @param range
+     * @return ArrayList<Chicken>
+     */
     public ArrayList<Chicken> getInRangeChickens(Double point, int range) {
         ArrayList<Chicken> chickens = new ArrayList();
         for (int n = 0; n < chickensList.size(); n++) {
@@ -189,6 +275,12 @@ public class SingletonGame {
         return chickens;
     }
     
+    /**
+     * Dado un punto del mapa, devuelve la torre que se encuentra en dicho
+     * punto o null si no hay ninguna
+     * 
+     * @return Tower
+     */
     public Tower getTowerAt() {
         for (int n = 0; n < towersList.size(); n++) {
             if (towersList.get(n).position.distance(cursor.position) == 0) {
@@ -198,49 +290,105 @@ public class SingletonGame {
         return null;
     }
     
+    /**
+     * Dado un punto del mapa, si es una casilla del mapa devuelve true si
+     * se puede construir ahi una torreta, es decir, si es una casilla de
+     * hierba y no hay una torreta construida ya
+     * 
+     * @return boolean
+     */
     public boolean isBuildable() {
         Point tmp = Grid.getBoxLittlePosition((int)cursor.position.x, (int)cursor.position.y);
         return map.isBuildable(tmp.x, tmp.y);
     }
     
+    /**
+     * Devuelve la puntuacion actual del juego
+     * @return 
+     */
     public int getPoints() {
         return points;
     }
     
+    /**
+     * Añade una cantidad de puntos dada al juego actual
+     * 
+     * @param amount 
+     */
     public void givePoints(int amount) {
         points += amount;
     }
     
+    /**
+     * Devuelve el dinero actual disponible en el juego actual
+     * @return 
+     */
     public int getMoney() {
         return money;
     }
     
+    /**
+     * Añade dinero al total del juego actual
+     * 
+     * @param amount 
+     */
     public void giveMoney(int amount) {
         money += amount;
     }
     
+    /**
+     * Resta dinero al total del juego actual
+     * @param amount 
+     */
     public void takeMoney(int amount) {
         money -= amount;
     }
     
+    /**
+     * Comprueba si se puede pagar una cantidad determinada de dinero
+     * (e.d. si se puede restar ese dinero quedandose a un valor total >=0)
+     * 
+     * @param amount
+     * @return 
+     */
     public boolean canPay(int amount) {
         return amount <= money;
     }
     
+    /**
+     * Devuelve el total de vidas restante
+     * 
+     * @return 
+     */
     public int getLife() {
         return lives;
     }
     
+    /**
+     * Resta una vida al total
+     */
     public void takeALife() {
         if (lives > 0) {
             lives--;
         }
     }
     
+    /**
+     * Dada una imagen y un tamapo (ancho y alto), asigna un mapa al juego
+     * actual
+     * 
+     * @param unmapa
+     * @param width
+     * @param height 
+     */
     public void setMap(BufferedImage unmapa, int width, int height) {
         this.map = new Map(unmapa, width, width);
     }
     
+    /**
+     * Reinicia el juego actual eliminando todas las torretas, las gallinas,
+     * las balas, y ademas reinicia la puntuacion, el dinero y las vidas
+     */
     public void clear() {
         chickensList.clear();
         towersList.clear();
