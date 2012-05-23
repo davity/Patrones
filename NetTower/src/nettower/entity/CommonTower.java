@@ -20,7 +20,7 @@ public class CommonTower extends Tower {
      * @param iniPosition 
      */
     public CommonTower(Point.Double iniPosition) {
-        super(Art.tower, 16, iniPosition, 20, 100, 10, 100, 200);
+        super(Art.commonTower, 16, iniPosition, 20, 100, 10, 100, 200);
     }
     
     /**
